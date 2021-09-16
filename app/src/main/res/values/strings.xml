@@ -5,4 +5,19 @@
     <string name="intro_skip">Lewati untuk saat ini</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cd_logo">logo</string>
+    <string name="title_register">Selamat Datang</string>
+    <string name="title_login">Masuk ke akun Anda</string>
+    <string name="subtitle_register">Cari Event IT yang sesuai dengan minat dan passion kamu</string>
+    <string name="subtitle_login">Masuk lagi untuk cari event dan tingkatkan kemampuan IT milikmu</string>
+    <string name="hint_username">Nama Pengguna</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="sudah_punya_akun">Sudah punya akun? </string>
+    <string name="masuk"> Masuk</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="suggest_register_text">Belum punya akun?  </string>
+    <color name="mtrl_textinput_default_box_stroke_color">@color/whitegray</color>
+
 </resources>
