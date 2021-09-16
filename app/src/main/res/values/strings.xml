@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">EventTech</string>
+    <string name="app_logo">logo</string>
+    <string name="next">Berikutnya</string>
+    <string name="intro_skip">Lewati untuk saat ini</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
