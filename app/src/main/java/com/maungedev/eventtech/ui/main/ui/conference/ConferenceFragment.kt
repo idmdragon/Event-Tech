@@ -15,8 +15,7 @@ class ConferenceFragment : Fragment() {
     private lateinit var conferenceViewModel: ConferenceViewModel
     private var _binding: FragmentConferenceBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,10 +29,6 @@ class ConferenceFragment : Fragment() {
         _binding = FragmentConferenceBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        conferenceViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 

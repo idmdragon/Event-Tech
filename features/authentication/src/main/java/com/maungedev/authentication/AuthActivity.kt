@@ -1,14 +1,17 @@
-package com.maungedev.eventtech.ui.auth
+package com.maungedev.authentication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.maungedev.authentication.databinding.ActivityAuthBinding
 import com.maungedev.eventtech.R
 
 class AuthActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityAuthBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auth)
-
+        binding = ActivityAuthBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setFragment()
     }
 
@@ -17,11 +20,11 @@ class AuthActivity : AppCompatActivity() {
         val mRegisterFragment = RegisterFragment()
         val fragment = mFragmentManager.findFragmentByTag(RegisterFragment::class.java.simpleName)
 
-        if (fragment !is RegisterFragment) {
+ /*       if (fragment !is RegisterFragment) {
             mFragmentManager
                 .beginTransaction()
                 .add(R.id.frame_container, mRegisterFragment, RegisterFragment::class.java.simpleName)
                 .commit()
-        }
+        }*/
     }
 }

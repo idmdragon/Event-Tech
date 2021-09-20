@@ -5,7 +5,7 @@
     style="@style/LayoutStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.LoginFragment">
+    tools:context="com.maungedev.authentication.RegisterFragment">
 
     <ImageView
         android:id="@+id/iv_logo"
@@ -20,11 +20,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_title_login"
+        android:id="@+id/tv_title_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="@string/title_login"
+        android:text="@string/title_register"
         android:textColor="@color/white"
         android:textSize="@dimen/size_20"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 
     <TextView
-        android:id="@+id/tv_subtitle_login"
+        android:id="@+id/tv_subtitle_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -42,20 +42,44 @@
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/poppins"
         android:gravity="center_horizontal"
-        android:text="@string/subtitle_login"
+        android:text="@string/subtitle_register"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_login" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title_register" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_username"
+        android:layout_width="@dimen/range_0"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="@dimen/range_28"
+        android:layout_marginStart="@dimen/range_0"
+        android:layout_marginEnd="@dimen/range_0"
+        android:backgroundTint="@android:color/transparent"
+        android:textColorHint="@color/whitegray"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/blue"
+        app:hintTextColor="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subtitle_register">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:textColor="@color/white"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:textColorHighlight="@color/white"
+            android:hint="@string/hint_username"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_email"
         android:layout_width="@dimen/range_0"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginTop="@dimen/range_24"
+        android:layout_marginTop="@dimen/range_16"
         android:layout_marginStart="@dimen/range_0"
         android:layout_marginEnd="@dimen/range_0"
         android:backgroundTint="@android:color/transparent"
@@ -64,7 +88,7 @@
         app:hintTextColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_subtitle_login">
+        app:layout_constraintTop_toBottomOf="@id/til_username">
 
         <com.google.android.material.textfield.TextInputEditText
             android:textColor="@color/white"
@@ -99,46 +123,34 @@
             android:textColor="@color/white"
             android:backgroundTint="@android:color/transparent"
             android:layout_width="match_parent"
-
             android:textColorHighlight="@color/white"
             android:inputType="textEmailAddress"
             android:hint="@string/hint_password"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tv_forgot_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/forgot_password"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/til_password"
-        app:layout_constraintTop_toBottomOf="@+id/til_password" />
-
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnNext"
+        android:id="@+id/btnRegister"
         style="@style/ButtonStyle16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/range_0"
-        android:layout_marginTop="@dimen/range_24"
+        android:layout_marginTop="@dimen/range_32"
         android:layout_marginEnd="@dimen/range_0"
-        android:text="@string/login"
+        android:text="@string/register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password" />
+        app:layout_constraintTop_toBottomOf="@+id/til_password" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/range_28"
+        android:layout_marginTop="@dimen/range_22"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnNext">
+        app:layout_constraintTop_toBottomOf="@id/btnRegister">
 
         <TextView
             android:id="@+id/tv_sudah_punya"
@@ -147,14 +159,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="3dp"
             android:textColor="@color/white"
-            android:text="@string/suggest_register_text"
+            android:text="@string/sudah_punya_akun"
             android:textAlignment="viewEnd" />
         <TextView
-            android:id="@+id/tv_daftar"
+            android:id="@+id/tv_masuk"
             android:fontFamily="@font/poppins_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register"
+            android:text="@string/masuk"
             android:textAlignment="viewStart"
             android:textColor="@color/blue" />
     </LinearLayout>

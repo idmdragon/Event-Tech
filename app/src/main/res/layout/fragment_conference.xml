@@ -4,19 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.main.ui.conference.ConferenceFragment">
 
-    <TextView
-        android:id="@+id/text_dashboard"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_marginEnd="@dimen/range_24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_gravity="start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_logo"
+            android:src="@drawable/ic_logo_bar" />
+
+        <ImageButton
+            android:id="@+id/btnNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/cdNotification"
+            android:padding="@dimen/range_12"
+            android:src="@drawable/ic_notification" />
+
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:searchIcon="@drawable/ic_search" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tvPageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/range_24"
+        android:layout_marginTop="@dimen/range_28"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/title_event_conference"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/range_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvPageTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvPageTitle"
+       />
+
+
+    <TextView
+        android:id="@+id/tvPageTitlePopular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/range_24"
+        android:layout_marginTop="@dimen/range_10"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/title_event_popular"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_category" />
+
+    <TextView
+        android:id="@+id/btnAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/see_all"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/size_12"
+        android:layout_marginEnd="@dimen/range_24"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPageTitlePopular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvPageTitlePopular" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_popular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/range_22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/item_event_general"
+        tools:itemCount="3"
+        app:layout_constraintTop_toBottomOf="@+id/tvPageTitlePopular" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.maungedev.eventtech.ui.intro
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
 import com.maungedev.eventtech.R
 import com.maungedev.eventtech.databinding.ActivityIntroBinding
-import com.maungedev.eventtech.ui.auth.AuthActivity
+import com.maungedev.eventtech.ui.main.MainActivity
 
 class IntroActivity : AppCompatActivity() {
 
@@ -58,14 +59,14 @@ class IntroActivity : AppCompatActivity() {
                 binding.introSliderViewPager.currentItem+=1
             }else{
 
-                Intent (applicationContext, AuthActivity::class.java).also {
+                Intent (applicationContext, MainActivity::class.java).also {
                     startActivity(it)
                     finish()
                 }
             }
         }
         binding.tvSkip.setOnClickListener {
-            Intent (applicationContext, AuthActivity::class.java).also {
+            Intent (applicationContext, MainActivity::class.java).also {
                 startActivity(it)
                 finish()
             }

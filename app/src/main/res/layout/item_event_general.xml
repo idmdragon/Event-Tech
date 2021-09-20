@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/rv_item_background"
+    android:layout_marginStart="@dimen/range_24"
+    android:layout_marginEnd="@dimen/range_24"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/range_16">
+
+    <ImageView
+        android:id="@+id/iv_poster"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:src="@color/blue"
+        android:layout_marginStart="@dimen/range_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/range_12"
+        android:layout_marginBottom="@dimen/range_12"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/cd_event_poster" />
+
+    <ImageButton
+        android:id="@+id/btnMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_menu"
+        android:layout_marginTop="@dimen/range_12"
+        android:layout_marginEnd="@dimen/range_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/button_menu" />
+
+    <TextView
+        android:id="@+id/tv_event_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/blue"
+        android:layout_marginTop="@dimen/range_10"
+        android:layout_marginStart="@dimen/range_10"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_poster"
+        tools:text="Backend" />
+
+    <TextView
+        android:id="@+id/tv_event_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/poppins"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/btnMenu"
+        app:layout_constraintStart_toStartOf="@id/tv_event_category"
+        app:layout_constraintTop_toBottomOf="@id/tv_event_category"
+        tools:text="aaaaaaa aaaaaaaaa aa aaaaa aaaaaa " />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/range_8"
+        app:layout_constraintStart_toStartOf="@+id/tv_event_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_event_title"
+        app:drawableStartCompat="@drawable/ic_mini_calendar"
+        android:drawablePadding="@dimen/range_8"
+        tools:text="07 Juli 2021"
+        android:fontFamily="@font/poppins"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,5 +31,12 @@
     <string name="title_eventconference">Module Title</string>
     <string name="title_eventcompetition">Module Title</string>
     <string name="title_search">Module Title</string>
+    <string name="cdNotification">tombol notifikasi</string>
+    <string name="title_event_conference">Kategori Event Pertemuan</string>
+    <string name="title_event_popular">Event Terpopuler</string>
+    <string name="cd_category_icon">category icon</string>
+    <string name="see_all">Lihat Semua</string>
+    <string name="cd_event_poster">event poster</string>
+    <string name="button_menu">button menu</string>
 
 </resources>
