@@ -38,7 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="@dimen/range_12"
+        android:layout_marginTop="@dimen/range_10"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/poppins"
         android:gravity="center_horizontal"
@@ -106,18 +106,29 @@
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/tv_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/forgot_password"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/til_password"
+        app:layout_constraintTop_toBottomOf="@+id/til_password" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNext"
         style="@style/ButtonStyle16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/range_0"
-        android:layout_marginTop="@dimen/range_32"
+        android:layout_marginTop="@dimen/range_24"
         android:layout_marginEnd="@dimen/range_0"
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_password" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -139,7 +150,7 @@
             android:text="@string/suggest_register_text"
             android:textAlignment="viewEnd" />
         <TextView
-            android:id="@+id/tv_masuk"
+            android:id="@+id/tv_daftar"
             android:fontFamily="@font/poppins_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

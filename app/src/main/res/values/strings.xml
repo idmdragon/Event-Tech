@@ -18,6 +18,7 @@
     <string name="login">Masuk</string>
     <string name="register">Daftar</string>
     <string name="suggest_register_text">Belum punya akun?  </string>
+    <string name="forgot_password">Lupa password?</string>
     <color name="mtrl_textinput_default_box_stroke_color">@color/whitegray</color>
 
 </resources>
