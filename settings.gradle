@@ -8,3 +8,12 @@ dependencyResolutionManagement {
 }
 rootProject.name = "EventTech"
 include ':app'
+include ':data'
+include ':domain'
+include ':features:authentication'
+include ':features:favorite'
+include ':features:schedule'
+include ':features:profile'
+include ':features:eventconference'
+include ':features:eventcompetition'
+include ':features:search'

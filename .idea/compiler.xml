@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="EventTech.app" target="11" />
+      <module name="EventTech.authentication" target="11" />
+      <module name="EventTech.data" target="11" />
+      <module name="EventTech.features.authentication" target="11" />
+      <module name="EventTech.features.eventcompetition" target="11" />
+      <module name="EventTech.features.eventconference" target="11" />
+      <module name="EventTech.features.favorite" target="11" />
+      <module name="EventTech.features.profile" target="11" />
+      <module name="EventTech.features.schedule" target="11" />
+      <module name="EventTech.features.search" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
