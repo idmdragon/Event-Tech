@@ -3,17 +3,36 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_calendar.xml" value="0.28055555555555556" />
+        <entry key="app/src/main/res/drawable/ic_calendar_active.xml" value="0.28055555555555556" />
+        <entry key="app/src/main/res/drawable/ic_calendar_inactive.xml" value="0.28055555555555556" />
+        <entry key="app/src/main/res/drawable/ic_comp.xml" value="0.28055555555555556" />
+        <entry key="app/src/main/res/drawable/ic_conf.xml" value="0.28055555555555556" />
+        <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.28055555555555556" />
+        <entry key="app/src/main/res/drawable/ic_event_conf_active.xml" value="0.28055555555555556" />
+        <entry key="app/src/main/res/drawable/ic_event_conf_unactive.xml" value="0.28055555555555556" />
+        <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.28055555555555556" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.28055555555555556" />
         <entry key="app/src/main/res/drawable/ic_ilus_intro_1.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.28055555555555556" />
         <entry key="app/src/main/res/drawable/indicator_active.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/drawable/indicator_incative.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.17" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_competition.xml" value="0.2791666666666667" />
+        <entry key="app/src/main/res/layout/fragment_conference.xml" value="0.2791666666666667" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.2791666666666667" />
+        <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.2791666666666667" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.2791666666666667" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2791666666666667" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_schedule.xml" value="0.2791666666666667" />
         <entry key="app/src/main/res/layout/slide_item_container.xml" value="0.18" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2791666666666667" />
       </map>
     </option>
   </component>

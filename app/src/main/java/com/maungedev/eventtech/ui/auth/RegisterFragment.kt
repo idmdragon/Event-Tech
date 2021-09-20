@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.maungedev.eventtech.ui.main.MainActivity
 import com.maungedev.eventtech.R
 import com.maungedev.eventtech.databinding.FragmentRegisterBinding
+import com.maungedev.eventtech.ui.main.MainActivity
 
 class RegisterFragment : Fragment() {
 
