@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
+        android:paddingBottom="@dimen/range_8"
+        android:paddingTop="@dimen/range_8"
         android:background="@color/black"
         app:itemIconTint="@color/item_color"
         app:labelVisibilityMode="unlabeled"

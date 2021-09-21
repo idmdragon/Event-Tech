@@ -1,4 +1,4 @@
-package com.maungedev.eventtech.ui.main.ui.competition
+package com.maungedev.eventcompetition
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

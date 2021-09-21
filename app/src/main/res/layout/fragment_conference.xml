@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/range_24"
-        android:layout_marginTop="@dimen/range_28"
+        android:layout_marginTop="@dimen/range_16"
         android:fontFamily="@font/poppins_semibold"
         android:text="@string/title_event_conference"
         android:textColor="@color/white"
@@ -58,13 +58,13 @@
         android:id="@+id/rv_category"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="@dimen/range_12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvPageTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvPageTitle"
+        tools:listitem="@layout/item_conference_category"
+        android:orientation="horizontal"
        />
-
 
     <TextView
         android:id="@+id/tvPageTitlePopular"
@@ -99,7 +99,7 @@
         android:layout_marginTop="@dimen/range_22"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_event_general"
+        tools:listitem="@layout/item_mini_event"
         tools:itemCount="3"
         app:layout_constraintTop_toBottomOf="@+id/tvPageTitlePopular" />
 

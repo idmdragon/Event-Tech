@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_competition.xml" value="0.2791666666666667" />
-        <entry key="app/src/main/res/layout/fragment_conference.xml" value="0.4031510658016682" />
+        <entry key="app/src/main/res/layout/fragment_conference.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.2791666666666667" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.2791666666666667" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25" />
@@ -32,14 +32,17 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2791666666666667" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_schedule.xml" value="0.2791666666666667" />
-        <entry key="app/src/main/res/layout/item_conference_category.xml" value="0.75" />
-        <entry key="app/src/main/res/layout/item_event_general.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_conference_category.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_event_general.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/item_mini_event.xml" value="0.5" />
         <entry key="app/src/main/res/layout/slide_item_container.xml" value="0.18" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2791666666666667" />
         <entry key="features/authentication/src/main/res/layout/activity_auth.xml" value="0.2791666666666667" />
         <entry key="features/authentication/src/main/res/layout/activity_authentication.xml" value="0.25885416666666666" />
         <entry key="features/authentication/src/main/res/layout/auth_activity.xml" value="0.2791666666666667" />
         <entry key="features/authentication/src/main/res/layout/fragment_login.xml" value="0.2791666666666667" />
+        <entry key="features/eventcompetition/src/main/res/layout/fragment_competition.xml" value="0.2724961870869344" />
+        <entry key="features/eventcompetition/src/main/res/layout/s.xml" value="0.2724961870869344" />
       </map>
     </option>
   </component>

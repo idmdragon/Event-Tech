@@ -53,20 +53,24 @@ class IntroActivity : AppCompatActivity() {
             }
         })
 
+        val uriIntent = Uri.parse("eventtech://authentication")
+
         binding.btnNext.setOnClickListener{
+
+
             if(binding.introSliderViewPager.currentItem + 1 < introSlideAdapter.itemCount)
             {
                 binding.introSliderViewPager.currentItem+=1
             }else{
 
-                Intent (applicationContext, MainActivity::class.java).also {
+                Intent (Intent.ACTION_VIEW, uriIntent).also {
                     startActivity(it)
                     finish()
                 }
             }
         }
         binding.tvSkip.setOnClickListener {
-            Intent (applicationContext, MainActivity::class.java).also {
+            Intent (Intent.ACTION_VIEW, uriIntent).also {
                 startActivity(it)
                 finish()
             }

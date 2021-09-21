@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.maungedev.authentication.databinding.FragmentLoginBinding
-import com.maungedev.eventtech.R
 
 class LoginFragment : Fragment() {
 
@@ -26,7 +25,7 @@ class LoginFragment : Fragment() {
         binding.tvDaftar.setOnClickListener {
             val mRegisterFragment = RegisterFragment()
             val mFragmentManager = parentFragmentManager
-/*            mFragmentManager.beginTransaction().apply {
+            mFragmentManager.beginTransaction().apply {
                 replace(
                     R.id.frame_container,
                     mRegisterFragment,
@@ -34,7 +33,7 @@ class LoginFragment : Fragment() {
                 )
                 addToBackStack(null)
                 commit()
-            }*/
+            }
         }
     }
 

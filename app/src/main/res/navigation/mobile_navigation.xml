@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_conference" />
     <fragment
         android:id="@+id/navigation_competition"
-        android:name="com.maungedev.eventtech.ui.main.ui.competition.CompetitionFragment"
+        android:name="com.maungedev.eventcompetition.CompetitionFragment"
         android:label="fragment_competition"
         tools:layout="@layout/fragment_competition" />
     <fragment

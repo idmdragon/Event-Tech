@@ -10,13 +10,20 @@
             <dist:install-time />
         </dist:delivery>
 
-        <dist:fusing dist:include="false" />
+        <dist:fusing dist:include="true" />
     </dist:module>
 
     <application>
         <activity
             android:name=".AuthActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="eventtech"
+                    android:host="authentication"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
