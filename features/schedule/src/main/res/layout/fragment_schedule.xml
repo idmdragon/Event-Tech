@@ -18,4 +18,31 @@
         android:textSize="@dimen/size_18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_current_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_schedule"
+        android:backgroundTint="#4D515B"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingHorizontal="@dimen/range_8"
+        android:paddingVertical="2dp"
+        android:text="01 Sept, 2021"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_14"
+        android:layout_marginEnd="@dimen/range_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitleFavorite"
+        app:layout_constraintTop_toTopOf="@+id/tvTitleFavorite" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_schedule"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        tools:listitem="@layout/item_schedule"
+        android:layout_marginTop="@dimen/range_16"
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

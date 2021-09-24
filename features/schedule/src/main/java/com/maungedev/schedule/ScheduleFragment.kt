@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.maungedev.domain.model.EventIT
+import com.maungedev.eventtech.ui.adapter.ScheduleAdapter
 import com.maungedev.schedule.databinding.FragmentScheduleBinding
 
 class ScheduleFragment : Fragment() {
 
-    private lateinit var scheduleViewModel: ScheduleViewModel
+    private lateinit var viewModel: ScheduleViewModel
     private var _binding: FragmentScheduleBinding? = null
-
+    private lateinit var scheduleEventAdapter: ScheduleAdapter
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -20,11 +23,26 @@ class ScheduleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        scheduleViewModel =
+        viewModel =
             ViewModelProvider(this).get(ScheduleViewModel::class.java)
-
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.getScheduleEvent().observe(viewLifecycleOwner,::setSchedule)
+
+    }
+
+    private fun setSchedule(list: List<EventIT>) {
+        scheduleEventAdapter = ScheduleAdapter(requireContext())
+        scheduleEventAdapter.setItems(list)
+        binding.rvSchedule.adapter = scheduleEventAdapter
+        binding.rvSchedule.layoutManager = LinearLayoutManager(
+            activity,
+            LinearLayoutManager.VERTICAL, false
+        )
     }
 
     override fun onDestroyView() {

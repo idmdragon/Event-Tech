@@ -33,4 +33,12 @@
         <item name="android:fontFamily">@font/poppins_semibold</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="PoppinsMedium" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="PoppinsReguler" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>
