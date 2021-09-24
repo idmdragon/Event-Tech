@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/background_profile_text.xml" value="0.27870370370370373" />
         <entry key="app/src/main/res/drawable/background_schedule.xml" value="0.1859375" />
         <entry key="app/src/main/res/drawable/ic_calendar.xml" value="0.28055555555555556" />
         <entry key="app/src/main/res/drawable/ic_calendar_active.xml" value="0.28055555555555556" />
@@ -50,7 +51,7 @@
         <entry key="features/eventconference/src/main/res/layout/s.xml" value="0.3026041666666667" />
         <entry key="features/favorite/src/main/res/layout/fragment_favorite.xml" value="0.3026041666666667" />
         <entry key="features/favorite/src/main/res/layout/s.xml" value="0.3026041666666667" />
-        <entry key="features/profile/src/main/res/layout/fragment_profile.xml" value="0.5" />
+        <entry key="features/profile/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="features/profile/src/main/res/layout/tes.xml" value="0.234375" />
         <entry key="features/schedule/src/main/res/layout/a.xml" value="0.3026041666666667" />
         <entry key="features/schedule/src/main/res/layout/fragment_schedule.xml" value="0.33" />
@@ -67,7 +68,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.67" />
+        <option name="scale" value="0.5" />
       </ProjectState>
     </option>
   </component>
