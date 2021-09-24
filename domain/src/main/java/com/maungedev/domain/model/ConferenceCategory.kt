@@ -1,4 +1,4 @@
-package com.maungedev.eventtech.ui.main.ui.conference
+package com.maungedev.domain.model
 
 data class ConferenceCategory(
     val id: Int,

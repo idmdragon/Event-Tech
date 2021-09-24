@@ -1,4 +1,4 @@
-package com.maungedev.eventtech.ui.main.ui.schedule
+package com.maungedev.schedule
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.maungedev.eventtech.databinding.FragmentScheduleBinding
+import com.maungedev.schedule.databinding.FragmentScheduleBinding
 
 class ScheduleFragment : Fragment() {
 

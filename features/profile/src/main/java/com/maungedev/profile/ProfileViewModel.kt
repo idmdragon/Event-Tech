@@ -1,4 +1,4 @@
-package com.maungedev.eventtech.ui.main.ui.profile
+package com.maungedev.profile
 
 import androidx.lifecycle.ViewModel
 

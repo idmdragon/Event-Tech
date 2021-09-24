@@ -1,8 +1,8 @@
 package com.maungedev.eventtech.dummy
 
+import com.maungedev.domain.model.ConferenceCategory
 import com.maungedev.domain.model.EventIT
 import com.maungedev.eventtech.R
-import com.maungedev.eventtech.ui.main.ui.conference.ConferenceCategory
 
 object DummyData {
     fun generateDummyEvent(): List<EventIT> {
@@ -142,41 +142,34 @@ object DummyData {
         listData.add(
             ConferenceCategory(
                 4,
-                "Semua Kategori",
-                R.drawable.ic_all_category
-            )
-        )
-        listData.add(
-            ConferenceCategory(
-                5,
                 "Cloud Computing",
                 R.drawable.ic_cloud_computing
             )
         )
         listData.add(
             ConferenceCategory(
-                6,
+                5,
                 "Mobile Apps",
                 R.drawable.ic_mobile_apps
             )
         )
         listData.add(
             ConferenceCategory(
-                7,
+                6,
                 "Backend",
                 R.drawable.ic_backend
             )
         )
         listData.add(
             ConferenceCategory(
-                8,
+                7,
                 "IoT",
                 R.drawable.ic_iot
             )
         )
         listData.add(
             ConferenceCategory(
-                9,
+                8,
                 "Career",
                 R.drawable.ic_career
             )

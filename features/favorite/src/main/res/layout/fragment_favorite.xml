@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.ui.favorite.FavoriteFragment"
+    tools:context="com.maungedev.favorite.ui.FavoriteFragment"
     android:background="@color/black">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/title_event_favorite"
             style="@style/PoppinsSemiBold"
-            android:textSize="18sp"
+            android:textSize="@dimen/size_18"
             android:layout_marginTop="@dimen/range_16"
             android:layout_marginStart="@dimen/range_24"
             app:layout_constraintTop_toTopOf="parent"

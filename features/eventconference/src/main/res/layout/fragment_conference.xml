@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".ui.main.ui.conference.ConferenceFragment">
+    android:orientation="vertical"
+    tools:context="com.maungedev.eventconference.ui.ConferenceFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -17,6 +18,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:layout_marginTop="@dimen/range_16"
+            android:layout_marginStart="@dimen/range_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"

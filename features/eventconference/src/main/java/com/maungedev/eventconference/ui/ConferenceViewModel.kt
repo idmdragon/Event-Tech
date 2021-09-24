@@ -1,8 +1,9 @@
-package com.maungedev.eventtech.ui.main.ui.conference
+package com.maungedev.eventconference.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.maungedev.domain.model.ConferenceCategory
 import com.maungedev.domain.model.EventIT
 import com.maungedev.eventtech.dummy.DummyData
 

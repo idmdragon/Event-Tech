@@ -6,7 +6,7 @@
     app:startDestination="@id/navigation_conference">
     <fragment
         android:id="@+id/navigation_conference"
-        android:name="com.maungedev.eventtech.ui.main.ui.conference.ConferenceFragment"
+        android:name="com.maungedev.eventconference.ui.ConferenceFragment"
         android:label="fragment_conference"
         tools:layout="@layout/fragment_conference" />
     <fragment
@@ -16,17 +16,17 @@
         tools:layout="@layout/fragment_competition" />
     <fragment
         android:id="@+id/navigation_schedule"
-        android:name="com.maungedev.eventtech.ui.main.ui.schedule.ScheduleFragment"
+        android:name="com.maungedev.schedule.ScheduleFragment"
         android:label="fragment_schedule"
         tools:layout="@layout/fragment_schedule" />
     <fragment
         android:id="@+id/navigation_favorite"
-        android:name="com.maungedev.eventtech.ui.main.ui.favorite.FavoriteFragment"
+        android:name="com.maungedev.favorite.ui.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.maungedev.eventtech.ui.main.ui.profile.ProfileFragment"
+        android:name="com.maungedev.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.maungedev.eventtech.ui.main.ui.conference
+package com.maungedev.eventconference.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.maungedev.domain.model.ConferenceCategory
 import com.maungedev.domain.model.EventIT
-import com.maungedev.eventtech.databinding.FragmentConferenceBinding
+import com.maungedev.eventconference.databinding.FragmentConferenceBinding
 import com.maungedev.eventtech.ui.adapter.ConferenceCategoryAdapter
 import com.maungedev.eventtech.ui.adapter.MiniLayoutAdapter
 

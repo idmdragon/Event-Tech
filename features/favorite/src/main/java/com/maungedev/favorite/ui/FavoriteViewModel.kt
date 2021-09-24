@@ -1,4 +1,4 @@
-package com.maungedev.eventtech.ui.main.ui.favorite
+package com.maungedev.favorite.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
