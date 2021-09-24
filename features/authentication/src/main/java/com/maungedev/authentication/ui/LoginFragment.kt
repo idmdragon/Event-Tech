@@ -1,10 +1,11 @@
-package com.maungedev.authentication
+package com.maungedev.authentication.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.maungedev.authentication.R
 import com.maungedev.authentication.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {

@@ -13,8 +13,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.maungedev.domain.model.EventIT
 import com.maungedev.eventtech.databinding.ItemMiniEventBinding
 
-class MiniEventAdapter(private val context: Context) :
-    RecyclerView.Adapter<MiniEventAdapter.ViewHolder>() {
+class MiniLayoutAdapter(private val context: Context) :
+    RecyclerView.Adapter<MiniLayoutAdapter.ViewHolder>() {
 
     private val events = arrayListOf<EventIT>()
 
@@ -23,13 +23,13 @@ class MiniEventAdapter(private val context: Context) :
         this.events.addAll(items)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MiniEventAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MiniLayoutAdapter.ViewHolder {
         val itemBinding =
             ItemMiniEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
 
-    override fun onBindViewHolder(holder: MiniEventAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MiniLayoutAdapter.ViewHolder, position: Int) {
         holder.bind(events[position])
     }
 

@@ -38,5 +38,6 @@
     <string name="see_all">Lihat Semua</string>
     <string name="cd_event_poster">event poster</string>
     <string name="button_menu">button menu</string>
+    <string name="title_event_favorite">Event Favorite</string>
 
 </resources>

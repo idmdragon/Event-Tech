@@ -85,6 +85,25 @@ object DummyData {
                 null
             )
         )
+        listData.add(
+            EventIT(
+                "",
+                "Hology 5.0 App Inovation",
+                "Conference",
+                "Mobile Apps",
+                "",
+                "20 April 2000",
+                "20:00",
+                "Meet",
+                "",
+                "Lorem ipsum",
+                "",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8LuyKp6QSNwhSnZKMmrFPaJ3z_X_Y6A3tkw&usqp=CAU",
+                2,
+                2,
+                null
+            )
+        )
 
         return listData
     }

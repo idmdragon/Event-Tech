@@ -1,7 +1,8 @@
-package com.maungedev.authentication
+package com.maungedev.authentication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.maungedev.authentication.R
 import com.maungedev.authentication.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {
