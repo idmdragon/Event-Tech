@@ -1,5 +1,6 @@
 package com.maungedev.eventconference.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,9 +39,8 @@ class ConferenceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         conferenceViewModel.getPopularEvent().observe(viewLifecycleOwner,::setPopularEvent)
         conferenceViewModel.getConferenceCategory().observe(viewLifecycleOwner,::setConferenceCategory)
-
         binding.btnSearch.setOnClickListener {
-            Toast.makeText(requireContext(),"Search Button",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), Class.forName("com.maungedev.search.SearchActivity")))
         }
     }
 

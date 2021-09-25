@@ -30,7 +30,7 @@
         android:layout_marginEnd="@dimen/range_12"
         android:background="@android:color/transparent"
         android:contentDescription="@string/button_menu"
-        android:src="@drawable/ic_menu"
+        android:src="@drawable/ic_menu_event"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
