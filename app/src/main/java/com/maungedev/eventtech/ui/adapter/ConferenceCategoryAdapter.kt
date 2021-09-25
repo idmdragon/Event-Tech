@@ -5,15 +5,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.maungedev.domain.model.ConferenceCategory
+import com.maungedev.domain.model.EventConferenceCategory
 import com.maungedev.eventtech.databinding.ItemConferenceCategoryBinding
 
 class ConferenceCategoryAdapter(private val context: Context) :
     RecyclerView.Adapter<ConferenceCategoryAdapter.ViewHolder>() {
 
-    private val categories = arrayListOf<ConferenceCategory>()
+    private val categories = arrayListOf<EventConferenceCategory>()
 
-    fun setItems(items: List<ConferenceCategory>) {
+    fun setItems(items: List<EventConferenceCategory>) {
         this.categories.clear()
         this.categories.addAll(items)
     }
@@ -32,7 +32,7 @@ class ConferenceCategoryAdapter(private val context: Context) :
 
     inner class ViewHolder(private val binding: ItemConferenceCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ConferenceCategory) {
+        fun bind(item: EventConferenceCategory) {
             with(binding) {
                 tvCategoryName.text = item.categoryName
                 Glide.with(itemView.context)

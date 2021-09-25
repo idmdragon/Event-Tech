@@ -47,13 +47,22 @@
             android:padding="@dimen/range_12"
             android:src="@drawable/ic_search" />
     </androidx.appcompat.widget.Toolbar>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_event_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/range_24"
+        android:layout_marginTop="@dimen/range_16"
+        />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/range_8"
         android:paddingBottom="@dimen/range_64"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/rv_event_category">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_competition"
@@ -64,7 +73,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tvPageTitle"
                 app:layout_constraintTop_toBottomOf="@+id/tvPageTitle"
-                tools:listitem="@layout/item_conference_category" />
+                tools:listitem="@layout/item_list_event" />
 
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

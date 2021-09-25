@@ -1,7 +1,7 @@
 package com.maungedev.domain.model
 
-data class EventConferenceType(
+data class EventCompetitionCategory(
     val id: Int,
     val categoryName: String,
-    val categoryIcon: Int
+    var isSelected: Boolean = false
 )

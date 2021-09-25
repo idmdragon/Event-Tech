@@ -5,7 +5,7 @@ data class EventIT(
     val eventName: String,
     val eventType: String,
     val eventCategory: String,
-    val price: String,
+    val price: Int,
     val date: String,
     val time: String,
     val location: String,
@@ -16,5 +16,6 @@ data class EventIT(
     val numbersOfView: Int,
     val numbersOfRegistrationClick: Int,
     var favoriteBy: List<String>?,
+    val organizer: String
 ) {
 }

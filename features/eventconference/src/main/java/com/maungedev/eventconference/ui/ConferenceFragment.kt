@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.maungedev.domain.model.ConferenceCategory
+import com.maungedev.domain.model.EventConferenceCategory
 import com.maungedev.domain.model.EventIT
 import com.maungedev.eventconference.databinding.FragmentConferenceBinding
 import com.maungedev.eventtech.ui.adapter.ConferenceCategoryAdapter
@@ -44,7 +44,7 @@ class ConferenceFragment : Fragment() {
         }
     }
 
-    private fun setConferenceCategory(list: List<ConferenceCategory>) {
+    private fun setConferenceCategory(list: List<EventConferenceCategory>) {
         categoryEventAdapter = ConferenceCategoryAdapter(requireContext())
         categoryEventAdapter.setItems(list)
         binding.rvCategory.adapter = categoryEventAdapter

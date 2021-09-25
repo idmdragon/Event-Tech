@@ -2,6 +2,7 @@
 <resources>
     <dimen name="range_0">0dp</dimen>
     <dimen name="range_4">4dp</dimen>
+    <dimen name="range_6">6dp</dimen>
     <dimen name="range_8">8dp</dimen>
     <dimen name="range_12">12dp</dimen>
     <dimen name="range_16">16dp</dimen>

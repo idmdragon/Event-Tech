@@ -1,16 +1,20 @@
 package com.maungedev.eventcompetition
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.maungedev.domain.model.EventCompetitionCategory
 import com.maungedev.domain.model.EventIT
 import com.maungedev.eventcompetition.databinding.FragmentCompetitionBinding
-import com.maungedev.eventtech.ui.adapter.MiniLayoutAdapter
+import com.maungedev.eventtech.ui.adapter.CompetitionCategoryAdapter
+import com.maungedev.eventtech.ui.adapter.EventLayoutAdapter
 
 class CompetitionFragment : Fragment() {
 
@@ -18,7 +22,14 @@ class CompetitionFragment : Fragment() {
     private var _binding: FragmentCompetitionBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var competitionAdapter: MiniLayoutAdapter
+    private lateinit var competitionAdapter: EventLayoutAdapter
+    private val categoryAdapter:CompetitionCategoryAdapter by lazy {
+        CompetitionCategoryAdapter().apply {
+            setOnItemCallback {
+//                viewModel.filterPostByGameType(it)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,15 +43,32 @@ class CompetitionFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.getFavoriteEvent().observe(viewLifecycleOwner,::setFavoriteEvent)
+        viewModel.getCompetitionCategory().observe(viewLifecycleOwner,::setCompetitionCategory)
+        viewModel.getCompetitionEvent().observe(viewLifecycleOwner,::setCompetitionEvent)
 
     }
 
-    private fun setFavoriteEvent(list: List<EventIT>) {
-        Log.d("FavoriteFragmentDebugList","$list"
+    private fun setCompetitionCategory(list: List<EventCompetitionCategory>) {
+/*
+        categoryAdapter = CompetitionCategoryAdapter()
+*/
+        categoryAdapter.setItems(list)
+        binding.rvEventCategory.adapter = categoryAdapter
+        binding.rvEventCategory.layoutManager = LinearLayoutManager(
+            activity,
+            LinearLayoutManager.HORIZONTAL, false
         )
-        competitionAdapter = MiniLayoutAdapter(requireContext())
+/*        categoryAdapter.setOnItemCallback(
+            object : CompetitionCategoryAdapter.OnItemClickCallback {
+                override fun onItemClicked(category: EventCompetitionCategory) {
+                    Toast.makeText(requireContext(),"Category ${category.categoryName}",Toast.LENGTH_SHORT).show()
+                }
+            }
+        )*/
+    }
+
+    private fun setCompetitionEvent(list: List<EventIT>) {
+        competitionAdapter = EventLayoutAdapter(requireContext())
         competitionAdapter.setItems(list)
         binding.rvCompetition.adapter = competitionAdapter
         binding.rvCompetition.layoutManager = LinearLayoutManager(

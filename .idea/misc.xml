@@ -19,6 +19,8 @@
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.28055555555555556" />
         <entry key="app/src/main/res/drawable/indicator_active.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/drawable/indicator_incative.xml" value="0.16510416666666666" />
+        <entry key="app/src/main/res/drawable/item_competition_selected.xml" value="0.32760416666666664" />
+        <entry key="app/src/main/res/drawable/item_competition_unselected.xml" value="0.32760416666666664" />
         <entry key="app/src/main/res/drawable/rv_item_background.xml" value="0.2638888888888889" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.17" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.22" />
@@ -34,9 +36,10 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2791666666666667" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_schedule.xml" value="0.2791666666666667" />
+        <entry key="app/src/main/res/layout/item_competition_category.xml" value="1.0" />
         <entry key="app/src/main/res/layout/item_conference_category.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_event_general.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/item_list_event.xml" value="0.234375" />
+        <entry key="app/src/main/res/layout/item_list_event.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_mini_event.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_schedule.xml" value="0.36077844311377244" />
         <entry key="app/src/main/res/layout/slide_item_container.xml" value="0.18" />
@@ -45,7 +48,7 @@
         <entry key="features/authentication/src/main/res/layout/activity_authentication.xml" value="0.25885416666666666" />
         <entry key="features/authentication/src/main/res/layout/auth_activity.xml" value="0.2791666666666667" />
         <entry key="features/authentication/src/main/res/layout/fragment_login.xml" value="0.2791666666666667" />
-        <entry key="features/eventcompetition/src/main/res/layout/fragment_competition.xml" value="0.25" />
+        <entry key="features/eventcompetition/src/main/res/layout/fragment_competition.xml" value="0.47164591977869985" />
         <entry key="features/eventcompetition/src/main/res/layout/s.xml" value="0.2724961870869344" />
         <entry key="features/eventconference/src/main/res/layout/fragment_conference.xml" value="0.3026041666666667" />
         <entry key="features/eventconference/src/main/res/layout/s.xml" value="0.3026041666666667" />

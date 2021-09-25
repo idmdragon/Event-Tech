@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:paddingHorizontal="@dimen/range_16"
+    android:paddingVertical="@dimen/range_8"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/range_12"
+    android:background="@drawable/item_competition_unselected"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <TextView
+        android:id="@+id/tv_event_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Semua"
+        style="@style/PoppinsMedium"
+        android:textSize="@dimen/size_16"/>
+
+</FrameLayout>

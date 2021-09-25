@@ -1,6 +1,7 @@
 package com.maungedev.eventtech.dummy
 
-import com.maungedev.domain.model.ConferenceCategory
+import com.maungedev.domain.model.EventCompetitionCategory
+import com.maungedev.domain.model.EventConferenceCategory
 import com.maungedev.domain.model.EventIT
 import com.maungedev.eventtech.R
 
@@ -14,7 +15,7 @@ object DummyData {
                 "Hology 1.0 App Inovation",
                 "Conference",
                 "Mobile Apps",
-                "",
+                0,
                 "20 April 2000",
                 "20:00",
                 "Meet",
@@ -24,7 +25,8 @@ object DummyData {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8LuyKp6QSNwhSnZKMmrFPaJ3z_X_Y6A3tkw&usqp=CAU",
                 2,
                 2,
-                null
+                null,
+                "HMIF"
             )
         )
 
@@ -34,7 +36,7 @@ object DummyData {
                 "Hology 2.0 App Inovation",
                 "Conference",
                 "Mobile Apps",
-                "",
+                10000,
                 "20 April 2000",
                 "20:00",
                 "Meet",
@@ -44,7 +46,8 @@ object DummyData {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8LuyKp6QSNwhSnZKMmrFPaJ3z_X_Y6A3tkw&usqp=CAU",
                 2,
                 2,
-                null
+                null,
+                "UB"
             )
         )
         listData.add(
@@ -53,7 +56,7 @@ object DummyData {
                 "Hology 3.0 App Inovation",
                 "Conference",
                 "Mobile Apps",
-                "",
+                5000,
                 "20 April 2000",
                 "20:00",
                 "Meet",
@@ -63,7 +66,8 @@ object DummyData {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8LuyKp6QSNwhSnZKMmrFPaJ3z_X_Y6A3tkw&usqp=CAU",
                 2,
                 2,
-                null
+                null,
+                "UB"
             )
         )
         listData.add(
@@ -72,7 +76,7 @@ object DummyData {
                 "Hology 4.0 App Inovation",
                 "Conference",
                 "Mobile Apps",
-                "",
+                2000,
                 "20 April 2000",
                 "20:00",
                 "Meet",
@@ -82,7 +86,8 @@ object DummyData {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8LuyKp6QSNwhSnZKMmrFPaJ3z_X_Y6A3tkw&usqp=CAU",
                 2,
                 2,
-                null
+                null,
+                "TEKKOM UB"
             )
         )
         listData.add(
@@ -91,7 +96,7 @@ object DummyData {
                 "Hology 5.0 App Inovation",
                 "Conference",
                 "Mobile Apps",
-                "",
+                0,
                 "20 April 2000",
                 "20:00",
                 "Meet",
@@ -101,74 +106,75 @@ object DummyData {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8LuyKp6QSNwhSnZKMmrFPaJ3z_X_Y6A3tkw&usqp=CAU",
                 2,
                 2,
-                null
+                null,
+                "Dicoding ID"
             )
         )
 
         return listData
     }
 
-    fun generateConferenceCategory(): List<ConferenceCategory> {
-        val listData = arrayListOf<ConferenceCategory>()
+    fun generateConferenceCategory(): List<EventConferenceCategory> {
+        val listData = arrayListOf<EventConferenceCategory>()
 
         listData.add(
-            ConferenceCategory(
+            EventConferenceCategory(
                 0,
                 "Semua Kategori",
                 R.drawable.ic_all_category
             )
         )
         listData.add(
-            ConferenceCategory(
+            EventConferenceCategory(
                 1,
                 "UI/UX",
                 R.drawable.ic_ui_ux
             )
         )
         listData.add(
-            ConferenceCategory(
+            EventConferenceCategory(
                 2,
                 "Securit",
                 R.drawable.ic_security
             )
         )
         listData.add(
-            ConferenceCategory(
+            EventConferenceCategory(
                 3,
                 "Frontend",
                 R.drawable.ic_frontend
             )
         )
         listData.add(
-            ConferenceCategory(
+            EventConferenceCategory(
                 4,
                 "Cloud Computing",
                 R.drawable.ic_cloud_computing
             )
         )
         listData.add(
-            ConferenceCategory(
+            EventConferenceCategory(
                 5,
                 "Mobile Apps",
                 R.drawable.ic_mobile_apps
             )
         )
         listData.add(
-            ConferenceCategory(
+            EventConferenceCategory(
                 6,
                 "Backend",
                 R.drawable.ic_backend
             )
         )
         listData.add(
-            ConferenceCategory(
+            EventConferenceCategory(
                 7,
                 "IoT",
                 R.drawable.ic_iot
             )
         )
         listData.add(
-            ConferenceCategory(
+            EventConferenceCategory(
                 8,
                 "Career",
                 R.drawable.ic_career
@@ -177,5 +183,55 @@ object DummyData {
 
         return listData
 
+    }
+
+    fun generateCompetitionCategory(): List<EventCompetitionCategory> {
+        val listData = arrayListOf<EventCompetitionCategory>()
+        listData.add(
+            EventCompetitionCategory(
+                1,
+                "Semua"
+            )
+        )
+
+        listData.add(
+            EventCompetitionCategory(
+                2,
+                "UI/UX"
+            )
+        )
+
+        listData.add(
+            EventCompetitionCategory(
+                3,
+                "App Inovation"
+            )
+        )
+        listData.add(
+            EventCompetitionCategory(
+                4,
+                "Capture The Flag"
+            )
+        )
+        listData.add(
+            EventCompetitionCategory(
+                5,
+                "Hackaton"
+            )
+        )
+        listData.add(
+            EventCompetitionCategory(
+                6,
+                "Game Jam"
+            )
+        )
+        listData.add(
+            EventCompetitionCategory(
+                7,
+                "Business Plan"
+            )
+        )
+
+        return listData
     }
 }
