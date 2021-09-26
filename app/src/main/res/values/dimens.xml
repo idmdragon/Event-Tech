@@ -10,6 +10,8 @@
     <dimen name="range_28">28dp</dimen>
     <dimen name="range_32">32dp</dimen>
     <dimen name="range_64">64dp</dimen>
+    <dimen name="range_128">128dp</dimen>
+    <dimen name="range_84">84dp</dimen>
     <dimen name="size_8">8sp</dimen>
     <dimen name="size_12">12sp</dimen>
     <dimen name="size_14">14sp</dimen>

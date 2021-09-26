@@ -1,18 +1,17 @@
-package com.maungedev.search
+package com.maungedev.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.maungedev.search.databinding.ActivitySearchBinding
+import com.maungedev.detail.databinding.ActivityDetailBinding
 
-class SearchActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySearchBinding
+    private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySearchBinding.inflate(layoutInflater)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         with(binding){
             btnBack.setOnClickListener {
                 onBackPressed()

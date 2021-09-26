@@ -41,4 +41,11 @@
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="SearchTheme" parent="Base.Widget.AppCompat.SearchView">
+        <item name="android:textColorHint">@color/text_white_gray</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textSize">@dimen/size_16</item>
+        <item name="hintTextColor">@color/text_white_gray</item>
+    </style>
 </resources>

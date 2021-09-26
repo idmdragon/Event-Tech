@@ -35,7 +35,7 @@
             android:background="@android:color/transparent"
             android:contentDescription="@string/cdNotification"
             android:padding="@dimen/range_12"
-            android:src="@drawable/ic_menu_event" />
+            android:src="@drawable/ic_menu" />
 
         <ImageButton
             android:id="@+id/btnSearch"

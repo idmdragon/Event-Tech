@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/authentication" />
+            <option value="$PROJECT_DIR$/features/detail" />
             <option value="$PROJECT_DIR$/features/eventcompetition" />
             <option value="$PROJECT_DIR$/features/eventconference" />
             <option value="$PROJECT_DIR$/features/favorite" />

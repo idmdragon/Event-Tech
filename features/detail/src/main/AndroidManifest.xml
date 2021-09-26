@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.maungedev.profile">
+    package="com.maungedev.detail">
 
     <dist:module
         dist:instant="false"
-        dist:title="@string/title_profile">
+        dist:title="@string/title_detail">
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>
 
-        <dist:fusing dist:include="false" />
+        <dist:fusing dist:include="true" />
     </dist:module>
 
     <application>
         <activity
-            android:name=".ui.edit_username.EditUsernameActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.edit_password.EditPasswordActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.about.AboutActivity"
+            android:name=".DetailActivity"
             android:exported="true" />
     </application>
 

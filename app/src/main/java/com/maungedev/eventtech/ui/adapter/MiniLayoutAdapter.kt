@@ -1,6 +1,7 @@
 package com.maungedev.eventtech.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.maungedev.domain.model.EventIT
+import com.maungedev.eventtech.constant.PageNameConstant.DETAIL_PAGE
 import com.maungedev.eventtech.databinding.ItemMiniEventBinding
 
 class MiniLayoutAdapter(private val context: Context) :
@@ -48,6 +50,10 @@ class MiniLayoutAdapter(private val context: Context) :
                     .placeholder(ColorDrawable(Color.CYAN))
                     .apply(RequestOptions())
                     .into(ivPoster)
+
+                itemView.setOnClickListener {
+                    context.startActivity(Intent(itemView.context,Class.forName(DETAIL_PAGE)))
+                }
             }
         }
     }

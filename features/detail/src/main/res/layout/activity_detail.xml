@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".DetailActivity">
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/range_24"
+        android:layout_marginTop="@dimen/range_16"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/cd_back"
+        android:padding="@dimen/range_8"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title_name"
+        style="@style/PoppinsSemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/size_16"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_back"
+        android:text="Mobile Apps" />
+
+    <ImageButton
+        android:id="@+id/btn_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/range_16"
+        android:layout_marginEnd="@dimen/range_24"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/cdNotification"
+        android:padding="@dimen/range_12"
+        android:src="@drawable/ic_favorite_detail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/range_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_back">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/range_84"
+            >
+
+            <ImageView
+                android:id="@+id/iv_poster"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/range_24"
+                android:layout_marginEnd="@dimen/range_24"
+                android:contentDescription="@string/cd_event_poster"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/dummy_poster" />
+
+            <TextView
+                android:id="@+id/tv_event_title"
+                style="@style/PoppinsMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/range_8"
+                android:gravity="center"
+                android:textSize="@dimen/size_18"
+                app:layout_constraintEnd_toEndOf="@id/iv_poster"
+                app:layout_constraintStart_toStartOf="@id/iv_poster"
+                app:layout_constraintTop_toBottomOf="@id/iv_poster"
+                android:text="Design to Code #Session 2" />
+
+            <TextView
+                android:id="@+id/tv_event_information"
+                style="@style/PoppinsReguler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/range_4"
+                app:layout_constraintEnd_toEndOf="@id/tv_event_title"
+                app:layout_constraintStart_toStartOf="@id/tv_event_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_event_title"
+                android:text="Aug 01  •  Google Meet • 9am" />
+
+            <View
+                android:id="@+id/view_border"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/range_24"
+                android:layout_marginTop="@dimen/range_12"
+                android:layout_marginEnd="@dimen/range_24"
+                android:background="@color/whitegray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_event_information" />
+
+            <TextView
+                android:id="@+id/tv_title_about"
+                style="@style/PoppinsMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/range_12"
+                android:text="@string/text_about_event"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_border" />
+
+            <TextView
+                android:id="@+id/tv_about"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/range_28"
+                android:layout_marginTop="@dimen/range_4"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:textColor="@color/text_white_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_about"
+                android:text="Cloud Computing Backbone 4.0 adalah acara yang membahas tentang cloud computing dan dihadiri oleh pembcara pebicara skala naioanl seperti xx asd lkas aodnka skljnsad" />
+
+            <TextView
+                android:id="@+id/tv_title_prerequisite"
+                style="@style/PoppinsMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/range_16"
+                android:text="@string/text_prerequisite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_about" />
+
+            <TextView
+                android:id="@+id/tv_prerequisite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/range_28"
+                android:layout_marginTop="@dimen/range_4"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:textColor="@color/text_white_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_prerequisite"
+                android:text="Cloud Computing Backbone 4.0 adalah acara yang membahas tentang cloud computing dan dihadiri oleh pembcara pebicara skala naioanl seperti xx asd lkas aodnka skljnsad Cloud Computing Backbone 4.0 adalah acara yang membahas tentang cloud computing dan dihadiri oleh pembcara pebicara skala naioanl seperti xx asd lkas aodnka skljnsad" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/darkgray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/tv_title_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_price_title"
+            android:textColor="@color/text_white_gray"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/range_16"
+            android:layout_marginStart="@dimen/range_16"
+            />
+        <TextView
+            android:id="@+id/tv_price"
+            style="@style/PoppinsMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gratis"
+            android:layout_marginBottom="@dimen/range_16"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_price"
+            app:layout_constraintStart_toStartOf="@id/tv_title_price"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <Button
+            android:id="@+id/btn_registration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/range_16"
+            android:text="@string/text_registration"
+            android:textAllCaps="false"
+            android:textSize="@dimen/size_12"
+            android:fontFamily="@font/poppins_medium"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <Button
+            android:id="@+id/btn_add_reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/text_reminder"
+            android:drawableLeft="@drawable/ic_add"
+            android:drawablePadding="@dimen/range_6"
+            android:textSize="@dimen/size_12"
+            android:textAllCaps="false"
+            android:layout_marginEnd="@dimen/range_12"
+            app:layout_constraintEnd_toStartOf="@+id/btn_registration"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

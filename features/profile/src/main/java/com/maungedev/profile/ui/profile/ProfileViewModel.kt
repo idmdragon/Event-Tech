@@ -1,4 +1,4 @@
-package com.maungedev.profile
+package com.maungedev.profile.ui.profile
 
 import androidx.lifecycle.ViewModel
 

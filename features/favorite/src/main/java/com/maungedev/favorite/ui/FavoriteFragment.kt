@@ -36,8 +36,6 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setFavoriteEvent(list: List<EventIT>) {
-        Log.d("FavoriteFragmentDebugList","$list"
-        )
         favoriteEventAdapter = MiniLayoutAdapter(requireContext())
         favoriteEventAdapter.setItems(list)
         binding.rvFavorite.adapter = favoriteEventAdapter

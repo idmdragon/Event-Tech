@@ -8,7 +8,7 @@
     tools:context=".SearchActivity">
 
     <ImageButton
-        android:id="@+id/ib_back"
+        android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/range_16"
@@ -20,15 +20,19 @@
         android:contentDescription="@string/cd_back" />
 
     <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
+        style="@style/SearchTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
         app:iconifiedByDefault="false"
-        app:layout_constraintBottom_toBottomOf="@+id/ib_back"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ib_back"
-        app:layout_constraintTop_toTopOf="@+id/ib_back"
+        app:layout_constraintStart_toEndOf="@+id/btn_back"
+        app:layout_constraintTop_toTopOf="@+id/btn_back"
         app:queryHint="Cari Event"
- />
+        app:searchIcon="@null"
+        android:textColorHint="@color/whitegray"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

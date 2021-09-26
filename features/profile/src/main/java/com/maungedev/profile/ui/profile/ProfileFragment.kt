@@ -1,10 +1,11 @@
-package com.maungedev.profile
+package com.maungedev.profile.ui.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.maungedev.profile.R
 
 class ProfileFragment : Fragment() {
 

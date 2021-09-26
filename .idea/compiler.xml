@@ -6,6 +6,7 @@
       <module name="EventTech.authentication" target="11" />
       <module name="EventTech.data" target="11" />
       <module name="EventTech.features.authentication" target="11" />
+      <module name="EventTech.features.detail" target="11" />
       <module name="EventTech.features.eventcompetition" target="11" />
       <module name="EventTech.features.eventconference" target="11" />
       <module name="EventTech.features.favorite" target="11" />

@@ -26,7 +26,7 @@
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.maungedev.profile.ProfileFragment"
+        android:name="com.maungedev.profile.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

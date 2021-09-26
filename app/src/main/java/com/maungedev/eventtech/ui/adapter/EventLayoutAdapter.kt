@@ -1,11 +1,13 @@
 package com.maungedev.eventtech.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.maungedev.domain.model.EventIT
+import com.maungedev.eventtech.constant.PageNameConstant
 import com.maungedev.eventtech.databinding.ItemListEventBinding
 
 class EventLayoutAdapter (private val context: Context) :
@@ -44,6 +46,10 @@ class EventLayoutAdapter (private val context: Context) :
                 }
                 tvEventDate.text = "04"
                 tvEventMonth.text = "Aug"
+
+                binding.btnDetail.setOnClickListener {
+                    context.startActivity(Intent(itemView.context,Class.forName(PageNameConstant.DETAIL_PAGE)))
+                }
 
                 Glide.with(itemView.context)
                     .load(item.eventCover)
