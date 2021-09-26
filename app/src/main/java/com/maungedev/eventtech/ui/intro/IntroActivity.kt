@@ -19,7 +19,7 @@ import com.maungedev.eventtech.ui.main.MainActivity
 class IntroActivity : AppCompatActivity() {
 
 
-    private lateinit var binding : ActivityIntroBinding
+    private lateinit var binding: ActivityIntroBinding
 
     private val introSlideAdapter = IntroSlideAdapter(
         listOf(
@@ -48,46 +48,46 @@ class IntroActivity : AppCompatActivity() {
         binding.introSliderViewPager.adapter = introSlideAdapter
         setupIndicator()
         setCurrentIndicator(0)
-        binding.introSliderViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                setCurrentIndicator(position)
+
+        with(binding) {
+            introSliderViewPager.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    setCurrentIndicator(position)
+                }
+            })
+
+            btnNext.setOnClickListener {
+                if (introSliderViewPager.currentItem + 1 < introSlideAdapter.itemCount) {
+                    introSliderViewPager.currentItem += 1
+                } else {
+                    Intent(this@IntroActivity, Class.forName(AUTHENTICATION_PAGE)).also {
+                        startActivity(it)
+                        finish()
+                    }
+                }
             }
-        })
-
-
-        binding.btnNext.setOnClickListener{
-
-            if(binding.introSliderViewPager.currentItem + 1 < introSlideAdapter.itemCount)
-            {
-                binding.introSliderViewPager.currentItem+=1
-            }else{
-
-                Intent (this@IntroActivity, Class.forName(AUTHENTICATION_PAGE)).also {
+            tvSkip.setOnClickListener {
+                Intent(this@IntroActivity, Class.forName(AUTHENTICATION_PAGE)).also {
                     startActivity(it)
                     finish()
                 }
             }
         }
-        binding.tvSkip.setOnClickListener {
-            Intent (this@IntroActivity, Class.forName(AUTHENTICATION_PAGE)).also {
-                startActivity(it)
-                finish()
-            }
-        }
     }
 
-    private fun setupIndicator(){
+    private fun setupIndicator() {
         val indicators = arrayOfNulls<ImageView>(introSlideAdapter.itemCount)
         val layoutParams: LinearLayout.LayoutParams =
             LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
-        layoutParams.setMargins(8,0,8,0)
-        for (i in indicators.indices){
+        layoutParams.setMargins(8, 0, 8, 0)
+        for (i in indicators.indices) {
             indicators[i] = ImageView(applicationContext)
-            indicators[i].apply{
+            indicators[i].apply {
                 this?.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
@@ -100,24 +100,24 @@ class IntroActivity : AppCompatActivity() {
         }
     }
 
-    private fun setCurrentIndicator(index : Int){
+    private fun setCurrentIndicator(index: Int) {
         val childCount = binding.indicatorContainer.childCount
-        for (i in 0 until childCount){
+        for (i in 0 until childCount) {
             val imageView = binding.indicatorContainer[i] as ImageView
-            if(i == index){
+            if (i == index) {
                 imageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
                         R.drawable.indicator_active
                     )
                 )
-            }
-            else {
+            } else {
                 imageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
                         R.drawable.indicator_incative
-                    ))
+                    )
+                )
             }
         }
     }

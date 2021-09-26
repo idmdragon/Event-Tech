@@ -100,6 +100,7 @@
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_password"
         android:layout_width="@dimen/range_0"
@@ -128,6 +129,16 @@
             android:hint="@string/hint_password"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRegister"
+        app:layout_constraintEnd_toEndOf="@+id/btnRegister"
+        app:layout_constraintStart_toStartOf="@+id/btnRegister"
+        app:layout_constraintTop_toTopOf="@+id/btnRegister" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegister"
@@ -170,4 +181,5 @@
             android:textAlignment="viewStart"
             android:textColor="@color/blue" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

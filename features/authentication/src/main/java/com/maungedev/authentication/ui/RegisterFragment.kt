@@ -2,10 +2,12 @@ package com.maungedev.authentication.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.maungedev.authentication.R
 import com.maungedev.authentication.databinding.FragmentRegisterBinding
 import com.maungedev.eventtech.ui.main.MainActivity
@@ -27,10 +29,16 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRegister.setOnClickListener {
-            Intent(requireContext(), MainActivity::class.java).also {
-                startActivity(it)
-                activity?.finish()
-            }
+
+            binding.progressBar.isVisible = true
+            binding.btnRegister.isEnabled = false
+            Handler().postDelayed({
+                startActivity(Intent(requireContext(), MainActivity::class.java)).also{
+                    activity?.finish()
+                }
+            }, 1000)
+
+
         }
 
         binding.tvMasuk.setOnClickListener {
