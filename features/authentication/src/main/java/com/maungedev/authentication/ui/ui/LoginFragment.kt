@@ -1,4 +1,4 @@
-package com.maungedev.authentication.ui
+package com.maungedev.authentication.ui.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.maungedev.authentication.R
 import com.maungedev.authentication.databinding.FragmentLoginBinding
+import com.maungedev.authentication.ui.di.authModule
+import org.koin.core.context.loadKoinModules
 
 class LoginFragment : Fragment() {
 
@@ -23,6 +25,8 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadKoinModules(authModule)
+
         binding.tvDaftar.setOnClickListener {
             val mRegisterFragment = RegisterFragment()
             val mFragmentManager = parentFragmentManager

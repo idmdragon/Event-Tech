@@ -51,6 +51,7 @@
         <entry key="features/authentication/src/main/res/layout/activity_authentication.xml" value="0.25885416666666666" />
         <entry key="features/authentication/src/main/res/layout/auth_activity.xml" value="0.2791666666666667" />
         <entry key="features/authentication/src/main/res/layout/fragment_login.xml" value="0.2791666666666667" />
+        <entry key="features/authentication/src/main/res/layout/fragment_register.xml" value="0.29438405797101447" />
         <entry key="features/detail/src/main/res/layout/activity_detail.xml" value="0.2708638360175695" />
         <entry key="features/eventcompetition/src/main/res/layout/activity_conference_list.xml" value="0.23229166666666667" />
         <entry key="features/eventcompetition/src/main/res/layout/fragment_competition.xml" value="0.47164591977869985" />

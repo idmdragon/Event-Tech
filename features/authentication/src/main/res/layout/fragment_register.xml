@@ -5,7 +5,7 @@
     style="@style/LayoutStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.maungedev.authentication.ui.RegisterFragment">
+    tools:context="com.maungedev.authentication.ui.ui.RegisterFragment">
 
     <ImageView
         android:id="@+id/iv_logo"

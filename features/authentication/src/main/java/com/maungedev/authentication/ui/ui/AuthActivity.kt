@@ -1,4 +1,4 @@
-package com.maungedev.authentication.ui
+package com.maungedev.authentication.ui.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

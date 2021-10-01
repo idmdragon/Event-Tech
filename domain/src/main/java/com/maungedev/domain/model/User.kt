@@ -1,10 +1,10 @@
 package com.maungedev.domain.model
 
-data class EventOrganizer(
+data class User(
     val uid: String,
     val username: String,
     val email: String,
-    val avatar: String,
-    val myEvent: List<String>
+    val schedule: String,
+    val favorite: String
 ) {
 }
