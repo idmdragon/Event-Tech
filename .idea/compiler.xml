@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
+    <bytecodeTargetLevel target="1.8">
       <module name="EventTech.app" target="11" />
       <module name="EventTech.authentication" target="11" />
       <module name="EventTech.data" target="11" />

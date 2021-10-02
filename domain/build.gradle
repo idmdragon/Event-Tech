@@ -3,13 +3,8 @@ plugins {
     id 'kotlin'
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
-}
-
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.30"
 
     //coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
@@ -19,5 +14,10 @@ dependencies {
     api "org.koin:koin-core:2.2.2"
     api "org.koin:koin-android:2.2.2"
     api "org.koin:koin-android-viewmodel:2.2.2"
-    implementation project(path: ':data')
+
+
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }

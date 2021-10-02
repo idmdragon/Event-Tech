@@ -6,20 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.maungedev.authentication.R
 import com.maungedev.authentication.databinding.FragmentRegisterBinding
+import com.maungedev.authentication.ui.di.authModule
 import com.maungedev.domain.model.User
 import com.maungedev.domain.utils.Resource
 import com.maungedev.eventtech.ui.main.MainActivity
+import org.koin.core.context.loadKoinModules
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: AuthViewModel by activityViewModels()
+    private val viewModel: AuthViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +32,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        loadKoinModules(authModule)
         with(binding) {
 
             activity.apply {
