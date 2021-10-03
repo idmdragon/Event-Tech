@@ -48,4 +48,9 @@
         <item name="android:textSize">@dimen/size_16</item>
         <item name="hintTextColor">@color/text_white_gray</item>
     </style>
+
+    <style name="ProgressBarStyle">
+        <item name="colorAccent">@color/white</item>
+    </style>
+
 </resources>

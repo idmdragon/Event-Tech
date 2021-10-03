@@ -5,7 +5,7 @@
     style="@style/LayoutStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.maungedev.authentication.ui.ui.RegisterFragment">
+    tools:context="com.maungedev.authentication.ui.ui.register.RegisterFragment">
 
     <ImageView
         android:id="@+id/iv_logo"
@@ -130,16 +130,6 @@
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/btnRegister"
-        app:layout_constraintEnd_toEndOf="@+id/btnRegister"
-        app:layout_constraintStart_toStartOf="@+id/btnRegister"
-        app:layout_constraintTop_toTopOf="@+id/btnRegister" />
-
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegister"
         style="@style/ButtonStyle16"
@@ -147,11 +137,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/range_0"
         android:layout_marginTop="@dimen/range_32"
+        android:backgroundTint="@color/blue"
         android:layout_marginEnd="@dimen/range_0"
         android:text="@string/register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_password" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/white"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRegister"
+        app:layout_constraintEnd_toEndOf="@+id/btnRegister"
+        app:layout_constraintStart_toStartOf="@+id/btnRegister"
+        app:layout_constraintTop_toTopOf="@+id/btnRegister" />
 
     <LinearLayout
         android:layout_width="wrap_content"

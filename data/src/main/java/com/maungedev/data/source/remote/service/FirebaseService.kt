@@ -82,4 +82,18 @@ abstract class FirebaseService {
         }.catch {
             emit(FirebaseResponse.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
+
+
+    fun signInWithEmailAndPassword(email: String, password: String):Flow<FirebaseResponse<String>> =
+        flow{
+            val createUser = auth.signInWithEmailAndPassword(email,password).await()
+            val user = createUser.user
+            if (user!=null){
+                emit(FirebaseResponse.Success(user.uid))
+            }else{
+                emit(FirebaseResponse.Empty)
+            }
+        }.catch {
+            emit(FirebaseResponse.Error(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
     }

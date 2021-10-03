@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.maungedev.authentication.R
 import com.maungedev.authentication.databinding.ActivityAuthBinding
+import com.maungedev.authentication.ui.ui.register.RegisterFragment
 
 class AuthActivity : AppCompatActivity() {
 

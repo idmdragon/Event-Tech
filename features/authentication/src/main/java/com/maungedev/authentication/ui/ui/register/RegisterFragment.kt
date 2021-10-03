@@ -1,4 +1,4 @@
-package com.maungedev.authentication.ui.ui
+package com.maungedev.authentication.ui.ui.register
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.maungedev.authentication.R
 import com.maungedev.authentication.databinding.FragmentRegisterBinding
 import com.maungedev.authentication.ui.di.authModule
+import com.maungedev.authentication.ui.ui.login.LoginFragment
 import com.maungedev.domain.model.User
 import com.maungedev.domain.utils.Resource
 import com.maungedev.eventtech.ui.main.MainActivity
@@ -20,7 +22,7 @@ class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: AuthViewModel by viewModel()
+    private val viewModel: RegisterViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,20 +40,14 @@ class RegisterFragment : Fragment() {
             activity.apply {
 
                 btnRegister.setOnClickListener {
-
                     val email = tilEmail.editText?.text.toString()
                     val password = tilPassword.editText?.text.toString()
                     val username = tilUsername.editText?.text.toString()
+
                     viewModel.signUp(
                         email,
                         password,
-                        user = User(
-                            uid = "",
-                            email = email,
-                            username = username,
-                            favorite = "",
-                            schedule = ""
-                        )
+                        createEntityUser(email,username)
                     ).observe(viewLifecycleOwner,::signUpResponse)
 
                 }
@@ -73,19 +69,30 @@ class RegisterFragment : Fragment() {
         }
     }
 
+    private fun createEntityUser(email: String, username:String):User{
+        return User(
+            uid = "",
+            email = email,
+            username = username,
+            favorite = "",
+            schedule = ""
+        )
+    }
     private fun signUpResponse(resource: Resource<Unit>) {
         when(resource){
             is Resource.Success -> {
+                loadingState(false)
                 startActivity(Intent(requireContext(), MainActivity::class.java)).also {
                     activity?.finish()
                 }
             }
             is Resource.Loading -> {
+                loadingState(true)
                 }
 
             is Resource.Error -> {
+                loadingState(false)
                 Snackbar.make(binding.root,resource.message.toString(),Snackbar.LENGTH_LONG).show()
-
             }
 
         }
@@ -98,7 +105,11 @@ class RegisterFragment : Fragment() {
         _binding = null
     }
 
-    fun loadingState() {
+    private fun loadingState(state: Boolean) {
+        with(binding){
+            progressBar.isVisible = state
+            btnRegister.isEnabled = !state
+        }
     }
 
 

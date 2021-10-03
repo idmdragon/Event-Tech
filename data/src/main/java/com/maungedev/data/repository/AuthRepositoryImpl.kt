@@ -26,6 +26,14 @@ class AuthRepositoryImpl(
 
         }.asFlow()
 
+    override fun signInUser(email: String, password: String): Flow<Resource<Unit>> =
+        object : NetworkBondRequest<UserResponse>() {
 
+            override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
+                remote.signIn(email,password)
 
+            override suspend fun saveCallResult(data: UserResponse) =
+                local.insertUser(data.toEntity())
+
+        }.asFlow()
 }

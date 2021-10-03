@@ -8,4 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class AuthInteractor(private val authRepository: AuthRepository) : AuthUseCase {
     override fun signUpUser(email: String, password: String, user: User): Flow<Resource<Unit>> =
         authRepository.signUpUser(email,password,user)
+
+    override fun signInUser(email: String, password: String): Flow<Resource<Unit>> =
+        authRepository.signInUser(email,password)
 }

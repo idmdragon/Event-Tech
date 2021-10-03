@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.32135416666666666" />
         <entry key="app/src/main/res/drawable/background_profile_text.xml" value="0.27870370370370373" />
         <entry key="app/src/main/res/drawable/background_schedule.xml" value="0.1859375" />
         <entry key="app/src/main/res/drawable/ic_back_button.xml" value="0.32760416666666664" />
@@ -50,8 +51,8 @@
         <entry key="features/authentication/src/main/res/layout/activity_auth.xml" value="0.2791666666666667" />
         <entry key="features/authentication/src/main/res/layout/activity_authentication.xml" value="0.25885416666666666" />
         <entry key="features/authentication/src/main/res/layout/auth_activity.xml" value="0.2791666666666667" />
-        <entry key="features/authentication/src/main/res/layout/fragment_login.xml" value="0.2791666666666667" />
-        <entry key="features/authentication/src/main/res/layout/fragment_register.xml" value="0.29438405797101447" />
+        <entry key="features/authentication/src/main/res/layout/fragment_login.xml" value="0.5" />
+        <entry key="features/authentication/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="features/detail/src/main/res/layout/activity_detail.xml" value="0.2708638360175695" />
         <entry key="features/eventcompetition/src/main/res/layout/activity_conference_list.xml" value="0.23229166666666667" />
         <entry key="features/eventcompetition/src/main/res/layout/fragment_competition.xml" value="0.47164591977869985" />

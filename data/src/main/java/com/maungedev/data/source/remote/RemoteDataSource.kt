@@ -9,4 +9,6 @@ class RemoteDataSource(
     fun signUp(email:String, password:String, user: User) =
         authService.signUp(email,password,user)
 
+    fun signIn(email:String, password:String) =
+        authService.signIn(email,password)
 }

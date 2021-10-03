@@ -5,7 +5,7 @@
     style="@style/LayoutStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.maungedev.authentication.ui.ui.LoginFragment">
+    tools:context="com.maungedev.authentication.ui.ui.login.LoginFragment">
 
     <ImageView
         android:id="@+id/iv_logo"
@@ -118,7 +118,7 @@
         app:layout_constraintTop_toBottomOf="@+id/til_password" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnNext"
+        android:id="@+id/btnLogin"
         style="@style/ButtonStyle16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -130,6 +130,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/ProgressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/white"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toTopOf="@+id/btnLogin" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -138,7 +149,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnNext">
+        app:layout_constraintTop_toBottomOf="@id/btnLogin">
 
         <TextView
             android:id="@+id/tv_sudah_punya"
