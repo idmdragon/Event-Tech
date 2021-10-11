@@ -6,12 +6,12 @@
     app:startDestination="@id/navigation_conference">
     <fragment
         android:id="@+id/navigation_conference"
-        android:name="com.maungedev.eventconference.ui.ConferenceFragment"
+        android:name="com.maungedev.eventconference.ui.ui.ConferenceFragment"
         android:label="fragment_conference"
         tools:layout="@layout/fragment_conference" />
     <fragment
         android:id="@+id/navigation_competition"
-        android:name="com.maungedev.eventcompetition.CompetitionFragment"
+        android:name="com.maungedev.eventcompetition.ui.CompetitionFragment"
         android:label="fragment_competition"
         tools:layout="@layout/fragment_competition" />
     <fragment

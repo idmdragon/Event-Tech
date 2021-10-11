@@ -3,26 +3,26 @@ package com.maungedev.eventtech.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.maungedev.domain.model.EventCompetitionCategory
+import com.maungedev.domain.model.CompetitionCategory
 import com.maungedev.eventtech.R
 import com.maungedev.eventtech.databinding.ItemCompetitionCategoryBinding
 
 class CompetitionCategoryAdapter() :
     RecyclerView.Adapter<CompetitionCategoryAdapter.ViewHolder>() {
 
-    private val categories = arrayListOf<EventCompetitionCategory>()
+    private val categories = arrayListOf<CompetitionCategory>()
     private var onItemSelectedListener: OnItemSelectedListener? = null
 
 
-    fun setOnItemCallback(onItemSelected: (selectedCategory: EventCompetitionCategory) -> Unit) {
+    fun setOnItemCallback(onItemSelected: (selectedCategory: CompetitionCategory) -> Unit) {
         onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(category: EventCompetitionCategory) {
+            override fun onItemSelected(category: CompetitionCategory) {
                 onItemSelected(category)
             }
         }
     }
 
-    fun setItems(items: List<EventCompetitionCategory>) {
+    fun setItems(items: List<CompetitionCategory>) {
         this.categories.clear()
         this.categories.addAll(items)
     }
@@ -48,8 +48,8 @@ class CompetitionCategoryAdapter() :
 
     inner class ViewHolder(private val binding: ItemCompetitionCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: EventCompetitionCategory) {
-            if(item.categoryName.equals("Semua")){
+        fun bind(item: CompetitionCategory) {
+            if(item.categoryName == "Semua"){
                 binding.layoutRoot.setBackgroundResource(R.drawable.item_competition_selected)
             }
             binding.tvEventCategory.text = item.categoryName
@@ -58,5 +58,5 @@ class CompetitionCategoryAdapter() :
 }
 
 interface OnItemSelectedListener {
-    fun onItemSelected(category: EventCompetitionCategory)
+    fun onItemSelected(category: CompetitionCategory)
 }

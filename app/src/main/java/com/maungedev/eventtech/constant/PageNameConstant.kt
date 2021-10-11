@@ -5,5 +5,6 @@ object PageNameConstant {
     const val COMPETITION_PAGE = "com.maungedev.eventcompetition.CompetitionFragment"
     const val COMPETITION_LIST_PAGE = "com.maungedev.eventconference.ui.ConferenceListActivity"
     const val DETAIL_PAGE = "com.maungedev.detail.DetailActivity"
+    const val SEARCH_PAGE = "com.maungedev.search.SearchActivity"
 
 }

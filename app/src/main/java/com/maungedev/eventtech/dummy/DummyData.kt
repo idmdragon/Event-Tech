@@ -1,7 +1,5 @@
 package com.maungedev.eventtech.dummy
 
-import com.maungedev.domain.model.EventCompetitionCategory
-import com.maungedev.domain.model.EventConferenceCategory
 import com.maungedev.domain.model.EventIT
 import com.maungedev.eventtech.R
 
@@ -113,7 +111,7 @@ object DummyData {
 
         return listData
     }
-
+/*
     fun generateConferenceCategory(): List<EventConferenceCategory> {
         val listData = arrayListOf<EventConferenceCategory>()
 
@@ -233,5 +231,5 @@ object DummyData {
         )
 
         return listData
-    }
+    }*/
 }

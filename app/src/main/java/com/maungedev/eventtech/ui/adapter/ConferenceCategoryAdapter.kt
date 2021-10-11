@@ -6,7 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.maungedev.domain.model.EventConferenceCategory
+import com.maungedev.domain.model.ConferenceCategory
+import com.maungedev.eventtech.R
 import com.maungedev.eventtech.constant.ExtraNameConstant.EVENT_CATEGORY
 import com.maungedev.eventtech.constant.PageNameConstant.COMPETITION_LIST_PAGE
 import com.maungedev.eventtech.databinding.ItemConferenceCategoryBinding
@@ -14,9 +15,9 @@ import com.maungedev.eventtech.databinding.ItemConferenceCategoryBinding
 class ConferenceCategoryAdapter(private val context: Context) :
     RecyclerView.Adapter<ConferenceCategoryAdapter.ViewHolder>() {
 
-    private val categories = arrayListOf<EventConferenceCategory>()
+    private val categories = arrayListOf<ConferenceCategory>()
 
-    fun setItems(items: List<EventConferenceCategory>) {
+    fun setItems(items: List<ConferenceCategory>) {
         this.categories.clear()
         this.categories.addAll(items)
     }
@@ -35,11 +36,12 @@ class ConferenceCategoryAdapter(private val context: Context) :
 
     inner class ViewHolder(private val binding: ItemConferenceCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: EventConferenceCategory) {
+        fun bind(item: ConferenceCategory) {
             with(binding) {
                 tvCategoryName.text = item.categoryName
                 Glide.with(itemView.context)
                     .load(item.categoryIcon)
+                    .placeholder(R.drawable.ic_category_placeholder)
                     .into(ivCategoryIcon)
 
                 itemView.setOnClickListener {

@@ -1,0 +1,54 @@
+package com.maungedev.data.repository
+
+import android.net.Uri
+import com.maungedev.data.helper.NetworkBoundRequest
+import com.maungedev.data.helper.NetworkBoundResource
+import com.maungedev.data.mapper.*
+import com.maungedev.data.source.local.LocalDataSource
+import com.maungedev.data.source.remote.FirebaseResponse
+import com.maungedev.data.source.remote.RemoteDataSource
+import com.maungedev.data.source.remote.response.CompetitionCategoryResponse
+import com.maungedev.data.source.remote.response.ConferenceCategoryResponse
+import com.maungedev.domain.model.CompetitionCategory
+import com.maungedev.domain.model.ConferenceCategory
+import com.maungedev.domain.model.User
+import com.maungedev.domain.repository.EventRepository
+import com.maungedev.domain.utils.Resource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+
+class EventRepositoryImpl(
+    private val local: LocalDataSource,
+    private val remote: RemoteDataSource
+) : EventRepository {
+
+    override fun getConferenceCategory(): Flow<Resource<List<ConferenceCategory>>> =
+        object :NetworkBoundResource<List<ConferenceCategory>,List<ConferenceCategoryResponse>>(){
+            override fun loadFromDB(): Flow<List<ConferenceCategory>?> =
+                local.selectAllConferenceCategory().toConferenceCategoryListFlowModel()
+
+            override fun shouldFetch(data: List<ConferenceCategory>?): Boolean =
+                data == null || data.isEmpty()
+
+            override suspend fun createCall(): Flow<FirebaseResponse<List<ConferenceCategoryResponse>>> =
+                remote.getAllConferenceCategory()
+
+            override suspend fun saveCallResult(data: List<ConferenceCategoryResponse>) =
+                local.insertConferenceCategory(data.toListConferenceCategoryEntity())
+        }.asFlow()
+
+    override fun getCompetitionCategory(): Flow<Resource<List<CompetitionCategory>>> =
+        object :NetworkBoundResource<List<CompetitionCategory>,List<CompetitionCategoryResponse>>(){
+            override fun loadFromDB(): Flow<List<CompetitionCategory>?> =
+                local.selectAllCompetitionCategory().toCompetitionCategoryListFlowModel()
+
+            override fun shouldFetch(data: List<CompetitionCategory>?): Boolean =
+                data == null || data.isEmpty()
+
+            override suspend fun createCall(): Flow<FirebaseResponse<List<CompetitionCategoryResponse>>> =
+                remote.getAllCompetitionCategory()
+
+            override suspend fun saveCallResult(data: List<CompetitionCategoryResponse>) =
+                local.insertCompetitionCategory(data.toListCompetitionCategoryEntity())
+        }.asFlow()
+}

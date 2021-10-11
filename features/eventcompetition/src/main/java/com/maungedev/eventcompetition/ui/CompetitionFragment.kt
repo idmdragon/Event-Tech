@@ -1,21 +1,24 @@
-package com.maungedev.eventcompetition
+package com.maungedev.eventcompetition.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.maungedev.domain.model.EventCompetitionCategory
+import com.maungedev.domain.model.CompetitionCategory
 import com.maungedev.domain.model.EventIT
+import com.maungedev.domain.utils.Resource
 import com.maungedev.eventcompetition.databinding.FragmentCompetitionBinding
+import com.maungedev.eventcompetition.di.competitionModule
 import com.maungedev.eventtech.ui.adapter.CompetitionCategoryAdapter
 import com.maungedev.eventtech.ui.adapter.EventLayoutAdapter
+import org.koin.core.context.loadKoinModules
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class CompetitionFragment : Fragment() {
 
-    private lateinit var viewModel: CompetitionViewModel
+    private val viewModel: CompetitionViewModel by viewModel()
     private var _binding: FragmentCompetitionBinding? = null
     private val binding get() = _binding!!
 
@@ -32,36 +35,27 @@ class CompetitionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel =
-            ViewModelProvider(this).get(CompetitionViewModel::class.java)
-
+        loadKoinModules(competitionModule)
         _binding = FragmentCompetitionBinding.inflate(inflater, container, false)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getCompetitionCategory().observe(viewLifecycleOwner,::setCompetitionCategory)
-        viewModel.getCompetitionEvent().observe(viewLifecycleOwner,::setCompetitionEvent)
 
+        viewModel.getCompetitionCategory().observe(viewLifecycleOwner,::setCompetitionCategory)
     }
 
-    private fun setCompetitionCategory(list: List<EventCompetitionCategory>) {
-/*
-        categoryAdapter = CompetitionCategoryAdapter()
-*/
-        categoryAdapter.setItems(list)
-        binding.rvEventCategory.adapter = categoryAdapter
-        binding.rvEventCategory.layoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.HORIZONTAL, false
-        )
-/*        categoryAdapter.setOnItemCallback(
-            object : CompetitionCategoryAdapter.OnItemClickCallback {
-                override fun onItemClicked(category: EventCompetitionCategory) {
-                    Toast.makeText(requireContext(),"Category ${category.categoryName}",Toast.LENGTH_SHORT).show()
-                }
+    private fun setCompetitionCategory(resource: Resource<List<CompetitionCategory>>?) {
+        resource?.data.let {
+            if (it != null) {
+                categoryAdapter.setItems(it)
             }
-        )*/
+            binding.rvEventCategory.adapter = categoryAdapter
+            binding.rvEventCategory.layoutManager = LinearLayoutManager(
+                activity,
+                LinearLayoutManager.HORIZONTAL, false
+            )
+        }
     }
 
     private fun setCompetitionEvent(list: List<EventIT>) {

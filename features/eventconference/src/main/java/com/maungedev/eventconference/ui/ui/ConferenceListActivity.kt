@@ -1,4 +1,4 @@
-package com.maungedev.eventconference.ui
+package com.maungedev.eventconference.ui.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,7 +20,7 @@ class ConferenceListActivity : AppCompatActivity() {
         binding = ActivityConferenceListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.getPopularEvent().observe(this, ::setListEvent)
+//        viewModel.getPopularEvent().observe(this, ::setListEvent)
 
         with(binding){
             tvCategoryName.text = intent.getStringExtra(EVENT_CATEGORY)
