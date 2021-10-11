@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.first
 
-abstract class NetworkBondRequest<RequestType> {
+abstract class NetworkBoundRequest<RequestType> {
     private val result: Flow<Resource<Unit>> = flow {
         preRequest()
         emit(Resource.Loading())

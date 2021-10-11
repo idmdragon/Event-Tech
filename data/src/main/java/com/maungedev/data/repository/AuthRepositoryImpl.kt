@@ -1,6 +1,6 @@
 package com.maungedev.data.repository
 
-import com.maungedev.data.helper.NetworkBondRequest
+import com.maungedev.data.helper.NetworkBoundRequest
 import com.maungedev.data.mapper.toEntity
 import com.maungedev.data.source.local.LocalDataSource
 import com.maungedev.data.source.remote.FirebaseResponse
@@ -16,7 +16,7 @@ class AuthRepositoryImpl(
     private val remote: RemoteDataSource
 ) : AuthRepository {
     override fun signUpUser(email: String, password: String, user: User): Flow<Resource<Unit>> =
-        object : NetworkBondRequest<UserResponse>() {
+        object : NetworkBoundRequest<UserResponse>() {
 
             override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
                 remote.signUp(email,password,user)
@@ -27,7 +27,7 @@ class AuthRepositoryImpl(
         }.asFlow()
 
     override fun signInUser(email: String, password: String): Flow<Resource<Unit>> =
-        object : NetworkBondRequest<UserResponse>() {
+        object : NetworkBoundRequest<UserResponse>() {
 
             override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
                 remote.signIn(email,password)

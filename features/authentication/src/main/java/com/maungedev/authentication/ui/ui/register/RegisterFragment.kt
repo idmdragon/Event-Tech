@@ -74,8 +74,6 @@ class RegisterFragment : Fragment() {
             uid = "",
             email = email,
             username = username,
-            favorite = "",
-            schedule = ""
         )
     }
     private fun signUpResponse(resource: Resource<Unit>) {
@@ -98,7 +96,6 @@ class RegisterFragment : Fragment() {
         }
 
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
