@@ -32,6 +32,11 @@ fun EventEntity.toModel(): Event =
         organizer
     )
 
+fun Flow<EventEntity>.toFlowModel(): Flow<Event> =
+   this.map {
+       it.toModel()
+   }
+
 fun EventResponse.toEntity(): EventEntity =
     EventEntity(
         uid,

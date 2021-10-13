@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.maungedev.domain.model.Event
+import com.maungedev.eventtech.constant.ExtraNameConstant.EVENT_UID
 import com.maungedev.eventtech.constant.PageNameConstant
 import com.maungedev.eventtech.databinding.ItemListEventBinding
 
@@ -48,7 +49,7 @@ class EventLayoutAdapter (private val context: Context) :
                 tvEventMonth.text = "Aug"
 
                 binding.btnDetail.setOnClickListener {
-                    context.startActivity(Intent(itemView.context,Class.forName(PageNameConstant.DETAIL_PAGE)))
+                    context.startActivity(Intent(itemView.context,Class.forName(PageNameConstant.DETAIL_PAGE)).putExtra(EVENT_UID,item.uid))
                 }
 
                 Glide.with(itemView.context)

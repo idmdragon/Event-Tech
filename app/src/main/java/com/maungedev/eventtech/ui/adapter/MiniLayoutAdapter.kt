@@ -12,6 +12,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.maungedev.domain.model.Event
+import com.maungedev.eventtech.constant.ExtraNameConstant
 import com.maungedev.eventtech.constant.PageNameConstant.DETAIL_PAGE
 import com.maungedev.eventtech.databinding.ItemMiniEventBinding
 
@@ -52,7 +53,8 @@ class MiniLayoutAdapter(private val context: Context) :
                     .into(ivPoster)
 
                 itemView.setOnClickListener {
-                    context.startActivity(Intent(itemView.context,Class.forName(DETAIL_PAGE)))
+                    context.startActivity(Intent(itemView.context,Class.forName(DETAIL_PAGE)).putExtra(
+                        ExtraNameConstant.EVENT_UID,item.uid))
                 }
             }
         }

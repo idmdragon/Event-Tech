@@ -26,4 +26,7 @@ class RemoteDataSource(
 
     fun getAllEvent(): Flow<FirebaseResponse<List<EventResponse>>> =
         eventService.getAllEvent()
+
+    fun getEventById(id: String): Flow<FirebaseResponse<EventResponse>> =
+        eventService.getEventById(id)
 }

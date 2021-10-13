@@ -19,4 +19,7 @@ class EventService: FirebaseService() {
 
     fun getAllEvent(): Flow<FirebaseResponse<List<EventResponse>>> =
         getCollection(EVENT_COLLECTION)
+
+    fun getEventById(id: String): Flow<FirebaseResponse<EventResponse>> =
+        getDocument(EVENT_COLLECTION,id)
 }

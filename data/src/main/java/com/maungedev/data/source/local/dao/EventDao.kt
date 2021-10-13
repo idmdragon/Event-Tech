@@ -25,6 +25,9 @@ interface EventDao {
     fun selectAllCompetitionCategory(): Flow<List<CompetitionCategoryEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertEvent(event: EventEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllEvent(event: List<EventEntity>)
 
     @Query("SELECT * FROM event WHERE eventType = :eventType")
@@ -32,4 +35,7 @@ interface EventDao {
 
     @Query("SELECT * FROM event WHERE eventType = :eventType and eventCategory = :eventCategories")
     fun selectEventByCategories(eventType: String, eventCategories: String): Flow<List<EventEntity>>
+
+    @Query("SELECT * FROM event WHERE uid = :uid")
+    fun selectEventByUid(uid: String): Flow<EventEntity>
 }

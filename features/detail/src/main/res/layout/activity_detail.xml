@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".DetailActivity">
+    tools:context=".ui.DetailActivity">
 
     <ImageButton
         android:id="@+id/btn_back"
@@ -85,7 +85,7 @@
                 app:layout_constraintEnd_toEndOf="@id/iv_poster"
                 app:layout_constraintStart_toStartOf="@id/iv_poster"
                 app:layout_constraintTop_toBottomOf="@id/iv_poster"
-                android:text="Design to Code #Session 2" />
+                tools:text="Design to Code #Session 2" />
 
             <TextView
                 android:id="@+id/tv_event_information"
@@ -96,7 +96,7 @@
                 app:layout_constraintEnd_toEndOf="@id/tv_event_title"
                 app:layout_constraintStart_toStartOf="@id/tv_event_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_event_title"
-                android:text="Aug 01  •  Google Meet • 9am" />
+                tools:text="Aug 01  •  Google Meet • 9am" />
 
             <View
                 android:id="@+id/view_border"
@@ -133,7 +133,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title_about"
-                android:text="Cloud Computing Backbone 4.0 adalah acara yang membahas tentang cloud computing dan dihadiri oleh pembcara pebicara skala naioanl seperti xx asd lkas aodnka skljnsad" />
+                tools:text="Cloud Computing Backbone 4.0 adalah acara yang membahas tentang cloud computing dan dihadiri oleh pembcara pebicara skala naioanl seperti xx asd lkas aodnka skljnsad" />
 
             <TextView
                 android:id="@+id/tv_title_prerequisite"
@@ -158,7 +158,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title_prerequisite"
-                android:text="Cloud Computing Backbone 4.0 adalah acara yang membahas tentang cloud computing dan dihadiri oleh pembcara pebicara skala naioanl seperti xx asd lkas aodnka skljnsad Cloud Computing Backbone 4.0 adalah acara yang membahas tentang cloud computing dan dihadiri oleh pembcara pebicara skala naioanl seperti xx asd lkas aodnka skljnsad" />
+                tools:text="Cloud Computing Backbone 4.0 adalah acara yang membahas tentang cloud computing dan dihadiri oleh pembcara pebicara skala naioanl seperti xx asd lkas aodnka skljnsad Cloud Computing Backbone 4.0 adalah acara yang membahas tentang cloud computing dan dihadiri oleh pembcara pebicara skala naioanl seperti xx asd lkas aodnka skljnsad" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -187,7 +187,7 @@
             style="@style/PoppinsMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gratis"
+            tools:text="Gratis"
             android:layout_marginBottom="@dimen/range_16"
             app:layout_constraintTop_toBottomOf="@id/tv_title_price"
             app:layout_constraintStart_toStartOf="@id/tv_title_price"
