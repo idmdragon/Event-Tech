@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.maungedev.domain.model.EventIT
+import com.maungedev.domain.model.Event
 import com.maungedev.eventtech.ui.adapter.ScheduleAdapter
 import com.maungedev.schedule.databinding.FragmentScheduleBinding
 
@@ -35,7 +35,7 @@ class ScheduleFragment : Fragment() {
 
     }
 
-    private fun setSchedule(list: List<EventIT>) {
+    private fun setSchedule(list: List<Event>) {
         scheduleEventAdapter = ScheduleAdapter(requireContext())
         scheduleEventAdapter.setItems(list)
         binding.rvSchedule.adapter = scheduleEventAdapter

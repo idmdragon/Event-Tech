@@ -5,13 +5,14 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.maungedev.data.source.local.dao.EventDao
 import com.maungedev.data.source.local.dao.UserDao
-import com.maungedev.data.source.local.entity.CompetitionCategoryEntity
-import com.maungedev.data.source.local.entity.ConferenceCategoryEntity
-import com.maungedev.data.source.local.entity.ListConverter
-import com.maungedev.data.source.local.entity.UserEntity
+import com.maungedev.data.source.local.entity.*
 
 @Database(
-    entities = [UserEntity::class, ConferenceCategoryEntity::class, CompetitionCategoryEntity::class],
+    entities = [
+        UserEntity::class,
+        ConferenceCategoryEntity::class,
+        CompetitionCategoryEntity::class,
+        EventEntity::class],
     version = 1,
     exportSchema = false
 )

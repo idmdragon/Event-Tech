@@ -2,6 +2,7 @@ package com.maungedev.data.source.remote
 
 import com.maungedev.data.source.remote.response.CompetitionCategoryResponse
 import com.maungedev.data.source.remote.response.ConferenceCategoryResponse
+import com.maungedev.data.source.remote.response.EventResponse
 import com.maungedev.data.source.remote.service.AuthService
 import com.maungedev.data.source.remote.service.EventService
 import com.maungedev.domain.model.User
@@ -22,4 +23,7 @@ class RemoteDataSource(
 
     fun getAllCompetitionCategory(): Flow<FirebaseResponse<List<CompetitionCategoryResponse>>> =
         eventService.getAllCompetitionCategory()
+
+    fun getAllEvent(): Flow<FirebaseResponse<List<EventResponse>>> =
+        eventService.getAllEvent()
 }

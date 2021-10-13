@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.maungedev.data.source.local.entity.CompetitionCategoryEntity
 import com.maungedev.data.source.local.entity.ConferenceCategoryEntity
+import com.maungedev.data.source.local.entity.EventEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,4 +23,10 @@ interface EventDao {
 
     @Query("SELECT * FROM competition_category")
     fun selectAllCompetitionCategory(): Flow<List<CompetitionCategoryEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllEvent(event: List<EventEntity>)
+
+    @Query("SELECT * FROM event WHERE eventType = :eventType")
+    fun selectAllEventByType(eventType: String): Flow<List<EventEntity>>
 }

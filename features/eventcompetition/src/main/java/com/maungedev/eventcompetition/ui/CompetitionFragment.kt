@@ -1,18 +1,21 @@
 package com.maungedev.eventcompetition.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.maungedev.domain.model.CompetitionCategory
-import com.maungedev.domain.model.EventIT
+import com.maungedev.domain.model.Event
 import com.maungedev.domain.utils.Resource
 import com.maungedev.eventcompetition.databinding.FragmentCompetitionBinding
 import com.maungedev.eventcompetition.di.competitionModule
 import com.maungedev.eventtech.ui.adapter.CompetitionCategoryAdapter
 import com.maungedev.eventtech.ui.adapter.EventLayoutAdapter
+import com.maungedev.eventtech.ui.main.MainActivity
 import org.koin.core.context.loadKoinModules
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -43,6 +46,34 @@ class CompetitionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getCompetitionCategory().observe(viewLifecycleOwner,::setCompetitionCategory)
+        viewModel.getAllCompetitionEvent().observe(viewLifecycleOwner,::setCompetitionEvent)
+    }
+
+    private fun setCompetitionEvent(resource: Resource<List<Event>>) {
+        when(resource){
+            is Resource.Success -> {
+                loadingState(false)
+                competitionAdapter = EventLayoutAdapter(requireContext())
+                resource.data?.let { competitionAdapter.setItems(it) }
+                binding.rvCompetition.adapter = competitionAdapter
+                binding.rvCompetition.layoutManager = LinearLayoutManager(
+                    activity,
+                    LinearLayoutManager.VERTICAL, false
+                )
+            }
+            is Resource.Loading -> {
+                loadingState(true)
+            }
+
+            is Resource.Error -> {
+                loadingState(false)
+                Snackbar.make(binding.root,resource.message.toString(), Snackbar.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun loadingState(b: Boolean) {
+
     }
 
     private fun setCompetitionCategory(resource: Resource<List<CompetitionCategory>>?) {
@@ -58,13 +89,5 @@ class CompetitionFragment : Fragment() {
         }
     }
 
-    private fun setCompetitionEvent(list: List<EventIT>) {
-        competitionAdapter = EventLayoutAdapter(requireContext())
-        competitionAdapter.setItems(list)
-        binding.rvCompetition.adapter = competitionAdapter
-        binding.rvCompetition.layoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.VERTICAL, false
-        )
-    }
+
 }

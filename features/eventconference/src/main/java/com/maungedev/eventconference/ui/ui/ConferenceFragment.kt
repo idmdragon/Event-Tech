@@ -6,15 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.maungedev.domain.model.ConferenceCategory
-import com.maungedev.domain.model.EventIT
+import com.maungedev.domain.model.Event
 import com.maungedev.domain.utils.Resource
 import com.maungedev.eventconference.databinding.FragmentConferenceBinding
 import com.maungedev.eventconference.ui.di.conferenceModule
 import com.maungedev.eventtech.constant.PageNameConstant.SEARCH_PAGE
 import com.maungedev.eventtech.ui.adapter.ConferenceCategoryAdapter
+import com.maungedev.eventtech.ui.adapter.EventLayoutAdapter
 import com.maungedev.eventtech.ui.adapter.MiniLayoutAdapter
 import org.koin.core.context.loadKoinModules
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -40,11 +41,38 @@ class ConferenceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        conferenceViewModel.getPopularEvent().observe(viewLifecycleOwner,::setPopularEvent)
         conferenceViewModel.getConferenceCategory().observe(viewLifecycleOwner,::setConferenceCategory)
+        conferenceViewModel.getAllConferenceEvent().observe(viewLifecycleOwner,::setAllConference)
         binding.btnSearch.setOnClickListener {
             startActivity(Intent(requireContext(), Class.forName(SEARCH_PAGE)))
         }
+    }
+
+    private fun setAllConference(resource: Resource<List<Event>>) {
+        when(resource){
+            is Resource.Success -> {
+                loadingState(false)
+                popularEventAdapter = MiniLayoutAdapter(requireContext())
+                resource.data?.let { popularEventAdapter.setItems(it) }
+                binding.rvPopular.adapter = popularEventAdapter
+                binding.rvPopular.layoutManager = LinearLayoutManager(
+                    activity,
+                    LinearLayoutManager.VERTICAL, false
+                )
+            }
+            is Resource.Loading -> {
+                loadingState(true)
+            }
+
+            is Resource.Error -> {
+                loadingState(false)
+                Snackbar.make(binding.root,resource.message.toString(), Snackbar.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun loadingState(b: Boolean) {
+
     }
 
     private fun setConferenceCategory(resource: Resource<List<ConferenceCategory>>?) {
@@ -61,7 +89,7 @@ class ConferenceFragment : Fragment() {
     }
 
 
-    private fun setPopularEvent(list: List<EventIT>) {
+    private fun setPopularEvent(list: List<Event>) {
         popularEventAdapter = MiniLayoutAdapter(requireContext())
         popularEventAdapter.setItems(list)
         binding.rvPopular.adapter = popularEventAdapter

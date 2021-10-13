@@ -1,14 +1,13 @@
 package com.maungedev.eventtech.dummy
 
-import com.maungedev.domain.model.EventIT
-import com.maungedev.eventtech.R
+import com.maungedev.domain.model.Event
 
 object DummyData {
-    fun generateDummyEvent(): List<EventIT> {
-        val listData = arrayListOf<EventIT>()
+    fun generateDummyEvent(): List<Event> {
+        val listData = arrayListOf<Event>()
 
         listData.add(
-            EventIT(
+            Event(
                 "",
                 "Hology 1.0 App Inovation",
                 "Conference",
@@ -29,7 +28,7 @@ object DummyData {
         )
 
         listData.add(
-            EventIT(
+            Event(
                 "",
                 "Hology 2.0 App Inovation",
                 "Conference",
@@ -49,7 +48,7 @@ object DummyData {
             )
         )
         listData.add(
-            EventIT(
+            Event(
                 "",
                 "Hology 3.0 App Inovation",
                 "Conference",
@@ -69,7 +68,7 @@ object DummyData {
             )
         )
         listData.add(
-            EventIT(
+            Event(
                 "",
                 "Hology 4.0 App Inovation",
                 "Conference",
@@ -89,7 +88,7 @@ object DummyData {
             )
         )
         listData.add(
-            EventIT(
+            Event(
                 "",
                 "Hology 5.0 App Inovation",
                 "Conference",

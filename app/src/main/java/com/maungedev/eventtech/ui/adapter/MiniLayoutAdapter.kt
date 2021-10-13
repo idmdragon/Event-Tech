@@ -11,16 +11,16 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.maungedev.domain.model.EventIT
+import com.maungedev.domain.model.Event
 import com.maungedev.eventtech.constant.PageNameConstant.DETAIL_PAGE
 import com.maungedev.eventtech.databinding.ItemMiniEventBinding
 
 class MiniLayoutAdapter(private val context: Context) :
     RecyclerView.Adapter<MiniLayoutAdapter.ViewHolder>() {
 
-    private val events = arrayListOf<EventIT>()
+    private val events = arrayListOf<Event>()
 
-    fun setItems(items: List<EventIT>) {
+    fun setItems(items: List<Event>) {
         this.events.clear()
         this.events.addAll(items)
     }
@@ -39,7 +39,7 @@ class MiniLayoutAdapter(private val context: Context) :
 
     inner class ViewHolder(private val binding: ItemMiniEventBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: EventIT) {
+        fun bind(item: Event) {
             with(binding) {
                 tvEventCategory.text = item.eventCategory
                 tvEventTitle.text = item.eventName

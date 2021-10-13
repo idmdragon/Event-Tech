@@ -3,21 +3,19 @@ package com.maungedev.eventtech.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.maungedev.domain.model.EventIT
+import com.maungedev.domain.model.Event
 import com.maungedev.eventtech.R
 import com.maungedev.eventtech.databinding.ItemScheduleBinding
 
 class ScheduleAdapter(private val context: Context) :
     RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
 
-    private val events = arrayListOf<EventIT>()
+    private val events = arrayListOf<Event>()
     private val color = MutableLiveData<Boolean>()
 
-    fun setItems(items: List<EventIT>) {
+    fun setItems(items: List<Event>) {
         this.events.clear()
         this.events.addAll(items)
     }
@@ -37,7 +35,7 @@ class ScheduleAdapter(private val context: Context) :
 
     inner class ViewHolder(private val binding: ItemScheduleBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: EventIT) {
+        fun bind(item: Event) {
             with(binding) {
                 if (color.value == true){
                     layoutEvent.setBackgroundResource(R.color.green)

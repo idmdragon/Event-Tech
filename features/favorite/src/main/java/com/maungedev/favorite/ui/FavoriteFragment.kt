@@ -1,14 +1,13 @@
 package com.maungedev.favorite.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.maungedev.domain.model.EventIT
+import com.maungedev.domain.model.Event
 import com.maungedev.eventtech.ui.adapter.MiniLayoutAdapter
 import com.maungedev.favorite.databinding.FragmentFavoriteBinding
 
@@ -35,7 +34,7 @@ class FavoriteFragment : Fragment() {
 
     }
 
-    private fun setFavoriteEvent(list: List<EventIT>) {
+    private fun setFavoriteEvent(list: List<Event>) {
         favoriteEventAdapter = MiniLayoutAdapter(requireContext())
         favoriteEventAdapter.setItems(list)
         binding.rvFavorite.adapter = favoriteEventAdapter

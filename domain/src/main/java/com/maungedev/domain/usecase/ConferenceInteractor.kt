@@ -4,6 +4,7 @@ import com.maungedev.domain.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import com.maungedev.domain.model.CompetitionCategory
 import com.maungedev.domain.model.ConferenceCategory
+import com.maungedev.domain.model.Event
 import com.maungedev.domain.repository.EventRepository
 
 class ConferenceInteractor(private val eventITRepository: EventRepository): ConferenceUseCase {
@@ -11,5 +12,6 @@ class ConferenceInteractor(private val eventITRepository: EventRepository): Conf
     override fun getConferenceCategory(): Flow<Resource<List<ConferenceCategory>>> =
         eventITRepository.getConferenceCategory()
 
-
+    override fun getAllEventConference(): Flow<Resource<List<Event>>> =
+        eventITRepository.getAllEventConference()
 }

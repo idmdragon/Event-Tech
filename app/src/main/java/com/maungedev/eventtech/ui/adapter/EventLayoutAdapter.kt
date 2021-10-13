@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.maungedev.domain.model.EventIT
+import com.maungedev.domain.model.Event
 import com.maungedev.eventtech.constant.PageNameConstant
 import com.maungedev.eventtech.databinding.ItemListEventBinding
 
 class EventLayoutAdapter (private val context: Context) :
     RecyclerView.Adapter<EventLayoutAdapter.ViewHolder>() {
 
-    private val events = arrayListOf<EventIT>()
+    private val events = arrayListOf<Event>()
 
-    fun setItems(items: List<EventIT>) {
+    fun setItems(items: List<Event>) {
         this.events.clear()
         this.events.addAll(items)
     }
@@ -34,7 +34,7 @@ class EventLayoutAdapter (private val context: Context) :
 
     inner class ViewHolder(private val binding: ItemListEventBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: EventIT) {
+        fun bind(item: Event) {
             with(binding) {
                 tvEventTitle.text = item.eventName
                 tvEventOrganizer.text = item.organizer

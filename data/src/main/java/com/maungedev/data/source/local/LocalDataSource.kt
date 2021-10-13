@@ -4,6 +4,7 @@ import com.maungedev.data.source.local.dao.EventDao
 import com.maungedev.data.source.local.dao.UserDao
 import com.maungedev.data.source.local.entity.CompetitionCategoryEntity
 import com.maungedev.data.source.local.entity.ConferenceCategoryEntity
+import com.maungedev.data.source.local.entity.EventEntity
 import com.maungedev.data.source.local.entity.UserEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -25,4 +26,13 @@ class LocalDataSource(
 
     fun selectAllCompetitionCategory(): Flow<List<CompetitionCategoryEntity>> =
         eventDao.selectAllCompetitionCategory()
+
+    suspend fun insertEvent(event: List<EventEntity>): Unit =
+        eventDao.insertAllEvent(event)
+
+    fun selectAllEventConference(): Flow<List<EventEntity>> =
+        eventDao.selectAllEventByType("conference")
+
+    fun selectAllEventCompetition(): Flow<List<EventEntity>> =
+        eventDao.selectAllEventByType("competition")
 }
