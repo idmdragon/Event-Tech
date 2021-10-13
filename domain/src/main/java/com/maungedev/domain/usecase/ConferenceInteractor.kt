@@ -14,4 +14,7 @@ class ConferenceInteractor(private val eventITRepository: EventRepository): Conf
 
     override fun getAllEventConference(): Flow<Resource<List<Event>>> =
         eventITRepository.getAllEventConference()
+
+    override fun getEventByCategories(categories: String): Flow<Resource<List<Event>>> =
+        eventITRepository.getEventConferenceByCategories(categories)
 }

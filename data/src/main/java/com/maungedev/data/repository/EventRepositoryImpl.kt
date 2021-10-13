@@ -23,6 +23,20 @@ class EventRepositoryImpl(
     private val local: LocalDataSource,
     private val remote: RemoteDataSource
 ) : EventRepository {
+    override fun getEventConferenceByCategories(categories: String): Flow<Resource<List<Event>>> =
+        object :NetworkBoundResource<List<Event>,List<EventResponse>>(){
+            override fun loadFromDB(): Flow<List<Event>?> =
+                local.selectEventByCategories(categories).toListFlowModel()
+
+            override fun shouldFetch(data: List<Event>?): Boolean =
+                data == null || data.isEmpty()
+
+            override suspend fun createCall(): Flow<FirebaseResponse<List<EventResponse>>> =
+                remote.getAllEvent()
+
+            override suspend fun saveCallResult(data: List<EventResponse>) =
+                local.insertEvent(data.toListEntity())
+        }.asFlow()
 
     override fun getAllEventConference(): Flow<Resource<List<Event>>> =
         object :NetworkBoundResource<List<Event>,List<EventResponse>>(){

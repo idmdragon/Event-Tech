@@ -29,4 +29,7 @@ interface EventDao {
 
     @Query("SELECT * FROM event WHERE eventType = :eventType")
     fun selectAllEventByType(eventType: String): Flow<List<EventEntity>>
+
+    @Query("SELECT * FROM event WHERE eventType = :eventType and eventCategory = :eventCategories")
+    fun selectEventByCategories(eventType: String, eventCategories: String): Flow<List<EventEntity>>
 }

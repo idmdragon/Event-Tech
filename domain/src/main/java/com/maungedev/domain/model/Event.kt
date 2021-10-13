@@ -1,6 +1,7 @@
 package com.maungedev.domain.model
 
-data class  Event(
+
+data class Event(
     val uid: String,
     val eventName: String,
     val eventType: String,
@@ -17,5 +18,4 @@ data class  Event(
     val numbersOfRegistrationClick: Int,
     var favoriteBy: List<String>?,
     val organizer: String
-) {
-}
+)

@@ -2,6 +2,7 @@ package com.maungedev.eventtech.ui.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.maungedev.domain.model.ConferenceCategory
 import com.maungedev.eventtech.R
 import com.maungedev.eventtech.constant.ExtraNameConstant.EVENT_CATEGORY
-import com.maungedev.eventtech.constant.PageNameConstant.COMPETITION_LIST_PAGE
+import com.maungedev.eventtech.constant.PageNameConstant.CONFERENCE_LIST_PAGE
 import com.maungedev.eventtech.databinding.ItemConferenceCategoryBinding
 
 class ConferenceCategoryAdapter(private val context: Context) :
@@ -45,7 +46,7 @@ class ConferenceCategoryAdapter(private val context: Context) :
                     .into(ivCategoryIcon)
 
                 itemView.setOnClickListener {
-                    context.startActivity(Intent(context,Class.forName(COMPETITION_LIST_PAGE)).also{
+                    context.startActivity(Intent(context,Class.forName(CONFERENCE_LIST_PAGE)).also{
                         it.putExtra(EVENT_CATEGORY,item.categoryName)
                     })
                 }

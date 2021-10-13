@@ -15,7 +15,6 @@ import com.maungedev.eventconference.databinding.FragmentConferenceBinding
 import com.maungedev.eventconference.ui.di.conferenceModule
 import com.maungedev.eventtech.constant.PageNameConstant.SEARCH_PAGE
 import com.maungedev.eventtech.ui.adapter.ConferenceCategoryAdapter
-import com.maungedev.eventtech.ui.adapter.EventLayoutAdapter
 import com.maungedev.eventtech.ui.adapter.MiniLayoutAdapter
 import org.koin.core.context.loadKoinModules
 import org.koin.android.viewmodel.ext.android.viewModel

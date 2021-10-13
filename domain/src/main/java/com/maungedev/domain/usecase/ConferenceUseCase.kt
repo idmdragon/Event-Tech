@@ -9,4 +9,5 @@ import com.maungedev.domain.model.Event
 interface ConferenceUseCase {
     fun getConferenceCategory(): Flow<Resource<List<ConferenceCategory>>>
     fun getAllEventConference(): Flow<Resource<List<Event>>>
+    fun getEventByCategories(categories: String): Flow<Resource<List<Event>>>
 }

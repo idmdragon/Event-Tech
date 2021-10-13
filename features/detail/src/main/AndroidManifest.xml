@@ -15,7 +15,7 @@
 
     <application>
         <activity
-            android:name=".DetailActivity"
+            android:name=".ui.DetailActivity"
             android:exported="true" />
     </application>
 
