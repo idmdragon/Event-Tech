@@ -1,4 +1,4 @@
-package com.maungedev.profile.ui.edit_password
+package com.maungedev.profile.ui.ui.edit_password
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

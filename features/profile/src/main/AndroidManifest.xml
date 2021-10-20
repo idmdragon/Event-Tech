@@ -15,13 +15,13 @@
 
     <application>
         <activity
-            android:name=".ui.edit_username.EditUsernameActivity"
+            android:name=".ui.ui.edit_username.EditUsernameActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.edit_password.EditPasswordActivity"
+            android:name=".ui.ui.edit_password.EditPasswordActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.about.AboutActivity"
+            android:name=".ui.ui.about.AboutActivity"
             android:exported="true" />
     </application>
 

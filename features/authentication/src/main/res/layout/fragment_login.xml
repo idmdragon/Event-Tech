@@ -89,6 +89,7 @@
         app:boxBackgroundColor="@color/whitegray"
         app:boxStrokeColor="@color/blue"
         app:passwordToggleEnabled="true"
+        app:endIconMode="password_toggle"
         app:passwordToggleTint="@color/white"
         app:hintTextColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,9 +100,8 @@
             android:textColor="@color/white"
             android:backgroundTint="@android:color/transparent"
             android:layout_width="match_parent"
-
             android:textColorHighlight="@color/white"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:hint="@string/hint_password"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>

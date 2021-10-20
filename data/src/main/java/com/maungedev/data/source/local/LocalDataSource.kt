@@ -15,6 +15,9 @@ class LocalDataSource(
     suspend fun insertUser(userEntity: UserEntity): Unit =
         userDao.insertUser(userEntity)
 
+    fun selectUser(): Flow<UserEntity> =
+        userDao.selectCurrentUser()
+
     suspend fun insertConferenceCategory(conferenceCategoryEntity: List<ConferenceCategoryEntity>): Unit =
         eventDao.insertConferenceCategory(conferenceCategoryEntity)
 

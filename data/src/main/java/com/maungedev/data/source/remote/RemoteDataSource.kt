@@ -3,14 +3,17 @@ package com.maungedev.data.source.remote
 import com.maungedev.data.source.remote.response.CompetitionCategoryResponse
 import com.maungedev.data.source.remote.response.ConferenceCategoryResponse
 import com.maungedev.data.source.remote.response.EventResponse
+import com.maungedev.data.source.remote.response.UserResponse
 import com.maungedev.data.source.remote.service.AuthService
 import com.maungedev.data.source.remote.service.EventService
+import com.maungedev.data.source.remote.service.UserService
 import com.maungedev.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 class RemoteDataSource(
     private val authService: AuthService,
     private val eventService: EventService,
+    private val userService: UserService,
 ) {
     fun signUp(email:String, password:String, user: User) =
         authService.signUp(email,password,user)
@@ -29,4 +32,11 @@ class RemoteDataSource(
 
     fun getEventById(id: String): Flow<FirebaseResponse<EventResponse>> =
         eventService.getEventById(id)
+
+    fun getCurrentUser(id: String): Flow<FirebaseResponse<UserResponse>> =
+        userService.getUser(id)
+
+    fun getCurrentUserId(): String =
+        userService.getCurrentUserId()
+
 }

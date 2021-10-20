@@ -24,10 +24,9 @@ class SplashActivity : AppCompatActivity() {
                     finishAffinity()
                 }
             }else{
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java)).also {
+                startActivity(Intent(this@SplashActivity, IntroActivity::class.java)).also {
                     finishAffinity()
                 }
-
             }
         }, 1000)
     }
