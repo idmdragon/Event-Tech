@@ -7,8 +7,17 @@ import com.maungedev.domain.model.ConferenceCategory
 import com.maungedev.domain.model.Event
 import com.maungedev.domain.repository.EventRepository
 
-class DetailInteractor(private val eventITRepository: EventRepository): DetailUseCase {
+class DetailInteractor(private val eventRepository: EventRepository): DetailUseCase {
 
     override fun getEventById(id: String): Flow<Resource<Event>> =
-        eventITRepository.getEventById(id)
+        eventRepository.getEventById(id)
+
+    override fun addSchedule(id: String): Flow<Resource<Unit>> =
+        eventRepository.addSchedule(id)
+
+    override fun unsaveEvent(id: String): Flow<Resource<Unit>> =
+        eventRepository.unsaveEvent(id)
+
+    override fun saveEvent(id: String): Flow<Resource<Unit>> =
+        eventRepository.saveEvent(id)
 }

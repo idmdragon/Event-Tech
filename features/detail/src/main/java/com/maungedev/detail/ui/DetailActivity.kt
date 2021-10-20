@@ -2,15 +2,18 @@ package com.maungedev.detail.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.maungedev.detail.databinding.ActivityDetailBinding
 import com.maungedev.detail.di.detailModule
@@ -44,12 +47,9 @@ class DetailActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-
-
     }
 
     private fun setDetailObserver(resource: Resource<Event>) {
-        Log.d("CEKKK", "data ${resource.data}")
         when (resource) {
             is Resource.Success -> {
                 loadingState(false)
@@ -93,19 +93,94 @@ class DetailActivity : AppCompatActivity() {
                     .into(ivPoster)
 
 
-                binding.btnRegistration.setOnClickListener {
-                    startActivity(Intent(this@DetailActivity,RegistrationActivity::class.java).putExtra(
-                        EVENT_LINK_REGISTRATION,event.linkRegistration
-                    ))
+                btnRegistration.setOnClickListener {
+                    startActivity(
+                        Intent(this@DetailActivity, RegistrationActivity::class.java).putExtra(
+                            EVENT_LINK_REGISTRATION, event.linkRegistration
+                        )
+                    )
+                }
+
+                btnAddReminder.setOnClickListener {
+                    showDialog(data)
+                }
+
+                btnFavorite.setOnClickListener {
+                    viewModel.addFavorite(data.uid).observe(this@DetailActivity,::addFavoriteResponse)
                 }
             }
 
         }
     }
 
-    private fun loadingState(b: Boolean) {
+
+
+    private fun loadingState(state: Boolean) {
+        binding.progressBar.isVisible = state
+    }
+
+    private fun showDialog(data: Event) {
+        val materialBuilder = MaterialAlertDialogBuilder(this).create()
+        val inflater: View =
+            LayoutInflater.from(this).inflate(R.layout.dialog_confirmation, null)
+
+        val btnAddSchedule: Button = inflater.findViewById(R.id.btn_add_schedule)
+        val btnCancel: Button = inflater.findViewById(R.id.btn_cancel)
+        val reminderDescription: TextView = inflater.findViewById(R.id.tv_desc)
+
+        reminderDescription.text = getString(R.string.desc_reminder_dialog, data.eventName)
+
+        btnAddSchedule.setOnClickListener {
+            materialBuilder.dismiss()
+            viewModel.addSchedule(data.uid).observe(this,::addScheduleResponse)
+        }
+        btnCancel.setOnClickListener {
+            materialBuilder.dismiss()
+        }
+
+        materialBuilder.setView(inflater)
+        materialBuilder.show()
+    }
+
+    private fun addScheduleResponse(resource: Resource<Unit>?) {
+        when (resource) {
+            is Resource.Success -> {
+                loadingState(false)
+                Snackbar.make(binding.root, "Event berhasil di tambahkan pengingat", Snackbar.LENGTH_LONG)
+                    .show()
+            }
+            is Resource.Loading -> {
+                loadingState(true)
+            }
+
+            is Resource.Error -> {
+                loadingState(false)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                    .show()
+            }
+
+        }
 
     }
 
+    private fun addFavoriteResponse(resource: Resource<Unit>?) {
+        when (resource) {
+            is Resource.Success -> {
+                loadingState(false)
+                Snackbar.make(binding.root, "Event berhasil di tambahkan ke favorit", Snackbar.LENGTH_LONG)
+                    .show()
+            }
+            is Resource.Loading -> {
+                loadingState(true)
+            }
+
+            is Resource.Error -> {
+                loadingState(false)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                    .show()
+            }
+
+        }
+    }
 
 }

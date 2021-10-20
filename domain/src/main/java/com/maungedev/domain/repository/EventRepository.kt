@@ -13,4 +13,7 @@ interface EventRepository {
     fun getAllEventCompetition(): Flow<Resource<List<Event>>>
     fun getEventConferenceByCategories(categories: String): Flow<Resource<List<Event>>>
     fun getEventById(id: String): Flow<Resource<Event>>
+    fun addSchedule(id: String):Flow<Resource<Unit>>
+    fun unsaveEvent(id: String):Flow<Resource<Unit>>
+    fun saveEvent(id: String):Flow<Resource<Unit>>
 }

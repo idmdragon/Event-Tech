@@ -8,4 +8,7 @@ import com.maungedev.domain.model.Event
 
 interface DetailUseCase {
     fun getEventById(id:String): Flow<Resource<Event>>
+    fun addSchedule(id: String):Flow<Resource<Unit>>
+    fun unsaveEvent(id: String):Flow<Resource<Unit>>
+    fun saveEvent(id: String):Flow<Resource<Unit>>
 }

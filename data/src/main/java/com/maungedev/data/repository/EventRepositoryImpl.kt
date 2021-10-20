@@ -1,6 +1,5 @@
 package com.maungedev.data.repository
 
-import android.net.Uri
 import com.maungedev.data.helper.NetworkBoundRequest
 import com.maungedev.data.helper.NetworkBoundResource
 import com.maungedev.data.mapper.*
@@ -10,19 +9,45 @@ import com.maungedev.data.source.remote.RemoteDataSource
 import com.maungedev.data.source.remote.response.CompetitionCategoryResponse
 import com.maungedev.data.source.remote.response.ConferenceCategoryResponse
 import com.maungedev.data.source.remote.response.EventResponse
+import com.maungedev.data.source.remote.response.UserResponse
 import com.maungedev.domain.model.CompetitionCategory
 import com.maungedev.domain.model.ConferenceCategory
 import com.maungedev.domain.model.Event
-import com.maungedev.domain.model.User
 import com.maungedev.domain.repository.EventRepository
 import com.maungedev.domain.utils.Resource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 class EventRepositoryImpl(
     private val local: LocalDataSource,
     private val remote: RemoteDataSource
 ) : EventRepository {
+
+    override fun addSchedule(id: String): Flow<Resource<Unit>> =
+        object : NetworkBoundRequest<UserResponse>() {
+
+            override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
+                remote.addSchedule(id)
+
+            override suspend fun saveCallResult(data: UserResponse) =
+                local.insertUser(data.toEntity())
+
+        }.asFlow()
+
+    override fun unsaveEvent(id: String): Flow<Resource<Unit>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun saveEvent(id: String): Flow<Resource<Unit>> =
+        object : NetworkBoundRequest<UserResponse>() {
+
+            override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
+                remote.addFavoriteEvent(id)
+
+            override suspend fun saveCallResult(data: UserResponse) =
+                local.insertUser(data.toEntity())
+
+        }.asFlow()
+
     override fun getEventConferenceByCategories(categories: String): Flow<Resource<List<Event>>> =
         object :NetworkBoundResource<List<Event>,List<EventResponse>>(){
             override fun loadFromDB(): Flow<List<Event>?> =

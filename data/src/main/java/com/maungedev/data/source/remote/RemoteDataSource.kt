@@ -39,4 +39,9 @@ class RemoteDataSource(
     fun getCurrentUserId(): String =
         userService.getCurrentUserId()
 
+    fun addSchedule(id: String): Flow<FirebaseResponse<UserResponse>> =
+        userService.addSchedule(id)
+
+    fun addFavoriteEvent(id: String): Flow<FirebaseResponse<UserResponse>> =
+        userService.addFavoriteEvent(id)
 }

@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(mainLooper).postDelayed({
             if(isUserAlreadyHere()){
-                startActivity(Intent(this@SplashActivity, IntroActivity::class.java)).also {
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java)).also {
                     finishAffinity()
                 }
             }else{

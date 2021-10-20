@@ -42,4 +42,8 @@
     <string name="cd_back">Back button</string>
     <string name="title_detail">Module Title</string>
     <string name="detail_event">Detail Event</string>
+    <string name="text_agree">Setuju</string>
+    <string name="text_cancel">Batalkan</string>
+    <string name="title_dialog_reminder">Tambahkan pengingat</string>
+    <string name="desc_reminder_dialog">Apakah anda akan menambahkan pengingat event pada event %s</string>
 </resources>
