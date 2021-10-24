@@ -12,5 +12,6 @@ object FirebaseConstant {
         const val SCHEDULE = "schedule"
         const val UID = "uid"
         const val FAVORITE = "favorite"
+        const val USERNAME = "username"
     }
 }

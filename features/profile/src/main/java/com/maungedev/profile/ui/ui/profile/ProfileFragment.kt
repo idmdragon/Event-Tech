@@ -1,5 +1,6 @@
 package com.maungedev.profile.ui.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,8 +9,10 @@ import android.view.ViewGroup
 import com.google.android.material.snackbar.Snackbar
 import com.maungedev.domain.model.User
 import com.maungedev.domain.utils.Resource
+import com.maungedev.eventtech.constant.ExtraNameConstant.USERNAME
 import com.maungedev.profile.databinding.FragmentProfileBinding
 import com.maungedev.profile.ui.di.profileModule
+import com.maungedev.profile.ui.ui.edit_username.EditUsernameActivity
 import org.koin.core.context.loadKoinModules
 import org.koin.android.viewmodel.ext.android.viewModel
 class ProfileFragment : Fragment() {
@@ -43,6 +46,13 @@ class ProfileFragment : Fragment() {
                         if (user != null) {
                             tvEmail.text = user.email
                             tvUsername.text = user.username
+                        }
+                        tvEditUsername.setOnClickListener {
+                            if (user != null) {
+                                startActivity(
+                                    Intent(requireContext(), EditUsernameActivity::class.java).putExtra(
+                                    USERNAME,user.username))
+                            }
                         }
                     }
                 }
