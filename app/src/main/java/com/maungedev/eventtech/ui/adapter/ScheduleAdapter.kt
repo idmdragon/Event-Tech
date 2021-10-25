@@ -1,12 +1,15 @@
 package com.maungedev.eventtech.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.maungedev.domain.model.Event
 import com.maungedev.eventtech.R
+import com.maungedev.eventtech.constant.ExtraNameConstant
+import com.maungedev.eventtech.constant.PageNameConstant
 import com.maungedev.eventtech.databinding.ItemScheduleBinding
 
 class ScheduleAdapter(private val context: Context) :
@@ -48,6 +51,12 @@ class ScheduleAdapter(private val context: Context) :
 
                 tvEventMonth.text = "FEB"
                 tvEventTime.text = item.time
+
+                itemView.setOnClickListener {
+                    context.startActivity(
+                        Intent(itemView.context,Class.forName(PageNameConstant.DETAIL_PAGE)).putExtra(
+                        ExtraNameConstant.EVENT_UID,item.uid))
+                }
             }
         }
     }

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/darkgray">
 
     <TextView
@@ -18,19 +19,19 @@
         android:layout_marginTop="@dimen/range_16"
         android:layout_marginStart="@dimen/range_24"
         />
+
     <TextView
         android:id="@+id/tv_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_medium"
-        android:textSize="@dimen/size_12"
         android:layout_marginTop="@dimen/range_8"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="@dimen/range_24"
-        app:layout_constraintTop_toBottomOf="@id/tv_dialog_title"
+        android:textSize="@dimen/size_12"
+        app:layout_constraintEnd_toEndOf="@+id/btn_add_schedule"
         app:layout_constraintStart_toStartOf="@id/tv_dialog_title"
-        android:text="@string/desc_reminder_dialog"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_dialog_title"
+        tools:text="@string/desc_reminder_dialog" />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_add_schedule"
         android:layout_width="wrap_content"

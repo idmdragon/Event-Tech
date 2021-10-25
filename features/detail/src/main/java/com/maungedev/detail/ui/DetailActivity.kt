@@ -39,9 +39,6 @@ class DetailActivity : AppCompatActivity() {
         loadKoinModules(detailModule)
 
         setUpObserver()
-        binding.btnBack.setOnClickListener {
-            onBackPressed()
-        }
 
     }
 
@@ -52,7 +49,7 @@ class DetailActivity : AppCompatActivity() {
                 .observe(this@DetailActivity, { setCurrentUser(it, eventUID) })
         }
         viewModel.isRemindered.observe(this@DetailActivity, ::stateReminder)
-        viewModel.isFavorited.observe(this@DetailActivity, ::stateFavorite)
+
     }
 
     private fun setCurrentUser(resource: Resource<User>?, eventUID: String) {
@@ -103,10 +100,9 @@ class DetailActivity : AppCompatActivity() {
 
 
     @SuppressLint("SetTextI18n")
-    private fun setDetailView(data: Event) {
+    private fun setDetailView(event: Event) {
+        buttonClickListener(event)
         with(binding) {
-            data.let { event ->
-
                 tvEventTitle.text = event.eventName
                 tvAbout.text = event.description
                 tvPrerequisite.text = event.prerequisite
@@ -124,29 +120,43 @@ class DetailActivity : AppCompatActivity() {
                     .placeholder(R.drawable.image_placeholder)
                     .apply(RequestOptions())
                     .into(ivPoster)
-
-
-                btnRegistration.setOnClickListener {
-                    startActivity(
-                        Intent(this@DetailActivity, RegistrationActivity::class.java).putExtra(
-                            EVENT_LINK_REGISTRATION, event.linkRegistration
-                        )
-                    )
-                }
-
-                btnAddReminder.setOnClickListener {
-                    showReminderDialog(data)
-                }
-
-                btnFavorite.setOnClickListener {
-                    viewModel.addFavorite(data.uid)
-                        .observe(this@DetailActivity, ::addFavoriteResponse)
-                }
-            }
-
         }
     }
 
+    private fun buttonClickListener(data: Event){
+        binding.apply {
+
+            btnRegistration.setOnClickListener {
+                startActivity(
+                    Intent(this@DetailActivity, RegistrationActivity::class.java).putExtra(
+                        EVENT_LINK_REGISTRATION, data.linkRegistration
+                    )
+                )
+            }
+
+            btnAddReminder.setOnClickListener {
+                showReminderDialog(data)
+            }
+
+            btnBack.setOnClickListener {
+                onBackPressed()
+            }
+
+            viewModel.isFavorited.observe(this@DetailActivity,{ state ->
+                stateFavorite(state)
+                if(state){
+                    btnFavorite.setOnClickListener {
+                        viewModel.deleteFavorite(data.uid).observe(this@DetailActivity, ::deleteFavoriteResponse)
+                    }
+                }else{
+                    btnFavorite.setOnClickListener {
+                        viewModel.addFavorite(data.uid).observe(this@DetailActivity, ::deleteScheduleResponse)
+                    }
+                }
+            })
+
+        }
+    }
 
     private fun loadingState(state: Boolean) {
         binding.progressBar.isVisible = state
@@ -177,26 +187,38 @@ class DetailActivity : AppCompatActivity() {
             )
         } else {
             binding.btnFavorite.setImageResource(
-                R.drawable.ic_favorite_inactive
+                R.drawable.ic_favorite_detail
             )
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showReminderDialog(data: Event) {
         val materialBuilder = MaterialAlertDialogBuilder(this).create()
-        val inflater: View =
-            LayoutInflater.from(this).inflate(R.layout.dialog_confirmation, null)
-
+        val inflater: View = LayoutInflater.from(this).inflate(R.layout.dialog_confirmation, null)
         val btnAddSchedule: Button = inflater.findViewById(R.id.btn_add_schedule)
         val btnCancel: Button = inflater.findViewById(R.id.btn_cancel)
+        val reminderTitle: TextView = inflater.findViewById(R.id.tv_dialog_title)
         val reminderDescription: TextView = inflater.findViewById(R.id.tv_desc)
 
-        reminderDescription.text = getString(R.string.desc_reminder_dialog, data.eventName)
+        viewModel.isRemindered.observe(this@DetailActivity,{ state ->
+            if (state){
+                reminderDescription.text = getString(R.string.desc_reminder_dialog_delete, data.eventName)
+                reminderTitle.text = "Hapus Pengingat Event"
+                btnAddSchedule.setOnClickListener {
+                    materialBuilder.dismiss()
+                    viewModel.deleteSchedule(data.uid).observe(this, ::deleteScheduleResponse)
+                }
+            }else{
+                reminderDescription.text = getString(R.string.desc_reminder_dialog, data.eventName)
+                reminderTitle.text = "Tambahkan Pengingat Event"
+                btnAddSchedule.setOnClickListener {
+                    materialBuilder.dismiss()
+                    viewModel.addSchedule(data.uid).observe(this, ::addScheduleResponse)
+                }
+            }
+        })
 
-        btnAddSchedule.setOnClickListener {
-            materialBuilder.dismiss()
-            viewModel.addSchedule(data.uid).observe(this, ::addScheduleResponse)
-        }
         btnCancel.setOnClickListener {
             materialBuilder.dismiss()
         }
@@ -213,8 +235,31 @@ class DetailActivity : AppCompatActivity() {
                     binding.root,
                     "Event berhasil di tambahkan pengingat",
                     Snackbar.LENGTH_LONG
-                )
+                ).show()
+            }
+            is Resource.Loading -> {
+                loadingState(true)
+            }
+
+            is Resource.Error -> {
+                loadingState(false)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
                     .show()
+            }
+
+        }
+
+    }
+
+    private fun deleteScheduleResponse(resource: Resource<Unit>?) {
+        when (resource) {
+            is Resource.Success -> {
+                loadingState(false)
+                Snackbar.make(
+                    binding.root,
+                    "Event berhasil dihapus dari pengingat",
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
             is Resource.Loading -> {
                 loadingState(true)
@@ -253,5 +298,27 @@ class DetailActivity : AppCompatActivity() {
 
         }
     }
+    private fun deleteFavoriteResponse(resource: Resource<Unit>?) {
+        when (resource) {
+            is Resource.Success -> {
+                loadingState(false)
+                Snackbar.make(
+                    binding.root,
+                    "Event berhasil dihapus dari favorit",
+                    Snackbar.LENGTH_LONG
+                )
+                    .show()
+            }
+            is Resource.Loading -> {
+                loadingState(true)
+            }
 
+            is Resource.Error -> {
+                loadingState(false)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                    .show()
+            }
+
+        }
+    }
 }

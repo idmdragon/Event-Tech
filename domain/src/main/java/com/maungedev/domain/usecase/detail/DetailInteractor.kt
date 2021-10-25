@@ -22,4 +22,7 @@ class DetailInteractor(private val eventRepository: EventRepository): DetailUseC
 
     override fun getCurrentUser(): Flow<Resource<User>> =
         eventRepository.getCurrentUser()
+
+    override fun deleteSchedule(id: String): Flow<Resource<Unit>> =
+        eventRepository.deleteSchedule(id)
 }

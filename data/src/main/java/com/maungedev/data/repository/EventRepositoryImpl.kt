@@ -29,7 +29,18 @@ class EventRepositoryImpl(
         object : NetworkBoundRequest<UserResponse>() {
 
             override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
-                remote.addSchedule(id,getCurrentUserId())
+                remote.addSchedule(id)
+
+            override suspend fun saveCallResult(data: UserResponse) =
+                local.insertUser(data.toEntity())
+
+        }.asFlow()
+
+    override fun deleteSchedule(id: String): Flow<Resource<Unit>> =
+        object : NetworkBoundRequest<UserResponse>() {
+
+            override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
+                remote.deleteSchedule(id)
 
             override suspend fun saveCallResult(data: UserResponse) =
                 local.insertUser(data.toEntity())
@@ -37,10 +48,16 @@ class EventRepositoryImpl(
         }.asFlow()
 
 
+    override fun deleteFavoriteEvent(id: String): Flow<Resource<Unit>> =
+        object : NetworkBoundRequest<UserResponse>() {
 
-    override fun deleteFavoriteEvent(id: String): Flow<Resource<Unit>> {
-        TODO("Not yet implemented")
-    }
+            override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
+                remote.deleteFavorite(id)
+
+            override suspend fun saveCallResult(data: UserResponse) =
+                local.insertUser(data.toEntity())
+
+        }.asFlow()
 
     override fun addFavoriteEvent(id: String): Flow<Resource<Unit>> =
         object : NetworkBoundRequest<UserResponse>() {
@@ -80,7 +97,7 @@ class EventRepositoryImpl(
         remote.getCurrentUserId()
 
     override fun getEventConferenceByCategories(categories: String): Flow<Resource<List<Event>>> =
-        object :NetworkBoundResource<List<Event>,List<EventResponse>>(){
+        object : NetworkBoundResource<List<Event>, List<EventResponse>>() {
             override fun loadFromDB(): Flow<List<Event>?> =
                 local.selectEventByCategories(categories).toListFlowModel()
 
@@ -95,8 +112,8 @@ class EventRepositoryImpl(
         }.asFlow()
 
     override fun getEventById(id: String): Flow<Resource<Event>> =
-        object : NetworkBoundResource<Event, EventResponse>(){
-            override fun loadFromDB(): Flow<Event?>  =
+        object : NetworkBoundResource<Event, EventResponse>() {
+            override fun loadFromDB(): Flow<Event?> =
                 local.selectEventByUid(id).toFlowModel()
 
             override fun shouldFetch(data: Event?): Boolean =
@@ -110,7 +127,7 @@ class EventRepositoryImpl(
         }.asFlow()
 
     override fun getAllEventConference(): Flow<Resource<List<Event>>> =
-        object :NetworkBoundResource<List<Event>,List<EventResponse>>(){
+        object : NetworkBoundResource<List<Event>, List<EventResponse>>() {
             override fun loadFromDB(): Flow<List<Event>?> =
                 local.selectAllEventConference().toListFlowModel()
 
@@ -125,7 +142,7 @@ class EventRepositoryImpl(
         }.asFlow()
 
     override fun getAllEventCompetition(): Flow<Resource<List<Event>>> =
-        object :NetworkBoundResource<List<Event>,List<EventResponse>>(){
+        object : NetworkBoundResource<List<Event>, List<EventResponse>>() {
             override fun loadFromDB(): Flow<List<Event>?> =
                 local.selectAllEventCompetition().toListFlowModel()
 
@@ -140,7 +157,8 @@ class EventRepositoryImpl(
         }.asFlow()
 
     override fun getConferenceCategory(): Flow<Resource<List<ConferenceCategory>>> =
-        object :NetworkBoundResource<List<ConferenceCategory>,List<ConferenceCategoryResponse>>(){
+        object :
+            NetworkBoundResource<List<ConferenceCategory>, List<ConferenceCategoryResponse>>() {
             override fun loadFromDB(): Flow<List<ConferenceCategory>?> =
                 local.selectAllConferenceCategory().toConferenceCategoryListFlowModel()
 
@@ -155,7 +173,8 @@ class EventRepositoryImpl(
         }.asFlow()
 
     override fun getCompetitionCategory(): Flow<Resource<List<CompetitionCategory>>> =
-        object :NetworkBoundResource<List<CompetitionCategory>,List<CompetitionCategoryResponse>>(){
+        object :
+            NetworkBoundResource<List<CompetitionCategory>, List<CompetitionCategoryResponse>>() {
             override fun loadFromDB(): Flow<List<CompetitionCategory>?> =
                 local.selectAllCompetitionCategory().toCompetitionCategoryListFlowModel()
 
@@ -184,22 +203,19 @@ class EventRepositoryImpl(
                 local.insertEvents(data.toListEntity())
         }.asFlow()
 
-    override fun deleteSchedule(id: String): Flow<Resource<Unit>> {
-        TODO("Not yet implemented")
-    }
 
     override fun getAllFavorite(ids: List<String>): Flow<Resource<List<Event>>> =
-    object : NetworkBoundResource<List<Event>, List<EventResponse>>() {
-        override fun loadFromDB(): Flow<List<Event>?> =
-            local.selectAllMyFavorite(ids).toListFlowModel()
+        object : NetworkBoundResource<List<Event>, List<EventResponse>>() {
+            override fun loadFromDB(): Flow<List<Event>?> =
+                local.selectAllMyFavorite(ids).toListFlowModel()
 
-        override fun shouldFetch(data: List<Event>?): Boolean =
-            true
+            override fun shouldFetch(data: List<Event>?): Boolean =
+                true
 
-        override suspend fun createCall(): Flow<FirebaseResponse<List<EventResponse>>> =
-            remote.getMyFavorite(ids)
+            override suspend fun createCall(): Flow<FirebaseResponse<List<EventResponse>>> =
+                remote.getMyFavorite(ids)
 
-        override suspend fun saveCallResult(data: List<EventResponse>) =
-            local.insertEvents(data.toListEntity())
-    }.asFlow()
+            override suspend fun saveCallResult(data: List<EventResponse>) =
+                local.insertEvents(data.toListEntity())
+        }.asFlow()
 }

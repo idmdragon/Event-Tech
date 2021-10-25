@@ -42,8 +42,11 @@ class RemoteDataSource(
     fun getCurrentUserId(): String =
         userService.getCurrentUserId()
 
-    fun addSchedule(id: String, currentUserId: String): Flow<FirebaseResponse<UserResponse>> =
-        userService.addSchedule(id,currentUserId)
+    fun addSchedule(id: String): Flow<FirebaseResponse<UserResponse>> =
+        userService.addSchedule(id)
+
+    fun deleteSchedule(id: String): Flow<FirebaseResponse<UserResponse>> =
+        userService.deleteSchedule(id)
 
     fun addFavoriteEvent(id: String): Flow<FirebaseResponse<UserResponse>> =
         userService.addFavoriteEvent(id)
@@ -54,5 +57,7 @@ class RemoteDataSource(
     fun getMyFavorite(ids: List<String>): Flow<FirebaseResponse<List<EventResponse>>> =
         eventService.getMyFavorite(ids)
 
+    fun deleteFavorite(id: String): Flow<FirebaseResponse<UserResponse>> =
+        userService.deleteFavorite(id)
 
 }

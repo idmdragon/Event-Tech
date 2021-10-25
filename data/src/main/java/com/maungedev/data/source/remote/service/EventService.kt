@@ -34,4 +34,6 @@ class EventService: FirebaseService() {
             FirebaseConstant.Field.UID,
             ids
         )
+
+
 }

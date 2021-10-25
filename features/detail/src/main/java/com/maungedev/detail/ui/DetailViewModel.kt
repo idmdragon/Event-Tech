@@ -29,8 +29,14 @@ class DetailViewModel(private val useCase: DetailUseCase) : ViewModel() {
     fun addSchedule(id: String): LiveData<Resource<Unit>> =
         useCase.addSchedule(id).asLiveData()
 
+    fun deleteSchedule(id: String): LiveData<Resource<Unit>> =
+        useCase.deleteSchedule(id).asLiveData()
+
     fun addFavorite(id: String): LiveData<Resource<Unit>> =
         useCase.addFavoriteEvent(id).asLiveData()
+
+    fun deleteFavorite(id: String): LiveData<Resource<Unit>> =
+        useCase.deleteFavoriteEvent(id).asLiveData()
 
     fun getCurrentUser(): LiveData<Resource<User>> =
         useCase.getCurrentUser().asLiveData()

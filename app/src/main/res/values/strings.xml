@@ -46,4 +46,5 @@
     <string name="text_cancel">Batalkan</string>
     <string name="title_dialog_reminder">Tambahkan pengingat</string>
     <string name="desc_reminder_dialog">Apakah anda akan menambahkan pengingat event pada event %s</string>
+    <string name="desc_reminder_dialog_delete">Apakah anda akan menghapus pengingat event pada event %s</string>
 </resources>
