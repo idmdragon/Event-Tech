@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.maungedev.domain.model.ConferenceCategory
 import com.maungedev.domain.model.Event
-import com.maungedev.domain.usecase.ConferenceUseCase
+import com.maungedev.domain.usecase.conference.ConferenceUseCase
 import com.maungedev.domain.utils.Resource
 
 class ConferenceViewModel(private val useCase: ConferenceUseCase) : ViewModel() {

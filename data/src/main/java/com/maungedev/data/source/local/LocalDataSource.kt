@@ -47,4 +47,7 @@ class LocalDataSource(
 
     fun selectEventByUid(uid: String): Flow<EventEntity> =
         eventDao.selectEventByUid(uid)
+
+    fun selectAllMySchedule(ids: List<String>): Flow<List<EventEntity>> =
+        eventDao.selectAllMySchedules(ids)
 }

@@ -2,8 +2,8 @@ package com.maungedev.authentication.ui.di
 
 import com.maungedev.authentication.ui.ui.login.LoginViewModel
 import com.maungedev.authentication.ui.ui.register.RegisterViewModel
-import com.maungedev.domain.usecase.AuthInteractor
-import com.maungedev.domain.usecase.AuthUseCase
+import com.maungedev.domain.usecase.auth.AuthInteractor
+import com.maungedev.domain.usecase.auth.AuthUseCase
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

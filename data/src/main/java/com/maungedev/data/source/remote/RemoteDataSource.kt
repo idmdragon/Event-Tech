@@ -33,19 +33,23 @@ class RemoteDataSource(
     fun getEventById(id: String): Flow<FirebaseResponse<EventResponse>> =
         eventService.getEventById(id)
 
+    fun getMySchedule(ids: List<String>): Flow<FirebaseResponse<List<EventResponse>>> =
+        eventService.getMySchedule(ids)
+
     fun getCurrentUser(id: String): Flow<FirebaseResponse<UserResponse>> =
         userService.getUser(id)
 
     fun getCurrentUserId(): String =
         userService.getCurrentUserId()
 
-    fun addSchedule(id: String): Flow<FirebaseResponse<UserResponse>> =
-        userService.addSchedule(id)
+    fun addSchedule(id: String, currentUserId: String): Flow<FirebaseResponse<UserResponse>> =
+        userService.addSchedule(id,currentUserId)
 
     fun addFavoriteEvent(id: String): Flow<FirebaseResponse<UserResponse>> =
         userService.addFavoriteEvent(id)
 
     fun updateUsername(username: String): Flow<FirebaseResponse<UserResponse>> =
         userService.updateUsername(username)
+
 
 }

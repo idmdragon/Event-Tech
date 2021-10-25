@@ -1,9 +1,7 @@
-package com.maungedev.domain.usecase
+package com.maungedev.domain.usecase.detail
 
 import com.maungedev.domain.utils.Resource
 import kotlinx.coroutines.flow.Flow
-import com.maungedev.domain.model.CompetitionCategory
-import com.maungedev.domain.model.ConferenceCategory
 import com.maungedev.domain.model.Event
 import com.maungedev.domain.repository.EventRepository
 

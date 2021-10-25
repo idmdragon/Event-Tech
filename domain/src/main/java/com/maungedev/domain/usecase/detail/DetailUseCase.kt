@@ -1,4 +1,4 @@
-package com.maungedev.domain.usecase
+package com.maungedev.domain.usecase.detail
 
 import com.maungedev.domain.utils.Resource
 import kotlinx.coroutines.flow.Flow

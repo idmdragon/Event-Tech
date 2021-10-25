@@ -13,9 +13,12 @@ import com.maungedev.data.source.remote.response.UserResponse
 import com.maungedev.domain.model.CompetitionCategory
 import com.maungedev.domain.model.ConferenceCategory
 import com.maungedev.domain.model.Event
+import com.maungedev.domain.model.User
 import com.maungedev.domain.repository.EventRepository
 import com.maungedev.domain.utils.Resource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
 
 class EventRepositoryImpl(
     private val local: LocalDataSource,
@@ -26,7 +29,7 @@ class EventRepositoryImpl(
         object : NetworkBoundRequest<UserResponse>() {
 
             override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
-                remote.addSchedule(id)
+                remote.addSchedule(id,getCurrentUserId())
 
             override suspend fun saveCallResult(data: UserResponse) =
                 local.insertUser(data.toEntity())
@@ -47,6 +50,32 @@ class EventRepositoryImpl(
                 local.insertUser(data.toEntity())
 
         }.asFlow()
+
+    override fun getCurrentUser(): Flow<Resource<User>> =
+        flow {
+            val userId = getCurrentUserId()
+            if (userId.isNotEmpty()) {
+                emitAll(getUser(userId))
+            }
+        }
+
+    override fun getUser(id: String): Flow<Resource<User>> =
+        object : NetworkBoundResource<User, UserResponse>() {
+            override fun loadFromDB(): Flow<User?> =
+                local.selectUser().toFlowModel()
+
+            override fun shouldFetch(data: User?): Boolean =
+                data == null
+
+            override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
+                remote.getCurrentUser(id)
+
+            override suspend fun saveCallResult(data: UserResponse) =
+                local.insertUser(data.toEntity())
+        }.asFlow()
+
+    override fun getCurrentUserId(): String =
+        remote.getCurrentUserId()
 
     override fun getEventConferenceByCategories(categories: String): Flow<Resource<List<Event>>> =
         object :NetworkBoundResource<List<Event>,List<EventResponse>>(){
@@ -137,4 +166,23 @@ class EventRepositoryImpl(
             override suspend fun saveCallResult(data: List<CompetitionCategoryResponse>) =
                 local.insertCompetitionCategory(data.toListCompetitionCategoryEntity())
         }.asFlow()
+
+    override fun getAllSchedule(ids: List<String>): Flow<Resource<List<Event>>> =
+        object : NetworkBoundResource<List<Event>, List<EventResponse>>() {
+            override fun loadFromDB(): Flow<List<Event>?> =
+                local.selectAllMySchedule(ids).toListFlowModel()
+
+            override fun shouldFetch(data: List<Event>?): Boolean =
+                true
+
+            override suspend fun createCall(): Flow<FirebaseResponse<List<EventResponse>>> =
+                remote.getMySchedule(ids)
+
+            override suspend fun saveCallResult(data: List<EventResponse>) =
+                local.insertEvents(data.toListEntity())
+        }.asFlow()
+
+    override fun deleteSchedule(id: String): Flow<Resource<Unit>> {
+        TODO("Not yet implemented")
+    }
 }

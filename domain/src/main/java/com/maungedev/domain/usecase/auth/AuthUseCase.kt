@@ -1,4 +1,4 @@
-package com.maungedev.domain.usecase
+package com.maungedev.domain.usecase.auth
 
 import com.maungedev.domain.model.User
 import com.maungedev.domain.utils.Resource
