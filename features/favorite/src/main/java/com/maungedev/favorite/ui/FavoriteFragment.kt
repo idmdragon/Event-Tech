@@ -7,13 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.maungedev.domain.model.Event
+import com.maungedev.domain.utils.Resource
 import com.maungedev.eventtech.ui.adapter.MiniLayoutAdapter
+import com.maungedev.eventtech.ui.adapter.ScheduleAdapter
 import com.maungedev.favorite.databinding.FragmentFavoriteBinding
-
+import com.maungedev.favorite.di.favoriteModule
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.android.viewmodel.ext.android.viewModel
 class FavoriteFragment : Fragment() {
 
-    private lateinit var viewModel: FavoriteViewModel
+    private val viewModel: FavoriteViewModel by viewModel()
     private var _binding: FragmentFavoriteBinding? = null
     private lateinit var favoriteEventAdapter: MiniLayoutAdapter
     private val binding get() = _binding!!
@@ -22,25 +28,52 @@ class FavoriteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel =
-            ViewModelProvider(this).get(FavoriteViewModel::class.java)
-
+        loadKoinModules(favoriteModule)
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getFavoriteEvent().observe(viewLifecycleOwner,::setFavoriteEvent)
+        viewModel.getCurrentUser().observe(viewLifecycleOwner,{
+            it.data?.favorite.let { favoriteIds->
+                if(favoriteIds!=null){
+                    viewModel.getAllFavorite(favoriteIds).observe(viewLifecycleOwner,::setFavoriteEvent)
+                }
+            }
+        })
+    }
+
+    private fun setFavoriteEvent(resource: Resource<List<Event>>?) {
+        when (resource) {
+            is Resource.Success -> {
+                loadingState(false)
+                resource.data?.let { listItem ->
+                    favoriteEventAdapter = MiniLayoutAdapter(requireContext())
+                    favoriteEventAdapter.setItems(listItem)
+                    binding.rvFavorite.adapter = favoriteEventAdapter
+                    binding.rvFavorite.layoutManager = LinearLayoutManager(
+                        activity,
+                        LinearLayoutManager.VERTICAL, false
+                    )
+                }
+            }
+            is Resource.Loading -> {
+                loadingState(true)
+            }
+
+            is Resource.Error -> {
+                loadingState(false)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                    .show()
+            }
+
+        }
 
     }
 
-    private fun setFavoriteEvent(list: List<Event>) {
-        favoriteEventAdapter = MiniLayoutAdapter(requireContext())
-        favoriteEventAdapter.setItems(list)
-        binding.rvFavorite.adapter = favoriteEventAdapter
-        binding.rvFavorite.layoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.VERTICAL, false
-        )
+    private fun loadingState(b: Boolean) {
+
     }
+
+
 }

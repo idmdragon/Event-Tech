@@ -51,5 +51,8 @@ class RemoteDataSource(
     fun updateUsername(username: String): Flow<FirebaseResponse<UserResponse>> =
         userService.updateUsername(username)
 
+    fun getMyFavorite(ids: List<String>): Flow<FirebaseResponse<List<EventResponse>>> =
+        eventService.getMyFavorite(ids)
+
 
 }

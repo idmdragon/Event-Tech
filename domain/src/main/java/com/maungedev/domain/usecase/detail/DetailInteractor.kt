@@ -14,8 +14,8 @@ class DetailInteractor(private val eventRepository: EventRepository): DetailUseC
         eventRepository.addSchedule(id)
 
     override fun unsaveEvent(id: String): Flow<Resource<Unit>> =
-        eventRepository.unsaveEvent(id)
+        eventRepository.deleteFavoriteEvent(id)
 
     override fun saveEvent(id: String): Flow<Resource<Unit>> =
-        eventRepository.saveEvent(id)
+        eventRepository.addFavoriteEvent(id)
 }

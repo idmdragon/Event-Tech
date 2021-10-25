@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.maungedev.domain.model.Event
@@ -35,7 +34,7 @@ class ScheduleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getCurrentUser().observe(viewLifecycleOwner,{ it ->
+        viewModel.getCurrentUser().observe(viewLifecycleOwner,{
             it.data?.schedule.let { scheduleIds->
                 if(scheduleIds!=null){
                     viewModel.getAllSchedule(scheduleIds).observe(viewLifecycleOwner,::setSchedule)

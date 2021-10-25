@@ -17,8 +17,9 @@ interface EventRepository {
     fun getAllSchedule(ids: List<String>):Flow<Resource<List<Event>>>
     fun deleteSchedule(id: String):Flow<Resource<Unit>>
     fun addSchedule(id: String):Flow<Resource<Unit>>
-    fun unsaveEvent(id: String):Flow<Resource<Unit>>
-    fun saveEvent(id: String):Flow<Resource<Unit>>
+    fun addFavoriteEvent(id: String):Flow<Resource<Unit>>
+    fun deleteFavoriteEvent(id: String):Flow<Resource<Unit>>
+    fun getAllFavorite(ids: List<String>):Flow<Resource<List<Event>>>
     fun getCurrentUser(): Flow<Resource<User>>
     fun getCurrentUserId(): String
     fun getUser(id: String): Flow<Resource<User>>

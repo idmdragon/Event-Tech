@@ -36,11 +36,13 @@ class EventRepositoryImpl(
 
         }.asFlow()
 
-    override fun unsaveEvent(id: String): Flow<Resource<Unit>> {
+
+
+    override fun deleteFavoriteEvent(id: String): Flow<Resource<Unit>> {
         TODO("Not yet implemented")
     }
 
-    override fun saveEvent(id: String): Flow<Resource<Unit>> =
+    override fun addFavoriteEvent(id: String): Flow<Resource<Unit>> =
         object : NetworkBoundRequest<UserResponse>() {
 
             override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
@@ -185,4 +187,19 @@ class EventRepositoryImpl(
     override fun deleteSchedule(id: String): Flow<Resource<Unit>> {
         TODO("Not yet implemented")
     }
+
+    override fun getAllFavorite(ids: List<String>): Flow<Resource<List<Event>>> =
+    object : NetworkBoundResource<List<Event>, List<EventResponse>>() {
+        override fun loadFromDB(): Flow<List<Event>?> =
+            local.selectAllMyFavorite(ids).toListFlowModel()
+
+        override fun shouldFetch(data: List<Event>?): Boolean =
+            true
+
+        override suspend fun createCall(): Flow<FirebaseResponse<List<EventResponse>>> =
+            remote.getMyFavorite(ids)
+
+        override suspend fun saveCallResult(data: List<EventResponse>) =
+            local.insertEvents(data.toListEntity())
+    }.asFlow()
 }

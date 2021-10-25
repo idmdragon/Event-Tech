@@ -50,4 +50,7 @@ class LocalDataSource(
 
     fun selectAllMySchedule(ids: List<String>): Flow<List<EventEntity>> =
         eventDao.selectAllMySchedules(ids)
+
+    fun selectAllMyFavorite(ids: List<String>): Flow<List<EventEntity>> =
+        eventDao.selectAllMyFavorite(ids)
 }

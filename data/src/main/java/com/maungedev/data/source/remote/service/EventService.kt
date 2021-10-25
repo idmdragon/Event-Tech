@@ -27,4 +27,11 @@ class EventService: FirebaseService() {
             FirebaseConstant.Field.UID,
             ids
         )
+
+    fun getMyFavorite(ids: List<String>): Flow<FirebaseResponse<List<EventResponse>>> =
+        getDocumentsWhereIds(
+            FirebaseConstant.FirebaseCollection.EVENT_COLLECTION,
+            FirebaseConstant.Field.UID,
+            ids
+        )
 }
