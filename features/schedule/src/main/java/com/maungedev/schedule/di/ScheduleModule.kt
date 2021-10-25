@@ -2,7 +2,7 @@ package com.maungedev.schedule.di
 
 import com.maungedev.domain.usecase.schedule.ScheduleInteractor
 import com.maungedev.domain.usecase.schedule.ScheduleUseCase
-import com.maungedev.schedule.ScheduleViewModel
+import com.maungedev.schedule.ui.ScheduleViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

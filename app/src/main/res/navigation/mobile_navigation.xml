@@ -16,7 +16,7 @@
         tools:layout="@layout/fragment_competition" />
     <fragment
         android:id="@+id/navigation_schedule"
-        android:name="com.maungedev.schedule.ScheduleFragment"
+        android:name="com.maungedev.schedule.ui.ScheduleFragment"
         android:label="fragment_schedule"
         tools:layout="@layout/fragment_schedule" />
     <fragment

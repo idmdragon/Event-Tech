@@ -1,4 +1,4 @@
-package com.maungedev.schedule
+package com.maungedev.schedule.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

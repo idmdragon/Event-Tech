@@ -19,6 +19,7 @@ import com.maungedev.detail.databinding.ActivityDetailBinding
 import com.maungedev.detail.di.detailModule
 import com.maungedev.detail.ui.webview.RegistrationActivity
 import com.maungedev.domain.model.Event
+import com.maungedev.domain.model.User
 import com.maungedev.domain.utils.Resource
 import com.maungedev.eventtech.R
 import com.maungedev.eventtech.constant.ExtraNameConstant.EVENT_LINK_REGISTRATION
@@ -37,24 +38,31 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         loadKoinModules(detailModule)
 
-        intent.getStringExtra(EVENT_UID).let {
-            if (it != null) {
-                viewModel.getEventById(it).observe(this@DetailActivity, ::setDetailObserver)
-            }
-        }
-
+        setUpObserver()
         binding.btnBack.setOnClickListener {
             onBackPressed()
         }
 
     }
 
-    private fun setDetailObserver(resource: Resource<Event>) {
+    private fun setUpObserver() {
+        intent.getStringExtra(EVENT_UID)?.let { eventUID ->
+            viewModel.getEventById(eventUID).observe(this@DetailActivity, ::setDetailObserver)
+            viewModel.getCurrentUser()
+                .observe(this@DetailActivity, { setCurrentUser(it, eventUID) })
+        }
+        viewModel.isRemindered.observe(this@DetailActivity, ::stateReminder)
+        viewModel.isFavorited.observe(this@DetailActivity, ::stateFavorite)
+    }
+
+    private fun setCurrentUser(resource: Resource<User>?, eventUID: String) {
         when (resource) {
             is Resource.Success -> {
                 loadingState(false)
-                resource.data?.let { setDetailView(it) }
-
+                resource.data?.let { user ->
+                    viewModel.setReminderState(user.schedule.contains(eventUID))
+                    viewModel.setFavoriteState(user.favorite.contains(eventUID))
+                }
             }
             is Resource.Loading -> {
                 loadingState(true)
@@ -62,11 +70,37 @@ class DetailActivity : AppCompatActivity() {
 
             is Resource.Error -> {
                 loadingState(false)
-                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
-                    .show()
+                Snackbar.make(
+                    binding.root,
+                    resource.message.toString(),
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
     }
+
+
+    private fun setDetailObserver(resource: Resource<Event>?) {
+        when (resource) {
+            is Resource.Success -> {
+                loadingState(false)
+                resource.data?.let { setDetailView(it) }
+            }
+            is Resource.Loading -> {
+                loadingState(true)
+            }
+
+            is Resource.Error -> {
+                loadingState(false)
+                Snackbar.make(
+                    binding.root,
+                    resource.message.toString(),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
 
     @SuppressLint("SetTextI18n")
     private fun setDetailView(data: Event) {
@@ -78,7 +112,6 @@ class DetailActivity : AppCompatActivity() {
                 tvPrerequisite.text = event.prerequisite
                 tvEventInformation.text = "${event.date} • ${event.location} • ${event.time}"
                 val zero: Long = 0
-
                 val price = when (event.price) {
                     zero -> "Gratis"
                     else -> "Rp. ${event.price}"
@@ -102,11 +135,12 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 btnAddReminder.setOnClickListener {
-                    showDialog(data)
+                    showReminderDialog(data)
                 }
 
                 btnFavorite.setOnClickListener {
-                    viewModel.addFavorite(data.uid).observe(this@DetailActivity,::addFavoriteResponse)
+                    viewModel.addFavorite(data.uid)
+                        .observe(this@DetailActivity, ::addFavoriteResponse)
                 }
             }
 
@@ -114,12 +148,41 @@ class DetailActivity : AppCompatActivity() {
     }
 
 
-
     private fun loadingState(state: Boolean) {
         binding.progressBar.isVisible = state
     }
 
-    private fun showDialog(data: Event) {
+    @SuppressLint("SetTextI18n")
+    private fun stateReminder(state: Boolean) {
+        binding.apply {
+            if (state) {
+                btnAddReminder.text = "Diingatkan"
+                btnAddReminder.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    R.drawable.ic_checklist, 0, 0, 0
+                )
+            } else {
+                btnAddReminder.text = "Pengingat"
+                btnAddReminder.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    R.drawable.ic_add, 0, 0, 0
+                )
+            }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun stateFavorite(state: Boolean) {
+        if (state) {
+            binding.btnFavorite.setImageResource(
+                R.drawable.ic_favorite_active
+            )
+        } else {
+            binding.btnFavorite.setImageResource(
+                R.drawable.ic_favorite_inactive
+            )
+        }
+    }
+
+    private fun showReminderDialog(data: Event) {
         val materialBuilder = MaterialAlertDialogBuilder(this).create()
         val inflater: View =
             LayoutInflater.from(this).inflate(R.layout.dialog_confirmation, null)
@@ -132,7 +195,7 @@ class DetailActivity : AppCompatActivity() {
 
         btnAddSchedule.setOnClickListener {
             materialBuilder.dismiss()
-            viewModel.addSchedule(data.uid).observe(this,::addScheduleResponse)
+            viewModel.addSchedule(data.uid).observe(this, ::addScheduleResponse)
         }
         btnCancel.setOnClickListener {
             materialBuilder.dismiss()
@@ -146,7 +209,11 @@ class DetailActivity : AppCompatActivity() {
         when (resource) {
             is Resource.Success -> {
                 loadingState(false)
-                Snackbar.make(binding.root, "Event berhasil di tambahkan pengingat", Snackbar.LENGTH_LONG)
+                Snackbar.make(
+                    binding.root,
+                    "Event berhasil di tambahkan pengingat",
+                    Snackbar.LENGTH_LONG
+                )
                     .show()
             }
             is Resource.Loading -> {
@@ -167,7 +234,11 @@ class DetailActivity : AppCompatActivity() {
         when (resource) {
             is Resource.Success -> {
                 loadingState(false)
-                Snackbar.make(binding.root, "Event berhasil di tambahkan ke favorit", Snackbar.LENGTH_LONG)
+                Snackbar.make(
+                    binding.root,
+                    "Event berhasil di tambahkan ke favorit",
+                    Snackbar.LENGTH_LONG
+                )
                     .show()
             }
             is Resource.Loading -> {

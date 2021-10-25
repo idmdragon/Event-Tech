@@ -42,10 +42,12 @@ class ScheduleAdapter(private val context: Context) :
                 }else{
                     layoutEvent.setBackgroundResource(R.color.blue)
                 }
-                tvEventDate.text = "11"
-                tvEventTitle.text = item.eventName
+                val titleSchedule = item.eventName + item.organizer
+                tvEventTitle.text = titleSchedule
+                tvEventDate.text = item.date
+
                 tvEventMonth.text = "FEB"
-                tvEventTime.text = "09.00 - 11.00"
+                tvEventTime.text = item.time
             }
         }
     }

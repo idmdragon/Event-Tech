@@ -1,5 +1,6 @@
-package com.maungedev.schedule
+package com.maungedev.schedule.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,9 @@ import com.maungedev.schedule.databinding.FragmentScheduleBinding
 import com.maungedev.schedule.di.scheduleModule
 import org.koin.core.context.loadKoinModules
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.*
+
 class ScheduleFragment : Fragment() {
 
     private val viewModel: ScheduleViewModel by viewModel()
@@ -42,7 +46,15 @@ class ScheduleFragment : Fragment() {
             }
         })
 
+        setCurrentDate()
 
+
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun setCurrentDate() {
+        val currentDate= SimpleDateFormat("d MMM, yyyy").format(Date())
+        binding.tvCurrentDate.text = currentDate
     }
 
     private fun setSchedule(resource: Resource<List<Event>>?) {

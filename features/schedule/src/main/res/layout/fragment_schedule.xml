@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context="com.maungedev.schedule.ScheduleFragment">
+    tools:context="com.maungedev.schedule.ui.ScheduleFragment">
 
     <TextView
         android:id="@+id/tvTitleFavorite"
@@ -26,9 +26,8 @@
         android:background="@drawable/background_schedule"
         android:backgroundTint="#4D515B"
         android:fontFamily="@font/poppins_medium"
-        android:paddingHorizontal="@dimen/range_8"
+        android:paddingHorizontal="@dimen/range_12"
         android:paddingVertical="2dp"
-        android:text="01 Sept, 2021"
         android:textColor="@color/white"
         android:textSize="@dimen/size_14"
         android:layout_marginEnd="@dimen/range_24"

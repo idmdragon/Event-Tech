@@ -3,6 +3,7 @@ package com.maungedev.domain.usecase.detail
 import com.maungedev.domain.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import com.maungedev.domain.model.Event
+import com.maungedev.domain.model.User
 import com.maungedev.domain.repository.EventRepository
 
 class DetailInteractor(private val eventRepository: EventRepository): DetailUseCase {
@@ -13,9 +14,12 @@ class DetailInteractor(private val eventRepository: EventRepository): DetailUseC
     override fun addSchedule(id: String): Flow<Resource<Unit>> =
         eventRepository.addSchedule(id)
 
-    override fun unsaveEvent(id: String): Flow<Resource<Unit>> =
+    override fun deleteFavoriteEvent(id: String): Flow<Resource<Unit>> =
         eventRepository.deleteFavoriteEvent(id)
 
-    override fun saveEvent(id: String): Flow<Resource<Unit>> =
+    override fun addFavoriteEvent(id: String): Flow<Resource<Unit>> =
         eventRepository.addFavoriteEvent(id)
+
+    override fun getCurrentUser(): Flow<Resource<User>> =
+        eventRepository.getCurrentUser()
 }
