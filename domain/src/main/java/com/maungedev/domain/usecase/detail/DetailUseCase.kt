@@ -14,4 +14,7 @@ interface DetailUseCase {
     fun addFavoriteEvent(id: String):Flow<Resource<Unit>>
     fun deleteFavoriteEvent(id: String):Flow<Resource<Unit>>
     fun getCurrentUser():Flow<Resource<User>>
+    fun increaseNumbersOfRegistrationClick(id:String):Flow<Unit>
+    fun increaseNumbersOfView(id:String):Flow<Unit>
+
 }

@@ -45,7 +45,7 @@ class ScheduleAdapter(private val context: Context) :
                 }else{
                     layoutEvent.setBackgroundResource(R.color.blue)
                 }
-                val titleSchedule = item.eventName + item.organizer
+                val titleSchedule = item.eventName + " - " +item.organizer
                 tvEventTitle.text = titleSchedule
                 tvEventDate.text = item.date
 

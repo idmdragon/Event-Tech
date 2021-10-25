@@ -5,6 +5,7 @@ import com.maungedev.domain.model.Event
 import com.maungedev.domain.model.User
 import com.maungedev.domain.usecase.detail.DetailUseCase
 import com.maungedev.domain.utils.Resource
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val useCase: DetailUseCase) : ViewModel() {
@@ -41,5 +42,9 @@ class DetailViewModel(private val useCase: DetailUseCase) : ViewModel() {
     fun getCurrentUser(): LiveData<Resource<User>> =
         useCase.getCurrentUser().asLiveData()
 
+    fun increaseNumbersOfRegistrationClick(id:String): LiveData<Unit> =
+        useCase.increaseNumbersOfRegistrationClick(id).asLiveData()
 
+    fun increaseNumbersOfView(id: String): LiveData<Unit> =
+        useCase.increaseNumbersOfView(id).asLiveData()
 }

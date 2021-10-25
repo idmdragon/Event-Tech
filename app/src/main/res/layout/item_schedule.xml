@@ -53,13 +53,18 @@
             <TextView
                 android:id="@+id/tv_event_title"
                 style="@style/PoppinsMedium"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/range_12"
                 android:layout_marginTop="@dimen/range_12"
+                android:layout_marginEnd="@dimen/range_4"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Design to Code -" />
+                app:layout_constraintEnd_toStartOf="@+id/btn_detail"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="Design to Code - " />
 
             <TextView
                 android:id="@+id/tv_event_time"

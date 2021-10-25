@@ -60,4 +60,9 @@ class RemoteDataSource(
     fun deleteFavorite(id: String): Flow<FirebaseResponse<UserResponse>> =
         userService.deleteFavorite(id)
 
+    fun increaseNumbersOfRegistrationClick(id: String) : Flow<Unit> =
+        eventService.increaseNumbersOfRegistrationClick(id)
+
+    fun increaseNumbersOfNumbersOfView(id: String) : Flow<Unit> =
+        eventService.increaseNumbersOfNumbersOfView(id)
 }

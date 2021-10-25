@@ -1,5 +1,6 @@
 package com.maungedev.data.repository
 
+import android.util.Log
 import com.maungedev.data.helper.NetworkBoundRequest
 import com.maungedev.data.helper.NetworkBoundResource
 import com.maungedev.data.mapper.*
@@ -24,6 +25,7 @@ class EventRepositoryImpl(
     private val local: LocalDataSource,
     private val remote: RemoteDataSource
 ) : EventRepository {
+
 
     override fun addSchedule(id: String): Flow<Resource<Unit>> =
         object : NetworkBoundRequest<UserResponse>() {
@@ -218,4 +220,11 @@ class EventRepositoryImpl(
             override suspend fun saveCallResult(data: List<EventResponse>) =
                 local.insertEvents(data.toListEntity())
         }.asFlow()
+
+
+    override fun increaseNumbersOfRegistrationClick(id: String): Flow<Unit> =
+        remote.increaseNumbersOfRegistrationClick(id)
+
+    override fun increaseNumbersOfView(id: String): Flow<Unit> =
+        remote.increaseNumbersOfNumbersOfView(id)
 }

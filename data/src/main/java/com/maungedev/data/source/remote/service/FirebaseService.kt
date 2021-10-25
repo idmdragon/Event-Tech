@@ -25,31 +25,6 @@ abstract class FirebaseService {
 
     fun getCurrentUserId() = uid.toString()
 
-    fun generateDocumentId(collection: String): String =
-        firestore.collection(collection).document().id
-
-    inline fun <reified ResponseType> getCollection(
-        collection: String,
-        docId: String,
-        subCollection: String
-    ): Flow<FirebaseResponse<List<ResponseType>>> =
-        flow {
-            val result = firestore
-                .collection(collection)
-                .document(docId)
-                .collection(subCollection)
-                .get()
-                .await()
-
-            if (result.isEmpty) {
-                emit(FirebaseResponse.Empty)
-            } else {
-                emit(FirebaseResponse.Success(result.toObjects(ResponseType::class.java)))
-            }
-        }.catch {
-            emit(FirebaseResponse.Error(it.message.toString()))
-        }.flowOn(Dispatchers.IO)
-
     fun createUserWithEmailAndPassword(
         email: String,
         password: String
@@ -121,25 +96,6 @@ abstract class FirebaseService {
             emit(FirebaseResponse.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 
-    fun uploadPicture(
-        reference: String,
-        fileName: String,
-        pictureURI: Uri
-    ): Flow<FirebaseResponse<String>> =
-        flow {
-            try {
-                val filePath = storage.reference
-                    .child("$reference/$fileName.jpg")
-
-                filePath.putFile(Uri.parse(pictureURI.toString())).await()
-                val downloadUrl = filePath.downloadUrl.await()
-
-                emit(FirebaseResponse.Success(downloadUrl.toString()))
-            } catch (e: Exception) {
-                emit(FirebaseResponse.Error(e.toString()))
-            }
-        }.flowOn(Dispatchers.IO)
-
     inline fun <reified ResponseType> getCollection(collection: String): Flow<FirebaseResponse<List<ResponseType>>> =
         flow {
             val result = firestore
@@ -202,7 +158,6 @@ abstract class FirebaseService {
                 .document(docId)
                 .update(fieldName, FieldValue.arrayRemove(value))
                 .await()
-
         }
     }
 
@@ -227,19 +182,6 @@ abstract class FirebaseService {
             emit(FirebaseResponse.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 
-    fun deleteDocument(collection: String,docId:String):Flow<FirebaseResponse<Unit>> =
-        flow <FirebaseResponse<Unit>>{
-            firestore
-                .collection(collection)
-                .document(docId)
-                .delete()
-                .await()
-
-            emit(FirebaseResponse.Success(Unit))
-
-        }.catch {
-            emit(FirebaseResponse.Error(it.message.toString()))
-        }.flowOn(Dispatchers.IO)
 
     inline fun <RequestType, reified ResponseType> updateFieldInDocument(
         collection: String,
@@ -259,5 +201,19 @@ abstract class FirebaseService {
             emit(FirebaseResponse.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 
-
+     fun increaseNumbersOfFieldInDocument(
+        collection: String,
+        docId: String,
+        fieldName: String,
+    ) {
+         Log.d("DISINI MASUK","Kepanggil di sini id $docId")
+         Log.d("DISINI MASUK","Kepanggil di collection $collection")
+         Log.d("DISINI MASUK","Kepanggil di fieldname $fieldName")
+        CoroutineScope(Dispatchers.IO).launch {
+            firestore.collection(collection)
+                .document(docId)
+                .update(fieldName, FieldValue.increment(1))
+                .await()
+        }
+    }
 }

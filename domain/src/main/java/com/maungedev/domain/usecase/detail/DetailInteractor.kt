@@ -25,4 +25,10 @@ class DetailInteractor(private val eventRepository: EventRepository): DetailUseC
 
     override fun deleteSchedule(id: String): Flow<Resource<Unit>> =
         eventRepository.deleteSchedule(id)
+
+    override fun increaseNumbersOfRegistrationClick(id: String): Flow<Unit> =
+        eventRepository.increaseNumbersOfRegistrationClick(id)
+
+    override fun increaseNumbersOfView(id: String): Flow<Unit>  =
+        eventRepository.increaseNumbersOfView(id)
 }

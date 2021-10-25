@@ -47,6 +47,8 @@ class DetailActivity : AppCompatActivity() {
             viewModel.getEventById(eventUID).observe(this@DetailActivity, ::setDetailObserver)
             viewModel.getCurrentUser()
                 .observe(this@DetailActivity, { setCurrentUser(it, eventUID) })
+
+            viewModel.increaseNumbersOfView(eventUID).observe(this@DetailActivity,{})
         }
         viewModel.isRemindered.observe(this@DetailActivity, ::stateReminder)
 
@@ -127,6 +129,7 @@ class DetailActivity : AppCompatActivity() {
         binding.apply {
 
             btnRegistration.setOnClickListener {
+                viewModel.increaseNumbersOfRegistrationClick(data.uid).observe(this@DetailActivity,{})
                 startActivity(
                     Intent(this@DetailActivity, RegistrationActivity::class.java).putExtra(
                         EVENT_LINK_REGISTRATION, data.linkRegistration
