@@ -57,6 +57,10 @@ class MiniLayoutAdapter(private val context: Context) :
                     .apply(RequestOptions())
                     .into(ivPoster)
 
+                btnMenu.setOnClickListener {
+                    context.startActivity(Intent(itemView.context,Class.forName(DETAIL_PAGE)).putExtra(
+                        ExtraNameConstant.EVENT_UID,item.uid))
+                }
                 itemView.setOnClickListener {
                     context.startActivity(Intent(itemView.context,Class.forName(DETAIL_PAGE)).putExtra(
                         ExtraNameConstant.EVENT_UID,item.uid))

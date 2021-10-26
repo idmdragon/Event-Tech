@@ -1,5 +1,6 @@
 package com.maungedev.data.source.remote.service
 
+import android.icu.text.CaseMap
 import com.maungedev.data.constant.FirebaseConstant
 import com.maungedev.data.source.remote.FirebaseResponse
 import com.maungedev.data.source.remote.response.CompetitionCategoryResponse
@@ -54,6 +55,19 @@ class EventService : FirebaseService() {
             )
         }
 
+    fun searchConference(title: String):Flow<FirebaseResponse<List<EventResponse>>> =
+        searchCollection(
+            FirebaseConstant.FirebaseCollection.EVENT_COLLECTION,
+            FirebaseConstant.Field.EVENT_NAME,
+            title
+        )
+
+    fun searchCompetition(title: String): Flow<FirebaseResponse<List<EventResponse>>> =
+        searchCollection(
+            FirebaseConstant.FirebaseCollection.EVENT_COLLECTION,
+            FirebaseConstant.Field.EVENT_NAME,
+            title
+        )
 
 
 }

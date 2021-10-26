@@ -119,7 +119,6 @@ class DetailActivity : AppCompatActivity() {
                 Glide.with(this@DetailActivity)
                     .load(event.eventCover)
                     .transform(CenterCrop(), RoundedCorners(8))
-                    .placeholder(R.drawable.image_placeholder)
                     .apply(RequestOptions())
                     .into(ivPoster)
         }

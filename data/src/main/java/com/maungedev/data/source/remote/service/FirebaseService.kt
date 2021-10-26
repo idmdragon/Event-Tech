@@ -204,9 +204,6 @@ abstract class FirebaseService {
         docId: String,
         fieldName: String,
     ) {
-         Log.d("DISINI MASUK","Kepanggil di sini id $docId")
-         Log.d("DISINI MASUK","Kepanggil di collection $collection")
-         Log.d("DISINI MASUK","Kepanggil di fieldname $fieldName")
         CoroutineScope(Dispatchers.IO).launch {
             firestore.collection(collection)
                 .document(docId)
@@ -214,4 +211,23 @@ abstract class FirebaseService {
                 .await()
         }
     }
+
+    inline fun <reified ResponseType>searchCollection(collection:String, whereField:String, query:String):Flow<FirebaseResponse<List<ResponseType>>> =
+        flow {
+            val result = firestore
+                .collection(collection)
+                .orderBy(whereField)
+                .startAt(query)
+                .endAt(query + '\uf8ff')
+                .get()
+                .await()
+
+            if (result.isEmpty){
+                emit(FirebaseResponse.Empty)
+            }else{
+                emit(FirebaseResponse.Success(result.toObjects(ResponseType::class.java)))
+            }
+        }.catch {
+            emit(FirebaseResponse.Error(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
 }

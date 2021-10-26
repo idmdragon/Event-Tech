@@ -172,7 +172,8 @@ class EventRepositoryImpl(
         }.asFlow()
 
     override fun getConferenceCategory(): Flow<Resource<List<ConferenceCategory>>> =
-        object : NetworkBoundResource<List<ConferenceCategory>, List<ConferenceCategoryResponse>>() {
+        object :
+            NetworkBoundResource<List<ConferenceCategory>, List<ConferenceCategoryResponse>>() {
             override fun loadFromDB(): Flow<List<ConferenceCategory>?> =
                 local.selectAllConferenceCategory().toConferenceCategoryListFlowModel()
 
@@ -187,7 +188,8 @@ class EventRepositoryImpl(
         }.asFlow()
 
     override fun getCompetitionCategory(): Flow<Resource<List<CompetitionCategory>>> =
-        object : NetworkBoundResource<List<CompetitionCategory>, List<CompetitionCategoryResponse>>() {
+        object :
+            NetworkBoundResource<List<CompetitionCategory>, List<CompetitionCategoryResponse>>() {
             override fun loadFromDB(): Flow<List<CompetitionCategory>?> =
                 local.selectAllCompetitionCategory().toCompetitionCategoryListFlowModel()
 
@@ -239,5 +241,35 @@ class EventRepositoryImpl(
     override fun increaseNumbersOfView(id: String): Flow<Unit> =
         remote.increaseNumbersOfNumbersOfView(id)
 
+    override fun searchConference(title: String): Flow<Resource<List<Event>>> =
+        object : NetworkBoundResource<List<Event>, List<EventResponse>>() {
+            override fun loadFromDB(): Flow<List<Event>?> =
+                local.searchConference(title).toListFlowModel()
 
+            override fun shouldFetch(data: List<Event>?): Boolean =
+                true
+
+            override suspend fun createCall(): Flow<FirebaseResponse<List<EventResponse>>> =
+                remote.searchConference(title)
+
+            override suspend fun saveCallResult(data: List<EventResponse>) =
+                local.insertEvents(data.toListEntity())
+
+        }.asFlow()
+
+    override fun searchCompetition(title: String): Flow<Resource<List<Event>>> =
+        object : NetworkBoundResource<List<Event>, List<EventResponse>>() {
+            override fun loadFromDB(): Flow<List<Event>?> =
+                local.searchCompetition(title).toListFlowModel()
+
+            override fun shouldFetch(data: List<Event>?): Boolean =
+                true
+
+            override suspend fun createCall(): Flow<FirebaseResponse<List<EventResponse>>> =
+                remote.searchCompetition(title)
+
+            override suspend fun saveCallResult(data: List<EventResponse>) =
+                local.insertEvents(data.toListEntity())
+
+        }.asFlow()
 }

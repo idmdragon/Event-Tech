@@ -11,13 +11,13 @@
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/range_16"
         android:layout_marginStart="@dimen/range_24"
+        android:layout_marginTop="@dimen/range_16"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/cd_back"
         android:src="@drawable/ic_back_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/cd_back" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
@@ -25,15 +25,73 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
+        android:textColorHint="@color/whitegray"
         app:iconifiedByDefault="false"
-
         app:layout_constraintBottom_toBottomOf="@+id/btn_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_back"
         app:layout_constraintTop_toTopOf="@+id/btn_back"
         app:queryHint="Cari Event"
-        app:searchIcon="@null"
-        android:textColorHint="@color/whitegray"
-        />
+        app:searchIcon="@null" />
 
+    <TextView
+        android:id="@+id/tv_result_count"
+        style="@style/PoppinsMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/range_8"
+        app:layout_constraintStart_toStartOf="@id/btn_back"
+        app:layout_constraintTop_toBottomOf="@id/search_view"
+        tools:text="Hasil Pencarian (0)" />
+
+    <LinearLayout
+        android:id="@+id/layout_not_found"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/range_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/range_24"
+        app:layout_constraintTop_toBottomOf="@id/tv_result_count"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ilu_empty_search"
+            android:contentDescription="@string/cd_search_not_found" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/PoppinsMedium"
+            android:layout_marginTop="@dimen/range_24"
+            android:layout_marginHorizontal="@dimen/range_24"
+            android:textSize="@dimen/size_16"
+            android:gravity="center"
+            android:text="@string/text_search_event_not_found"/>
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/range_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_result_count" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/ProgressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

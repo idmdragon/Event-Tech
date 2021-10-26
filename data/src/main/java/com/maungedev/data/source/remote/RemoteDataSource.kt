@@ -65,4 +65,10 @@ class RemoteDataSource(
 
     fun increaseNumbersOfNumbersOfView(id: String) : Flow<Unit> =
         eventService.increaseNumbersOfNumbersOfView(id)
+
+    fun searchConference(title: String) : Flow<FirebaseResponse<List<EventResponse>>> =
+        eventService.searchConference(title)
+
+    fun searchCompetition(title: String): Flow<FirebaseResponse<List<EventResponse>>>  =
+        eventService.searchCompetition(title)
 }

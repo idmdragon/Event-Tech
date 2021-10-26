@@ -9,7 +9,6 @@ import kotlinx.coroutines.Dispatchers
 class SplashViewModel(application: Application) : ViewModel() {
     private val dataStorePlayground = DataStore.getInstance(application)
 
-    fun readPrefUid() = dataStorePlayground.readPrefUID().asLiveData(Dispatchers.IO)
     fun readPrefHaveRunAppBefore() = dataStorePlayground.readPrefHaveRunAppBefore().asLiveData(
         Dispatchers.IO
     )

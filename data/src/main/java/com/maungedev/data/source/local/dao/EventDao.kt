@@ -48,5 +48,8 @@ interface EventDao {
     @Query("SELECT * FROM event WHERE uid in (:ids) LIMIT 10")
     fun selectAllMyFavorite(ids: List<String>): Flow<List<EventEntity>>
 
+    @Query("SELECT * FROM event WHERE eventType = :eventType and eventName LIKE '%'||:title||'%'")
+    fun searchEvent(title: String, eventType: String): Flow<List<EventEntity>>
+
 
 }

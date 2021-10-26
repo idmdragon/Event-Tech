@@ -52,7 +52,7 @@ class ScheduleAdapter(private val context: Context) :
                 tvEventMonth.text = "FEB"
                 tvEventTime.text = item.time
 
-                itemView.setOnClickListener {
+                btnDetail.setOnClickListener {
                     context.startActivity(
                         Intent(itemView.context,Class.forName(PageNameConstant.DETAIL_PAGE)).putExtra(
                         ExtraNameConstant.EVENT_UID,item.uid))

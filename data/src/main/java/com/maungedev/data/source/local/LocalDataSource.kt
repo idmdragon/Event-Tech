@@ -6,6 +6,7 @@ import com.maungedev.data.source.local.entity.CompetitionCategoryEntity
 import com.maungedev.data.source.local.entity.ConferenceCategoryEntity
 import com.maungedev.data.source.local.entity.EventEntity
 import com.maungedev.data.source.local.entity.UserEntity
+import com.maungedev.domain.model.Event
 import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource(
@@ -56,6 +57,12 @@ class LocalDataSource(
 
     fun selectAllPopular(): Flow<List<EventEntity>> =
         eventDao.selectAllPopular("conference")
+
+    fun searchConference(title: String): Flow<List<EventEntity>> =
+        eventDao.searchEvent(title,"conference")
+
+    fun searchCompetition(title: String): Flow<List<EventEntity>> =
+        eventDao.searchEvent(title,"competition")
 
 
 }

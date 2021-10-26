@@ -47,7 +47,9 @@ class ConferenceFragment : Fragment() {
         conferenceViewModel.getAllConferenceEvent().observe(viewLifecycleOwner, ::setAllConference)
         conferenceViewModel.getAllPopularEvent().observe(viewLifecycleOwner, ::setPopularEvent)
         binding.btnSearch.setOnClickListener {
-            startActivity(Intent(requireContext(), Class.forName(SEARCH_PAGE)))
+            startActivity(Intent(requireContext(), Class.forName(SEARCH_PAGE)).putExtra(
+                ExtraNameConstant.EVENT_TYPE,"conference"
+            ))
         }
     }
 

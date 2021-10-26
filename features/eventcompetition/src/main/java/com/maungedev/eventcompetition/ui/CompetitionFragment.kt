@@ -13,6 +13,7 @@ import com.maungedev.domain.model.Event
 import com.maungedev.domain.utils.Resource
 import com.maungedev.eventcompetition.databinding.FragmentCompetitionBinding
 import com.maungedev.eventcompetition.di.competitionModule
+import com.maungedev.eventtech.constant.ExtraNameConstant
 import com.maungedev.eventtech.constant.PageNameConstant
 import com.maungedev.eventtech.ui.adapter.CompetitionCategoryAdapter
 import com.maungedev.eventtech.ui.adapter.EventLayoutAdapter
@@ -49,7 +50,9 @@ class CompetitionFragment : Fragment() {
         viewModel.getCompetitionCategory().observe(viewLifecycleOwner,::setCompetitionCategory)
         viewModel.getAllCompetitionEvent().observe(viewLifecycleOwner,::setCompetitionEvent)
         binding.btnSearch.setOnClickListener {
-            startActivity(Intent(requireContext(), Class.forName(PageNameConstant.SEARCH_PAGE)))
+            startActivity(Intent(requireContext(), Class.forName(PageNameConstant.SEARCH_PAGE)).putExtra(
+                ExtraNameConstant.EVENT_TYPE,"competition"
+            ))
         }
 
     }

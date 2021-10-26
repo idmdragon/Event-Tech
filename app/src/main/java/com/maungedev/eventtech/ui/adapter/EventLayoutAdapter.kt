@@ -51,6 +51,9 @@ class EventLayoutAdapter (private val context: Context) :
                 binding.btnDetail.setOnClickListener {
                     context.startActivity(Intent(itemView.context,Class.forName(PageNameConstant.DETAIL_PAGE)).putExtra(EVENT_UID,item.uid))
                 }
+                itemView.setOnClickListener {
+                    context.startActivity(Intent(itemView.context,Class.forName(PageNameConstant.DETAIL_PAGE)).putExtra(EVENT_UID,item.uid))
+                }
 
                 Glide.with(itemView.context)
                     .load(item.eventCover)
