@@ -2,7 +2,6 @@ package com.maungedev.eventconference.ui.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.maungedev.domain.model.Event
@@ -11,7 +10,6 @@ import com.maungedev.eventconference.databinding.ActivityConferenceListBinding
 import com.maungedev.eventconference.ui.di.conferenceModule
 import com.maungedev.eventtech.constant.ExtraNameConstant.EVENT_CATEGORY
 import com.maungedev.eventtech.ui.adapter.EventLayoutAdapter
-import com.maungedev.eventtech.ui.adapter.MiniLayoutAdapter
 import org.koin.core.context.loadKoinModules
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -36,7 +34,10 @@ class ConferenceListActivity : AppCompatActivity() {
             if (categories == "Semua") {
                 viewModel.getAllConferenceEvent()
                     .observe(this@ConferenceListActivity, ::setListEvent)
-            } else {
+            } else if(categories == "Popular"){
+                viewModel.getAllPopularEvent()
+                    .observe(this@ConferenceListActivity, ::setListEvent)
+            }else{
                 viewModel.getEventByCategories(categories)
                     .observe(this@ConferenceListActivity, ::setListEvent)
             }

@@ -13,6 +13,8 @@ import com.maungedev.domain.model.Event
 import com.maungedev.domain.utils.Resource
 import com.maungedev.eventconference.databinding.FragmentConferenceBinding
 import com.maungedev.eventconference.ui.di.conferenceModule
+import com.maungedev.eventtech.constant.ExtraNameConstant
+import com.maungedev.eventtech.constant.PageNameConstant
 import com.maungedev.eventtech.constant.PageNameConstant.SEARCH_PAGE
 import com.maungedev.eventtech.ui.adapter.ConferenceCategoryAdapter
 import com.maungedev.eventtech.ui.adapter.MiniLayoutAdapter
@@ -40,15 +42,17 @@ class ConferenceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        conferenceViewModel.getConferenceCategory().observe(viewLifecycleOwner,::setConferenceCategory)
-        conferenceViewModel.getAllConferenceEvent().observe(viewLifecycleOwner,::setAllConference)
+        conferenceViewModel.getConferenceCategory()
+            .observe(viewLifecycleOwner, ::setConferenceCategory)
+        conferenceViewModel.getAllConferenceEvent().observe(viewLifecycleOwner, ::setAllConference)
+        conferenceViewModel.getAllPopularEvent().observe(viewLifecycleOwner, ::setPopularEvent)
         binding.btnSearch.setOnClickListener {
             startActivity(Intent(requireContext(), Class.forName(SEARCH_PAGE)))
         }
     }
 
-    private fun setAllConference(resource: Resource<List<Event>>) {
-        when(resource){
+    private fun setPopularEvent(resource: Resource<List<Event>>) {
+        when (resource) {
             is Resource.Success -> {
                 loadingState(false)
                 popularEventAdapter = MiniLayoutAdapter(requireContext())
@@ -65,7 +69,43 @@ class ConferenceFragment : Fragment() {
 
             is Resource.Error -> {
                 loadingState(false)
-                Snackbar.make(binding.root,resource.message.toString(), Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                    .show()
+            }
+        }
+
+    }
+
+    private fun setAllConference(resource: Resource<List<Event>>) {
+        when (resource) {
+            is Resource.Success -> {
+                loadingState(false)
+                popularEventAdapter = MiniLayoutAdapter(requireContext())
+                resource.data?.let { popularEventAdapter.setItems(it) }
+                popularEventAdapter.itemCount = 5
+                binding.rvPopular.adapter = popularEventAdapter
+                binding.rvPopular.layoutManager = LinearLayoutManager(
+                    activity,
+                    LinearLayoutManager.VERTICAL, false
+                )
+                binding.btnAll.setOnClickListener {
+                    startActivity(
+                        Intent(
+                            requireContext(),
+                            Class.forName(PageNameConstant.CONFERENCE_LIST_PAGE)
+                        ).also {
+                            it.putExtra(ExtraNameConstant.EVENT_CATEGORY, "Popular")
+                        })
+                }
+            }
+            is Resource.Loading -> {
+                loadingState(true)
+            }
+
+            is Resource.Error -> {
+                loadingState(false)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                    .show()
             }
         }
     }
@@ -85,17 +125,6 @@ class ConferenceFragment : Fragment() {
             )
         }
 
-    }
-
-
-    private fun setPopularEvent(list: List<Event>) {
-        popularEventAdapter = MiniLayoutAdapter(requireContext())
-        popularEventAdapter.setItems(list)
-        binding.rvPopular.adapter = popularEventAdapter
-        binding.rvPopular.layoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.VERTICAL, false
-        )
     }
 
 

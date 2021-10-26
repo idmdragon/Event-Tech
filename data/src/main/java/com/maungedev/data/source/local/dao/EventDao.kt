@@ -33,15 +33,20 @@ interface EventDao {
     @Query("SELECT * FROM event WHERE eventType = :eventType")
     fun selectAllEventByType(eventType: String): Flow<List<EventEntity>>
 
+    @Query("SELECT * FROM event WHERE eventType = :eventType ORDER BY numbersOfView DESC LIMIT 10")
+    fun selectAllPopular(eventType: String): Flow<List<EventEntity>>
+
     @Query("SELECT * FROM event WHERE eventType = :eventType and eventCategory = :eventCategories")
     fun selectEventByCategories(eventType: String, eventCategories: String): Flow<List<EventEntity>>
 
     @Query("SELECT * FROM event WHERE uid = :uid")
     fun selectEventByUid(uid: String): Flow<EventEntity>
 
-    @Query("SELECT * FROM event WHERE uid in (:ids)")
+    @Query("SELECT * FROM event WHERE uid in (:ids) LIMIT 10")
     fun selectAllMySchedules(ids: List<String>): Flow<List<EventEntity>>
 
-    @Query("SELECT * FROM event WHERE uid in (:ids)")
+    @Query("SELECT * FROM event WHERE uid in (:ids) LIMIT 10")
     fun selectAllMyFavorite(ids: List<String>): Flow<List<EventEntity>>
+
+
 }

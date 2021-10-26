@@ -1,4 +1,4 @@
-package com.maungedev.search
+package com.maungedev.search.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

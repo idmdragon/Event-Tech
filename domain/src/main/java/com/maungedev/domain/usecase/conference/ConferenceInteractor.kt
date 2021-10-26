@@ -6,14 +6,17 @@ import com.maungedev.domain.model.ConferenceCategory
 import com.maungedev.domain.model.Event
 import com.maungedev.domain.repository.EventRepository
 
-class ConferenceInteractor(private val eventITRepository: EventRepository): ConferenceUseCase {
+class ConferenceInteractor(private val eventRepository: EventRepository): ConferenceUseCase {
 
     override fun getConferenceCategory(): Flow<Resource<List<ConferenceCategory>>> =
-        eventITRepository.getConferenceCategory()
+        eventRepository.getConferenceCategory()
 
     override fun getAllEventConference(): Flow<Resource<List<Event>>> =
-        eventITRepository.getAllEventConference()
+        eventRepository.getAllEventConference()
 
     override fun getEventByCategories(categories: String): Flow<Resource<List<Event>>> =
-        eventITRepository.getEventConferenceByCategories(categories)
+        eventRepository.getEventConferenceByCategories(categories)
+
+    override fun getAllPopularEvent(): Flow<Resource<List<Event>>> =
+        eventRepository.getAllPopularEvent()
 }

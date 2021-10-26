@@ -20,10 +20,15 @@ class MiniLayoutAdapter(private val context: Context) :
     RecyclerView.Adapter<MiniLayoutAdapter.ViewHolder>() {
 
     private val events = arrayListOf<Event>()
+    private var itemSize = 5
 
     fun setItems(items: List<Event>) {
         this.events.clear()
         this.events.addAll(items)
+    }
+
+    fun setItemCount(size: Int){
+        this.itemSize = size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MiniLayoutAdapter.ViewHolder {
@@ -36,7 +41,7 @@ class MiniLayoutAdapter(private val context: Context) :
         holder.bind(events[position])
     }
 
-    override fun getItemCount() = events.size
+    override fun getItemCount() = itemSize
 
     inner class ViewHolder(private val binding: ItemMiniEventBinding) :
         RecyclerView.ViewHolder(binding.root) {

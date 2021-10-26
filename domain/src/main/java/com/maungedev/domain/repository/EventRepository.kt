@@ -12,6 +12,7 @@ interface EventRepository {
     fun getCompetitionCategory(): Flow<Resource<List<CompetitionCategory>>>
     fun getAllEventConference(): Flow<Resource<List<Event>>>
     fun getAllEventCompetition(): Flow<Resource<List<Event>>>
+    fun getAllPopularEvent(): Flow<Resource<List<Event>>>
     fun getEventConferenceByCategories(categories: String): Flow<Resource<List<Event>>>
     fun getEventById(id: String): Flow<Resource<Event>>
     fun getAllSchedule(ids: List<String>):Flow<Resource<List<Event>>>
@@ -25,4 +26,5 @@ interface EventRepository {
     fun getUser(id: String): Flow<Resource<User>>
     fun increaseNumbersOfRegistrationClick(id:String):Flow<Unit>
     fun increaseNumbersOfView(id:String):Flow<Unit>
+
 }
