@@ -40,25 +40,25 @@ class RemoteDataSource(
         userService.getUser(id)
 
     fun getCurrentUserId(): String =
-        userService.getCurrentUserId()
+        userService.getCurrentUserId().toString()
 
     fun addSchedule(id: String): Flow<FirebaseResponse<UserResponse>> =
-        userService.addSchedule(id)
+        userService.addSchedule(id,getCurrentUserId())
 
     fun deleteSchedule(id: String): Flow<FirebaseResponse<UserResponse>> =
-        userService.deleteSchedule(id)
+        userService.deleteSchedule(id,getCurrentUserId())
 
     fun addFavoriteEvent(id: String): Flow<FirebaseResponse<UserResponse>> =
-        userService.addFavoriteEvent(id)
+        userService.addFavoriteEvent(id,getCurrentUserId())
 
     fun updateUsername(username: String): Flow<FirebaseResponse<UserResponse>> =
-        userService.updateUsername(username)
+        userService.updateUsername(username,getCurrentUserId())
 
     fun getMyFavorite(ids: List<String>): Flow<FirebaseResponse<List<EventResponse>>> =
         eventService.getMyFavorite(ids)
 
     fun deleteFavorite(id: String): Flow<FirebaseResponse<UserResponse>> =
-        userService.deleteFavorite(id)
+        userService.deleteFavorite(id,getCurrentUserId())
 
     fun increaseNumbersOfRegistrationClick(id: String) : Flow<Unit> =
         eventService.increaseNumbersOfRegistrationClick(id)

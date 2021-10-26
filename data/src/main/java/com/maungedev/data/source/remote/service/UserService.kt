@@ -1,5 +1,6 @@
 package com.maungedev.data.source.remote.service
 
+import android.util.Log
 import com.maungedev.data.constant.FirebaseConstant
 import com.maungedev.data.source.remote.FirebaseResponse
 import com.maungedev.data.source.remote.response.UserResponse
@@ -26,12 +27,12 @@ class UserService : FirebaseService() {
             id
         )
 
-    fun addSchedule(id: String): Flow<FirebaseResponse<UserResponse>> =
+    fun addSchedule(id: String,userID: String): Flow<FirebaseResponse<UserResponse>> =
         flow {
 
             addArrayStringValueAtDocField(
                 FirebaseConstant.FirebaseCollection.USER,
-                getCurrentUserId(),
+                userID,
                 FirebaseConstant.Field.SCHEDULE,
                 id
             )
@@ -39,17 +40,17 @@ class UserService : FirebaseService() {
             emitAll(
                 getDocument<UserResponse>(
                     FirebaseConstant.FirebaseCollection.USER,
-                    getCurrentUserId()
+                    userID
                 )
             )
         }
 
-    fun addFavoriteEvent(id: String): Flow<FirebaseResponse<UserResponse>> =
+    fun addFavoriteEvent(id: String,userID: String): Flow<FirebaseResponse<UserResponse>> =
         flow {
 
             addArrayStringValueAtDocField(
                 FirebaseConstant.FirebaseCollection.USER,
-                getCurrentUserId(),
+                userID,
                 FirebaseConstant.Field.FAVORITE,
                 id
             )
@@ -57,26 +58,26 @@ class UserService : FirebaseService() {
             emitAll(
                 getDocument<UserResponse>(
                     FirebaseConstant.FirebaseCollection.USER,
-                    getCurrentUserId()
+                    userID
                 )
             )
 
         }
 
-    fun updateUsername(username: String): Flow<FirebaseResponse<UserResponse>> =
+    fun updateUsername(username: String,userID: String): Flow<FirebaseResponse<UserResponse>> =
         updateFieldInDocument<User, UserResponse>(
             FirebaseConstant.FirebaseCollection.USER,
-            getCurrentUserId(),
+            userID,
             FirebaseConstant.Field.USERNAME,
             username
         )
 
-    fun deleteSchedule(id: String):  Flow<FirebaseResponse<UserResponse>> =
+    fun deleteSchedule(id: String,userID: String):  Flow<FirebaseResponse<UserResponse>> =
         flow {
-
+            Log.d("CEKKID"," deleteSchedule ${getCurrentUserId()}")
             removeArrayStringValueAtDocField(
                 FirebaseConstant.FirebaseCollection.USER,
-                getCurrentUserId(),
+                userID,
                 FirebaseConstant.Field.SCHEDULE,
                 id
             )
@@ -84,17 +85,17 @@ class UserService : FirebaseService() {
             emitAll(
                 getDocument<UserResponse>(
                     FirebaseConstant.FirebaseCollection.USER,
-                    getCurrentUserId()
+                    userID
                 )
             )
         }
 
-    fun deleteFavorite(id: String): Flow<FirebaseResponse<UserResponse>>  =
+    fun deleteFavorite(id: String,userID: String): Flow<FirebaseResponse<UserResponse>>  =
         flow {
 
             removeArrayStringValueAtDocField(
                 FirebaseConstant.FirebaseCollection.USER,
-                getCurrentUserId(),
+                userID,
                 FirebaseConstant.Field.FAVORITE,
                 id
             )
@@ -102,7 +103,7 @@ class UserService : FirebaseService() {
             emitAll(
                 getDocument<UserResponse>(
                     FirebaseConstant.FirebaseCollection.USER,
-                    getCurrentUserId()
+                    userID
                 )
             )
         }

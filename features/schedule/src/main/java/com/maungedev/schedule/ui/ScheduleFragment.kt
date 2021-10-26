@@ -2,6 +2,7 @@ package com.maungedev.schedule.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,6 +79,7 @@ class ScheduleFragment : Fragment() {
 
             is Resource.Error -> {
                 loadingState(false)
+                Log.e("CEKK",resource.message.toString())
                 Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
                     .show()
             }

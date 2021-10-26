@@ -38,7 +38,7 @@ class RegisterFragment : Fragment() {
         with(binding) {
 
             activity.apply {
-
+                viewModel.setNotFirstTimeOpenApp(true)
                 btnRegister.setOnClickListener {
                     val email = tilEmail.editText?.text.toString()
                     val password = tilPassword.editText?.text.toString()

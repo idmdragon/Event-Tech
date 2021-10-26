@@ -19,11 +19,9 @@ import java.lang.Exception
 abstract class FirebaseService {
 
     val auth = FirebaseAuth.getInstance()
-    val uid = auth.currentUser?.uid
     val firestore = Firebase.firestore
-    val storage = Firebase.storage
 
-    fun getCurrentUserId() = uid.toString()
+    fun getCurrentUserId() = auth.currentUser?.uid
 
     fun createUserWithEmailAndPassword(
         email: String,

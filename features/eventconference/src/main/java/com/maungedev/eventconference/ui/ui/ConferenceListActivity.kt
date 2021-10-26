@@ -31,15 +31,19 @@ class ConferenceListActivity : AppCompatActivity() {
             val categories: String = intent.getStringExtra(EVENT_CATEGORY) ?: "Semua"
             tvCategoryName.text = categories
 
-            if (categories == "Semua") {
-                viewModel.getAllConferenceEvent()
-                    .observe(this@ConferenceListActivity, ::setListEvent)
-            } else if(categories == "Popular"){
-                viewModel.getAllPopularEvent()
-                    .observe(this@ConferenceListActivity, ::setListEvent)
-            }else{
-                viewModel.getEventByCategories(categories)
-                    .observe(this@ConferenceListActivity, ::setListEvent)
+            when (categories) {
+                "Semua" -> {
+                    viewModel.getAllConferenceEvent()
+                        .observe(this@ConferenceListActivity, ::setListEvent)
+                }
+                "Popular" -> {
+                    viewModel.getAllPopularEvent()
+                        .observe(this@ConferenceListActivity, ::setListEvent)
+                }
+                else -> {
+                    viewModel.getEventByCategories(categories)
+                        .observe(this@ConferenceListActivity, ::setListEvent)
+                }
             }
 
             btnBack.setOnClickListener {

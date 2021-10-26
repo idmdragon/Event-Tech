@@ -69,5 +69,6 @@ dependencies {
     api 'com.google.firebase:firebase-analytics-ktx'
     api 'com.google.firebase:firebase-auth-ktx'
 
-
+    api 'androidx.datastore:datastore:1.0.0'
+    api 'androidx.datastore:datastore-preferences:1.0.0'
 }

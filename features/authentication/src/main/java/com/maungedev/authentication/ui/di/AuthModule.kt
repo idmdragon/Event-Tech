@@ -4,6 +4,7 @@ import com.maungedev.authentication.ui.ui.login.LoginViewModel
 import com.maungedev.authentication.ui.ui.register.RegisterViewModel
 import com.maungedev.domain.usecase.auth.AuthInteractor
 import com.maungedev.domain.usecase.auth.AuthUseCase
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,7 +13,7 @@ val authModule = module {
         AuthInteractor(get())
     }
     viewModel {
-        RegisterViewModel(get())
+        RegisterViewModel(get(),androidApplication())
 
     }
     viewModel {
