@@ -10,9 +10,13 @@ import com.maungedev.data.source.remote.response.UserResponse
 import com.maungedev.domain.model.User
 import com.maungedev.domain.repository.UserRepository
 import com.maungedev.domain.utils.Resource
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
+import java.util.concurrent.Executors
 
 class UserRepositoryImpl(
     private val local: LocalDataSource,
@@ -59,9 +63,8 @@ class UserRepositoryImpl(
         TODO("Not yet implemented")
     }
 
-    override fun logout(): Flow<Resource<Unit>> {
-        TODO("Not yet implemented")
-    }
+    override fun logout(): Unit =
+        remote.logout()
 
 
 }

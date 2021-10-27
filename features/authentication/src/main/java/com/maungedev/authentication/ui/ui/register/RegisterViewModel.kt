@@ -17,6 +17,8 @@ class RegisterViewModel(private val authUseCase: AuthUseCase,
     fun setNotFirstTimeOpenApp(isFirstTime: Boolean) = viewModelScope.launch {
         datastore.savePrefHaveRunAppBefore(isFirstTime)
     }
+
+
     fun signUp(email: String, password: String, user: User) =
         authUseCase.signUpUser(email,password,user).asLiveData()
 }

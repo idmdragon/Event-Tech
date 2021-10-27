@@ -1,20 +1,23 @@
 package com.maungedev.data.source.remote.service
 
-import android.net.Uri
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.maungedev.data.source.remote.FirebaseResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import java.lang.Exception
+import android.content.Intent
+
+import androidx.core.content.ContextCompat.startActivity
+
+import android.R
+import android.util.Log
+import androidx.core.content.ContextCompat
+
 
 abstract class FirebaseService {
 
@@ -145,6 +148,7 @@ abstract class FirebaseService {
                 .await()
         }
     }
+
     fun removeArrayStringValueAtDocField(
         collection: String,
         docId: String,
@@ -159,7 +163,7 @@ abstract class FirebaseService {
         }
     }
 
-    inline fun < reified ResponseType> getDocumentsWhereIds(
+    inline fun <reified ResponseType> getDocumentsWhereIds(
         collection: String,
         fieldName: String,
         value: List<String>
@@ -167,7 +171,7 @@ abstract class FirebaseService {
         flow {
             val result = firestore
                 .collection(collection)
-                .whereIn(fieldName,value)
+                .whereIn(fieldName, value)
                 .get()
                 .await()
 
@@ -191,7 +195,7 @@ abstract class FirebaseService {
             firestore
                 .collection(collection)
                 .document(docId)
-                .update(fieldName,value)
+                .update(fieldName, value)
                 .await()
 
             emitAll(getDocument<ResponseType>(collection, docId))
@@ -199,7 +203,7 @@ abstract class FirebaseService {
             emit(FirebaseResponse.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 
-     fun increaseNumbersOfFieldInDocument(
+    fun increaseNumbersOfFieldInDocument(
         collection: String,
         docId: String,
         fieldName: String,
@@ -212,7 +216,11 @@ abstract class FirebaseService {
         }
     }
 
-    inline fun <reified ResponseType>searchCollection(collection:String, whereField:String, query:String):Flow<FirebaseResponse<List<ResponseType>>> =
+    inline fun <reified ResponseType> searchCollection(
+        collection: String,
+        whereField: String,
+        query: String
+    ): Flow<FirebaseResponse<List<ResponseType>>> =
         flow {
             val result = firestore
                 .collection(collection)
@@ -222,12 +230,14 @@ abstract class FirebaseService {
                 .get()
                 .await()
 
-            if (result.isEmpty){
+            if (result.isEmpty) {
                 emit(FirebaseResponse.Empty)
-            }else{
+            } else {
                 emit(FirebaseResponse.Success(result.toObjects(ResponseType::class.java)))
             }
         }.catch {
             emit(FirebaseResponse.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
+
+    fun signOut(): Unit = auth.signOut()
 }

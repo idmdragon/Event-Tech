@@ -16,6 +16,8 @@ class ProfileInteractor (private val userRepository: UserRepository): ProfileUse
     override fun resetPassword(email: String): Flow<Resource<Unit>> =
         userRepository.resetPassword(email)
 
-    override fun logout(): Flow<Resource<Unit>> =
+    override fun logout() : Unit =
         userRepository.logout()
+
+
 }

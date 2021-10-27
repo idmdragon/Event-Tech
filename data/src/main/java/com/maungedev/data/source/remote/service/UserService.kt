@@ -1,6 +1,5 @@
 package com.maungedev.data.source.remote.service
 
-import android.util.Log
 import com.maungedev.data.constant.FirebaseConstant
 import com.maungedev.data.source.remote.FirebaseResponse
 import com.maungedev.data.source.remote.response.UserResponse
@@ -11,15 +10,6 @@ import kotlinx.coroutines.flow.flow
 
 class UserService : FirebaseService() {
 
-    private fun getUser() = auth.currentUser
-
-    fun isUserExist(): Flow<Boolean> = flow {
-        if (getUser() != null) {
-            emit(true)
-        } else {
-            emit(false)
-        }
-    }
 
     fun getUser(id: String): Flow<FirebaseResponse<UserResponse>> =
         getDocument(
@@ -74,7 +64,6 @@ class UserService : FirebaseService() {
 
     fun deleteSchedule(id: String,userID: String):  Flow<FirebaseResponse<UserResponse>> =
         flow {
-            Log.d("CEKKID"," deleteSchedule ${getCurrentUserId()}")
             removeArrayStringValueAtDocField(
                 FirebaseConstant.FirebaseCollection.USER,
                 userID,
@@ -107,4 +96,7 @@ class UserService : FirebaseService() {
                 )
             )
         }
+
+    fun logout() : Unit =
+        signOut()
 }

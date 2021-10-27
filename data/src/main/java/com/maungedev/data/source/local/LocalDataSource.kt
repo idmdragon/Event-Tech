@@ -13,6 +13,9 @@ class LocalDataSource(
     private val userDao: UserDao,
     private val eventDao: EventDao
 ) {
+    suspend fun clearUser(): Unit =
+        userDao.clear()
+
     suspend fun insertUser(userEntity: UserEntity): Unit =
         userDao.insertUser(userEntity)
 

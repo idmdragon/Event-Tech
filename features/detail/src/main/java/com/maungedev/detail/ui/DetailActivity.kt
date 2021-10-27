@@ -152,7 +152,7 @@ class DetailActivity : AppCompatActivity() {
                     }
                 }else{
                     btnFavorite.setOnClickListener {
-                        viewModel.addFavorite(data.uid).observe(this@DetailActivity, ::deleteScheduleResponse)
+                        viewModel.addFavorite(data.uid).observe(this@DetailActivity, ::addFavoriteResponse)
                     }
                 }
             })
@@ -198,7 +198,7 @@ class DetailActivity : AppCompatActivity() {
     private fun showReminderDialog(data: Event) {
         val materialBuilder = MaterialAlertDialogBuilder(this).create()
         val inflater: View = LayoutInflater.from(this).inflate(R.layout.dialog_confirmation, null)
-        val btnAddSchedule: Button = inflater.findViewById(R.id.btn_add_schedule)
+        val btnAddSchedule: Button = inflater.findViewById(R.id.btn_accept)
         val btnCancel: Button = inflater.findViewById(R.id.btn_cancel)
         val reminderTitle: TextView = inflater.findViewById(R.id.tv_dialog_title)
         val reminderDescription: TextView = inflater.findViewById(R.id.tv_desc)
@@ -245,7 +245,7 @@ class DetailActivity : AppCompatActivity() {
 
             is Resource.Error -> {
                 loadingState(false)
-                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_SHORT)
                     .show()
             }
 
@@ -269,7 +269,7 @@ class DetailActivity : AppCompatActivity() {
 
             is Resource.Error -> {
                 loadingState(false)
-                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_SHORT)
                     .show()
             }
 
@@ -294,7 +294,7 @@ class DetailActivity : AppCompatActivity() {
 
             is Resource.Error -> {
                 loadingState(false)
-                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_SHORT)
                     .show()
             }
 
@@ -317,7 +317,7 @@ class DetailActivity : AppCompatActivity() {
 
             is Resource.Error -> {
                 loadingState(false)
-                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_SHORT)
                     .show()
             }
 

@@ -21,8 +21,11 @@ class AuthRepositoryImpl(
             override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
                 remote.signUp(email,password,user)
 
-            override suspend fun saveCallResult(data: UserResponse) =
+            override suspend fun saveCallResult(data: UserResponse) {
+                local.clearUser()
                 local.insertUser(data.toEntity())
+            }
+
 
         }.asFlow()
 
@@ -32,8 +35,13 @@ class AuthRepositoryImpl(
             override suspend fun createCall(): Flow<FirebaseResponse<UserResponse>> =
                 remote.signIn(email,password)
 
-            override suspend fun saveCallResult(data: UserResponse) =
+            override suspend fun saveCallResult(data: UserResponse) {
+                local.clearUser()
                 local.insertUser(data.toEntity())
+            }
+
 
         }.asFlow()
+
+
 }

@@ -10,5 +10,5 @@ interface UserRepository {
     fun getUser(id: String): Flow<Resource<User>>
     fun updateUsername(username: String):Flow<Resource<Unit>>
     fun resetPassword(email: String):Flow<Resource<Unit>>
-    fun logout():Flow<Resource<Unit>>
+    fun logout(): Unit
 }
