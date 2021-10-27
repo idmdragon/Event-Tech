@@ -34,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
-    private fun observeUID( ) {
+    private fun observeUID() {
             if (isUserAlreadyHere()) {
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java)).also {
                     finishAffinity()

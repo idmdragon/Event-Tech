@@ -72,7 +72,6 @@ class RemoteDataSource(
     fun searchCompetition(title: String): Flow<FirebaseResponse<List<EventResponse>>>  =
         eventService.searchCompetition(title)
 
-
     fun logout(): Unit =
         userService.logout()
 }

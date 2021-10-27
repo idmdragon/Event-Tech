@@ -10,14 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import android.content.Intent
-
-import androidx.core.content.ContextCompat.startActivity
-
-import android.R
-import android.util.Log
-import androidx.core.content.ContextCompat
-
 
 abstract class FirebaseService {
 

@@ -66,5 +66,4 @@ class UserRepositoryImpl(
     override fun logout(): Unit =
         remote.logout()
 
-
 }

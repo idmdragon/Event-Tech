@@ -51,5 +51,7 @@ interface EventDao {
     @Query("SELECT * FROM event WHERE eventType = :eventType and eventName LIKE '%'||:title||'%'")
     fun searchEvent(title: String, eventType: String): Flow<List<EventEntity>>
 
+    @Query("DELETE FROM event")
+    suspend fun clearEvent()
 
 }

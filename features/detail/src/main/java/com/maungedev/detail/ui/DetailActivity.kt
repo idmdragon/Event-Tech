@@ -24,6 +24,7 @@ import com.maungedev.domain.utils.Resource
 import com.maungedev.eventtech.R
 import com.maungedev.eventtech.constant.ExtraNameConstant.EVENT_LINK_REGISTRATION
 import com.maungedev.eventtech.constant.ExtraNameConstant.EVENT_UID
+import com.maungedev.eventtech.utils.DateConverter
 import org.koin.core.context.loadKoinModules
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -108,7 +109,7 @@ class DetailActivity : AppCompatActivity() {
                 tvEventTitle.text = event.eventName
                 tvAbout.text = event.description
                 tvPrerequisite.text = event.prerequisite
-                tvEventInformation.text = "${event.date} • ${event.location} • ${event.time}"
+                tvEventInformation.text = "${DateConverter.convertMillisToDateMonth(event.date)} • ${event.location} • ${event.time}"
                 val zero: Long = 0
                 val price = when (event.price) {
                     zero -> "Gratis"

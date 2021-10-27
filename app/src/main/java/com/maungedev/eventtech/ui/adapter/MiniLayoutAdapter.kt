@@ -15,12 +15,13 @@ import com.maungedev.domain.model.Event
 import com.maungedev.eventtech.constant.ExtraNameConstant
 import com.maungedev.eventtech.constant.PageNameConstant.DETAIL_PAGE
 import com.maungedev.eventtech.databinding.ItemMiniEventBinding
+import com.maungedev.eventtech.utils.DateConverter
 
 class MiniLayoutAdapter(private val context: Context) :
     RecyclerView.Adapter<MiniLayoutAdapter.ViewHolder>() {
 
     private val events = arrayListOf<Event>()
-    private var itemSize = 5
+    private var itemSize = events.size
 
     fun setItems(items: List<Event>) {
         this.events.clear()
@@ -41,7 +42,7 @@ class MiniLayoutAdapter(private val context: Context) :
         holder.bind(events[position])
     }
 
-    override fun getItemCount() = itemSize
+    override fun getItemCount() = events.size
 
     inner class ViewHolder(private val binding: ItemMiniEventBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -49,7 +50,8 @@ class MiniLayoutAdapter(private val context: Context) :
             with(binding) {
                 tvEventCategory.text = item.eventCategory
                 tvEventTitle.text = item.eventName
-                tvEventDate.text = item.date
+                tvEventDate.text = DateConverter.convertMillisToString(item.date)
+
                 Glide.with(itemView.context)
                     .load(item.eventCover)
                     .transform(CenterCrop(), RoundedCorners(8))

@@ -1,5 +1,6 @@
 package com.maungedev.eventtech.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ class CompetitionCategoryAdapter() :
 
     private val categories = arrayListOf<CompetitionCategory>()
     private var onItemSelectedListener: OnItemSelectedListener? = null
-
+    private var activeCategory = 0
 
     fun setOnItemCallback(onItemSelected: (selectedCategory: CompetitionCategory) -> Unit) {
         onItemSelectedListener = object : OnItemSelectedListener {
@@ -41,26 +42,33 @@ class CompetitionCategoryAdapter() :
     }
 
     override fun onBindViewHolder(holder: CompetitionCategoryAdapter.ViewHolder, position: Int) {
-            holder.bind(categories[position])
+        holder.bind(categories[position],position)
+        holder.itemView.setBackgroundResource(R.drawable.item_competition_selected)
+        if (activeCategory == position){
+            holder.itemView.setBackgroundResource(R.drawable.item_competition_selected)
+        }else{
+            holder.itemView.setBackgroundResource(R.drawable.item_competition_unselected)
+        }
     }
 
     override fun getItemCount() = categories.size
 
     inner class ViewHolder(private val binding: ItemCompetitionCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: CompetitionCategory) {
-            if(item.categoryName == "Semua"){
-                binding.layoutRoot.setBackgroundResource(R.drawable.item_competition_selected)
-            }
+        fun bind(item: CompetitionCategory, position: Int) {
             itemView.setOnClickListener {
+                activeCategory = position
+                Log.d("category","klik")
                 onItemSelectedListener?.onItemSelected(item)
-                binding.layoutRoot.setBackgroundResource(R.drawable.item_competition_selected)
-            }
+                notifyDataSetChanged()
 
+            }
             binding.tvEventCategory.text = item.categoryName
         }
     }
 }
+
+
 
 interface OnItemSelectedListener {
     fun onItemSelected(category: CompetitionCategory)

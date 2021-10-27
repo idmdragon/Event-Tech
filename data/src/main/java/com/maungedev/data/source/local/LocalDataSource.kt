@@ -6,7 +6,6 @@ import com.maungedev.data.source.local.entity.CompetitionCategoryEntity
 import com.maungedev.data.source.local.entity.ConferenceCategoryEntity
 import com.maungedev.data.source.local.entity.EventEntity
 import com.maungedev.data.source.local.entity.UserEntity
-import com.maungedev.domain.model.Event
 import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource(
@@ -14,7 +13,7 @@ class LocalDataSource(
     private val eventDao: EventDao
 ) {
     suspend fun clearUser(): Unit =
-        userDao.clear()
+        userDao.clearUser()
 
     suspend fun insertUser(userEntity: UserEntity): Unit =
         userDao.insertUser(userEntity)
@@ -54,6 +53,9 @@ class LocalDataSource(
 
     fun selectEventByUid(uid: String): Flow<EventEntity> =
         eventDao.selectEventByUid(uid)
+
+    suspend fun clearEvent(): Unit =
+        eventDao.clearEvent()
 
     fun selectAllMySchedule(ids: List<String>): Flow<List<EventEntity>> =
         eventDao.selectAllMySchedules(ids)

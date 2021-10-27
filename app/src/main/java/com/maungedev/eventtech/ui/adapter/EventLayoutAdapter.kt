@@ -10,6 +10,7 @@ import com.maungedev.domain.model.Event
 import com.maungedev.eventtech.constant.ExtraNameConstant.EVENT_UID
 import com.maungedev.eventtech.constant.PageNameConstant
 import com.maungedev.eventtech.databinding.ItemListEventBinding
+import com.maungedev.eventtech.utils.DateConverter
 
 class EventLayoutAdapter (private val context: Context) :
     RecyclerView.Adapter<EventLayoutAdapter.ViewHolder>() {
@@ -40,13 +41,17 @@ class EventLayoutAdapter (private val context: Context) :
                 tvEventTitle.text = item.eventName
                 tvEventOrganizer.text = item.organizer
                 val free = "Gratis"
-               if(item.price.equals(0)){
+               if(item.price.toString() == "0"){
                    tvEventPrice.text = free
                }else{
                    tvEventPrice.text = "Rp.${item.price}"
                 }
-                tvEventDate.text = "04"
-                tvEventMonth.text = "Aug"
+
+                val dateAndMonth = DateConverter.convertMillisToString(item.date).split(" ").toTypedArray()
+                val date = dateAndMonth[0]
+                val month = dateAndMonth[1]
+                tvEventDate.text = date
+                tvEventMonth.text = month
 
                 binding.btnDetail.setOnClickListener {
                     context.startActivity(Intent(itemView.context,Class.forName(PageNameConstant.DETAIL_PAGE)).putExtra(EVENT_UID,item.uid))

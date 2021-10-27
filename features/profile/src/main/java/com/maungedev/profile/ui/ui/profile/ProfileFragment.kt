@@ -94,14 +94,14 @@ class ProfileFragment : Fragment() {
         val materialBuilder = MaterialAlertDialogBuilder(requireContext()).create()
         val inflater: View =
             LayoutInflater.from(requireContext()).inflate(R.layout.dialog_confirmation, null)
-        val btnAddSchedule: Button = inflater.findViewById(R.id.btn_accept)
+        val btnAccept: Button = inflater.findViewById(R.id.btn_accept)
         val btnCancel: Button = inflater.findViewById(R.id.btn_cancel)
         val title: TextView = inflater.findViewById(R.id.tv_dialog_title)
         val description: TextView = inflater.findViewById(R.id.tv_desc)
 
         description.text = getString(R.string.desc_logout)
         title.text = "Keluar dari aplikasi"
-        btnAddSchedule.setOnClickListener {
+        btnAccept.setOnClickListener {
             materialBuilder.dismiss()
             viewModel.logout()
 

@@ -9,20 +9,19 @@ import com.google.gson.reflect.TypeToken
 @Entity(tableName = "event")
 data class EventEntity(
     @PrimaryKey
-    val uid: String,
-    val eventName: String,
-    val eventType: String,
-    val eventCategory: String,
-    val price: Long,
-    val date: String,
-    val time: String,
-    val location: String,
-    val linkRegistration: String,
-    val description: String,
-    val prerequisite: String,
-    val eventCover: String,
-    val numbersOfView: Int,
-    val numbersOfRegistrationClick: Int,
-    var favoriteBy: List<String>?,
-    val organizer: String
+    val uid: String ="",
+    val eventName: String ="",
+    val eventType: String = "",
+    val eventCategory: String ="",
+    val price: Long = 0,
+    val date: Long = 0,
+    val time: String = "",
+    val location: String ="",
+    val linkRegistration: String ="",
+    val description: String = "",
+    val prerequisite: String = "",
+    val eventCover: String ="",
+    val numbersOfView: Int = 0,
+    val numbersOfRegistrationClick: Int = 0,
+    val organizer: String = ""
 )

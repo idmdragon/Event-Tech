@@ -34,11 +34,6 @@ class DataStore(private val context: Context) {
         name = DATASTORE_NAME
     )
 
-    suspend fun saveUIDtoDataStore(uid: String) {
-        context.userPreferenceDataStore.edit {
-            it[UID_PREF_KEY] = uid
-        }
-    }
 
     suspend fun savePrefHaveRunAppBefore(isFirstTime: Boolean) {
         context.userPreferenceDataStore.edit {
@@ -46,10 +41,6 @@ class DataStore(private val context: Context) {
         }
     }
 
-    fun readPrefUID(): Flow<Boolean> = context.userPreferenceDataStore.data
-        .map {
-            it[UID_PREF_KEY]==("")
-        }
 
     fun readPrefHaveRunAppBefore(): Flow<Boolean> = context.userPreferenceDataStore.data
         .map {

@@ -11,6 +11,7 @@ import com.maungedev.eventtech.R
 import com.maungedev.eventtech.constant.ExtraNameConstant
 import com.maungedev.eventtech.constant.PageNameConstant
 import com.maungedev.eventtech.databinding.ItemScheduleBinding
+import com.maungedev.eventtech.utils.DateConverter
 
 class ScheduleAdapter(private val context: Context) :
     RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
@@ -47,9 +48,13 @@ class ScheduleAdapter(private val context: Context) :
                 }
                 val titleSchedule = item.eventName + " - " +item.organizer
                 tvEventTitle.text = titleSchedule
-                tvEventDate.text = item.date
 
-                tvEventMonth.text = "FEB"
+
+                val dateAndMonth = DateConverter.convertMillisToString(item.date).split(" ").toTypedArray()
+                val date = dateAndMonth[0]
+                val month = dateAndMonth[1]
+                tvEventDate.text = date
+                tvEventMonth.text = month
                 tvEventTime.text = item.time
 
                 btnDetail.setOnClickListener {
