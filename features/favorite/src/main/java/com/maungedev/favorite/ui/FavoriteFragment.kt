@@ -1,10 +1,12 @@
 package com.maungedev.favorite.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -36,8 +38,13 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getCurrentUser().observe(viewLifecycleOwner,{
             it.data?.favorite.let { favoriteIds->
-                if(favoriteIds!=null){
-                    viewModel.getAllFavorite(favoriteIds).observe(viewLifecycleOwner,::setFavoriteEvent)
+                if (favoriteIds != null) {
+                    if(favoriteIds.isNotEmpty()){
+                        isEmpty(false)
+                        viewModel.getAllFavorite(favoriteIds).observe(viewLifecycleOwner,::setFavoriteEvent)
+                    }else{
+                        isEmpty(true)
+                    }
                 }
             }
         })
@@ -74,6 +81,13 @@ class FavoriteFragment : Fragment() {
 
     private fun loadingState(b: Boolean) {
 
+    }
+
+    private fun isEmpty(state: Boolean){
+        binding.apply {
+            layoutEmpty.isVisible = state
+            rvFavorite.isVisible = !state
+        }
     }
 
 

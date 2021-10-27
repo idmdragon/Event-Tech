@@ -11,9 +11,6 @@ class FavoriteInteractor (private val eventRepository: EventRepository): Favorit
     override fun getAllFavorite(ids: List<String>): Flow<Resource<List<Event>>> =
         eventRepository.getAllFavorite(ids)
 
-    override fun deleteFavoriteEvent(id: String): Flow<Resource<Unit>> =
-        eventRepository.deleteFavoriteEvent(id)
-
     override fun getCurrentUser(): Flow<Resource<User>> =
         eventRepository.getCurrentUser()
 

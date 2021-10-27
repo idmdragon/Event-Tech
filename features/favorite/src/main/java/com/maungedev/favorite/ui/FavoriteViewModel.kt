@@ -13,9 +13,6 @@ class FavoriteViewModel (private val useCase: FavoriteUseCase) : ViewModel() {
     fun getAllFavorite(ids: List<String>): LiveData<Resource<List<Event>>> =
         useCase.getAllFavorite(ids).asLiveData()
 
-    fun deleteFavoriteEvent(id: String): LiveData<Resource<Unit>> =
-        useCase.deleteFavoriteEvent(id).asLiveData()
-
     fun getCurrentUser(): LiveData<Resource<User>> =
         useCase.getCurrentUser().asLiveData()
 }
