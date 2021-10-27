@@ -7,6 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ScheduleUseCase {
     fun getAllSchedule(ids: List<String>):Flow<Resource<List<Event>>>
-    fun deleteSchedule(id: String):Flow<Resource<Unit>>
     fun getCurrentUser(): Flow<Resource<User>>
 }

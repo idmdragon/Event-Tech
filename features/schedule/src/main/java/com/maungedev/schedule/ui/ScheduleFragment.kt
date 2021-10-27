@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -42,10 +43,18 @@ class ScheduleFragment : Fragment() {
         viewModel.getCurrentUser().observe(viewLifecycleOwner,{
             it.data?.schedule.let { scheduleIds->
                 if(scheduleIds!=null){
-                    viewModel.getAllSchedule(scheduleIds).observe(viewLifecycleOwner,::setSchedule)
+                    if(scheduleIds.isNotEmpty()){
+                        isEmpty(false)
+                        viewModel.getAllSchedule(scheduleIds).observe(viewLifecycleOwner,::setSchedule)
+                    }else{
+                        isEmpty(true)
+                    }
+
                 }
             }
-        })
+        }
+
+        )
 
         setCurrentDate()
 
@@ -59,7 +68,6 @@ class ScheduleFragment : Fragment() {
     }
 
     private fun setSchedule(resource: Resource<List<Event>>?) {
-
         when (resource) {
             is Resource.Success -> {
                 loadingState(false)
@@ -79,7 +87,6 @@ class ScheduleFragment : Fragment() {
 
             is Resource.Error -> {
                 loadingState(false)
-                Log.e("CEKK",resource.message.toString())
                 Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
                     .show()
             }
@@ -91,6 +98,13 @@ class ScheduleFragment : Fragment() {
 
     private fun loadingState(b: Boolean) {
 
+    }
+
+    private fun isEmpty(state: Boolean){
+        binding.apply {
+            layoutEmpty.isVisible = state
+            rvSchedule.isVisible = !state
+        }
     }
 
 

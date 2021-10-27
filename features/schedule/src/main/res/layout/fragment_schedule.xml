@@ -35,11 +35,38 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvTitleFavorite"
         app:layout_constraintTop_toTopOf="@+id/tvTitleFavorite" />
 
+    <LinearLayout
+        android:id="@+id/layout_empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/range_64"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/range_24"
+        app:layout_constraintTop_toBottomOf="@id/tv_current_date"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ilu_schedule_empty"
+            android:contentDescription="@string/cd_search_not_found" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/PoppinsMedium"
+            android:layout_marginTop="@dimen/range_24"
+            android:layout_marginHorizontal="@dimen/range_24"
+            android:textSize="@dimen/size_16"
+            android:gravity="center"
+            android:text="@string/text_empty_reminder"/>
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_schedule"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/item_schedule"
         android:layout_marginTop="@dimen/range_16"
         app:layout_constraintTop_toBottomOf="@+id/tv_current_date"
         app:layout_constraintBottom_toBottomOf="parent"

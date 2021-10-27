@@ -11,9 +11,6 @@ class ScheduleInteractor (private val eventRepository: EventRepository): Schedul
     override fun getAllSchedule(ids: List<String>): Flow<Resource<List<Event>>> =
         eventRepository.getAllSchedule(ids)
 
-    override fun deleteSchedule(id: String): Flow<Resource<Unit>> =
-        eventRepository.deleteSchedule(id)
-
     override fun getCurrentUser(): Flow<Resource<User>> =
         eventRepository.getCurrentUser()
 }

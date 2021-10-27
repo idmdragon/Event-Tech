@@ -13,9 +13,6 @@ class ScheduleViewModel(private val useCase: ScheduleUseCase) : ViewModel() {
     fun getAllSchedule(ids: List<String>): LiveData<Resource<List<Event>>> =
         useCase.getAllSchedule(ids).asLiveData()
 
-    fun deleteSchedule(id: String): LiveData<Resource<Unit>> =
-        useCase.deleteSchedule(id).asLiveData()
-
     fun getCurrentUser(): LiveData<Resource<User>> =
         useCase.getCurrentUser().asLiveData()
 }
