@@ -17,7 +17,6 @@ import com.maungedev.eventtech.constant.ExtraNameConstant
 import com.maungedev.eventtech.constant.PageNameConstant
 import com.maungedev.eventtech.ui.adapter.CompetitionCategoryAdapter
 import com.maungedev.eventtech.ui.adapter.EventLayoutAdapter
-import com.maungedev.eventtech.ui.main.MainActivity
 import org.koin.core.context.loadKoinModules
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -31,7 +30,7 @@ class CompetitionFragment : Fragment() {
     private val categoryAdapter:CompetitionCategoryAdapter by lazy {
         CompetitionCategoryAdapter().apply {
             setOnItemCallback {
-//                viewModel.filterPostByGameType(it)
+                viewModel.getEventsByCategories(it.categoryName).observe(viewLifecycleOwner,::setCompetitionEvent)
             }
         }
     }
@@ -47,8 +46,8 @@ class CompetitionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getCompetitionCategory().observe(viewLifecycleOwner,::setCompetitionCategory)
         viewModel.getAllCompetitionEvent().observe(viewLifecycleOwner,::setCompetitionEvent)
+        viewModel.getCompetitionCategory().observe(viewLifecycleOwner,::setCompetitionCategory)
         binding.btnSearch.setOnClickListener {
             startActivity(Intent(requireContext(), Class.forName(PageNameConstant.SEARCH_PAGE)).putExtra(
                 ExtraNameConstant.EVENT_TYPE,"competition"
@@ -94,6 +93,7 @@ class CompetitionFragment : Fragment() {
                 activity,
                 LinearLayoutManager.HORIZONTAL, false
             )
+
         }
     }
 

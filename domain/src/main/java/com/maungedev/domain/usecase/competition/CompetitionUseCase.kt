@@ -8,4 +8,5 @@ import com.maungedev.domain.model.Event
 interface CompetitionUseCase {
     fun getCompetitionCategory(): Flow<Resource<List<CompetitionCategory>>>
     fun getAllEventCompetition(): Flow<Resource<List<Event>>>
+    fun getEventCompetitionByCategories(categories: String): Flow<Resource<List<Event>>>
 }

@@ -52,6 +52,11 @@ class CompetitionCategoryAdapter() :
             if(item.categoryName == "Semua"){
                 binding.layoutRoot.setBackgroundResource(R.drawable.item_competition_selected)
             }
+            itemView.setOnClickListener {
+                onItemSelectedListener?.onItemSelected(item)
+                binding.layoutRoot.setBackgroundResource(R.drawable.item_competition_selected)
+            }
+
             binding.tvEventCategory.text = item.categoryName
         }
     }

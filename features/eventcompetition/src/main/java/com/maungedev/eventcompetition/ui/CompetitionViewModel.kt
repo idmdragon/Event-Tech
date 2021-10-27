@@ -1,5 +1,6 @@
 package com.maungedev.eventcompetition.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -15,4 +16,14 @@ class CompetitionViewModel(private val useCase: CompetitionUseCase) : ViewModel(
 
     fun getAllCompetitionEvent():  LiveData<Resource<List<Event>>> =
         useCase.getAllEventCompetition().asLiveData()
+
+    fun getEventsByCategories(categories: String):  LiveData<Resource<List<Event>>>  {
+        Log.d("CEKK","isi categories $categories")
+        return if (categories == "Semua"){
+            useCase.getAllEventCompetition().asLiveData()
+        }else{
+            useCase.getEventCompetitionByCategories(categories).asLiveData()
+        }
+    }
+
 }

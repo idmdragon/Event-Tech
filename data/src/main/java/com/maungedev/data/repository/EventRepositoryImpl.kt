@@ -96,10 +96,25 @@ class EventRepositoryImpl(
     override fun getCurrentUserId(): String =
         remote.getCurrentUserId()
 
-    override fun getEventConferenceByCategories(categories: String): Flow<Resource<List<Event>>> =
+    override fun getEventsConferenceByCategories(categories: String): Flow<Resource<List<Event>>> =
         object : NetworkBoundResource<List<Event>, List<EventResponse>>() {
             override fun loadFromDB(): Flow<List<Event>?> =
-                local.selectEventByCategories(categories).toListFlowModel()
+                local.selectEventsConferenceByCategories(categories).toListFlowModel()
+
+            override fun shouldFetch(data: List<Event>?): Boolean =
+                data == null || data.isEmpty()
+
+            override suspend fun createCall(): Flow<FirebaseResponse<List<EventResponse>>> =
+                remote.getAllEvent()
+
+            override suspend fun saveCallResult(data: List<EventResponse>) =
+                local.insertEvents(data.toListEntity())
+        }.asFlow()
+
+    override fun getEventsCompetitionByCategories(categories: String): Flow<Resource<List<Event>>> =
+        object : NetworkBoundResource<List<Event>, List<EventResponse>>() {
+            override fun loadFromDB(): Flow<List<Event>?> =
+                local.selectEventsCompetitionByCategories(categories).toListFlowModel()
 
             override fun shouldFetch(data: List<Event>?): Boolean =
                 data == null || data.isEmpty()
@@ -272,4 +287,6 @@ class EventRepositoryImpl(
                 local.insertEvents(data.toListEntity())
 
         }.asFlow()
+
+
 }

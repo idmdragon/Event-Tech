@@ -20,5 +20,5 @@ class ConferenceViewModel(private val useCase: ConferenceUseCase) : ViewModel() 
         useCase.getAllPopularEvent().asLiveData()
 
     fun getEventByCategories(categories: String):  LiveData<Resource<List<Event>>> =
-        useCase.getEventByCategories(categories).asLiveData()
+        useCase.getEventConferenceByCategories(categories).asLiveData()
 }

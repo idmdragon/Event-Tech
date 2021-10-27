@@ -13,7 +13,8 @@ interface EventRepository {
     fun getAllEventConference(): Flow<Resource<List<Event>>>
     fun getAllEventCompetition(): Flow<Resource<List<Event>>>
     fun getAllPopularEvent(): Flow<Resource<List<Event>>>
-    fun getEventConferenceByCategories(categories: String): Flow<Resource<List<Event>>>
+    fun getEventsConferenceByCategories(categories: String): Flow<Resource<List<Event>>>
+    fun getEventsCompetitionByCategories(categories: String): Flow<Resource<List<Event>>>
     fun getEventById(id: String): Flow<Resource<Event>>
     fun getAllSchedule(ids: List<String>):Flow<Resource<List<Event>>>
     fun deleteSchedule(id: String):Flow<Resource<Unit>>

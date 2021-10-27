@@ -6,11 +6,14 @@ import com.maungedev.domain.model.CompetitionCategory
 import com.maungedev.domain.model.Event
 import com.maungedev.domain.repository.EventRepository
 
-class CompetitionInteractor(private val eventITRepository: EventRepository): CompetitionUseCase {
+class CompetitionInteractor(private val eventRepository: EventRepository): CompetitionUseCase {
 
     override fun getCompetitionCategory(): Flow<Resource<List<CompetitionCategory>>> =
-        eventITRepository.getCompetitionCategory()
+        eventRepository.getCompetitionCategory()
 
     override fun getAllEventCompetition(): Flow<Resource<List<Event>>> =
-        eventITRepository.getAllEventCompetition()
+        eventRepository.getAllEventCompetition()
+
+    override fun getEventCompetitionByCategories(categories: String): Flow<Resource<List<Event>>> =
+        eventRepository.getEventsCompetitionByCategories(categories)
 }
