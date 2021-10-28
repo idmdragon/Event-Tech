@@ -54,6 +54,29 @@ class CompetitionFragment : Fragment() {
             ))
         }
 
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.refreshAllEvent().observe(viewLifecycleOwner,::refreshResponse)
+        }
+    }
+
+    private fun refreshResponse(resource: Resource<Unit>?) {
+        when (resource) {
+            is Resource.Success -> {
+                loadingState(false)
+                binding.swipeRefresh.isRefreshing = false
+            }
+            is Resource.Loading -> {
+                loadingState(true)
+            }
+
+            is Resource.Error -> {
+                binding.swipeRefresh.isRefreshing = false
+                loadingState(false)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                    .show()
+            }
+        }
+
     }
 
     private fun setCompetitionEvent(resource: Resource<List<Event>>) {

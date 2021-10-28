@@ -29,5 +29,6 @@ interface EventRepository {
     fun increaseNumbersOfView(id:String):Flow<Unit>
     fun searchConference(title:String):Flow<Resource<List<Event>>>
     fun searchCompetition(title:String):Flow<Resource<List<Event>>>
+    fun refreshAllEvent(): Flow<Resource<Unit>>
 
 }

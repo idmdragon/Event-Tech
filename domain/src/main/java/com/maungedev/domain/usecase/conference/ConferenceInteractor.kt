@@ -19,4 +19,7 @@ class ConferenceInteractor(private val eventRepository: EventRepository): Confer
 
     override fun getAllPopularEvent(): Flow<Resource<List<Event>>> =
         eventRepository.getAllPopularEvent()
+
+    override fun refreshAllEvent(): Flow<Resource<Unit>> =
+        eventRepository.refreshAllEvent()
 }

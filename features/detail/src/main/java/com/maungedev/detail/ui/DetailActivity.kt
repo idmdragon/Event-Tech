@@ -24,6 +24,7 @@ import com.maungedev.domain.utils.Resource
 import com.maungedev.eventtech.R
 import com.maungedev.eventtech.constant.ExtraNameConstant.EVENT_LINK_REGISTRATION
 import com.maungedev.eventtech.constant.ExtraNameConstant.EVENT_UID
+import com.maungedev.eventtech.utils.AlarmReceiver
 import com.maungedev.eventtech.utils.DateConverter
 import org.koin.core.context.loadKoinModules
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -32,6 +33,7 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private val viewModel: DetailViewModel by viewModel()
+    private val alarmReceiver = AlarmReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,13 +46,23 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setUpObserver() {
-        intent.getStringExtra(EVENT_UID)?.let { eventUID ->
-            viewModel.getEventById(eventUID).observe(this@DetailActivity, ::setDetailObserver)
-            viewModel.getCurrentUser()
-                .observe(this@DetailActivity, { setCurrentUser(it, eventUID) })
+        val eventUID = intent.getStringExtra(EVENT_UID)
 
-            viewModel.increaseNumbersOfView(eventUID).observe(this@DetailActivity,{})
-        }
+            if (eventUID != null) {
+                viewModel.getEventById(eventUID).observe(this@DetailActivity, ::setDetailObserver)
+                viewModel.getCurrentUser()
+                    .observe(this@DetailActivity, { setCurrentUser(it, eventUID) })
+
+                viewModel.increaseNumbersOfView(eventUID).observe(this@DetailActivity, {})
+            }else{
+                Snackbar.make(
+                    binding.root,
+                    "Event yang anda cari tidak ditemukan",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+
+
         viewModel.isRemindered.observe(this@DetailActivity, ::stateReminder)
 
     }
@@ -106,30 +118,32 @@ class DetailActivity : AppCompatActivity() {
     private fun setDetailView(event: Event) {
         buttonClickListener(event)
         with(binding) {
-                tvEventTitle.text = event.eventName
-                tvAbout.text = event.description
-                tvPrerequisite.text = event.prerequisite
-                tvEventInformation.text = "${DateConverter.convertMillisToDateMonth(event.date)} • ${event.location} • ${event.time}"
-                val zero: Long = 0
-                val price = when (event.price) {
-                    zero -> "Gratis"
-                    else -> "Rp. ${event.price}"
-                }
+            tvEventTitle.text = event.eventName
+            tvAbout.text = event.description
+            tvPrerequisite.text = event.prerequisite
+            tvEventInformation.text =
+                "${DateConverter.convertMillisToDateMonth(event.date)} • ${event.location} • ${event.time}"
+            val zero: Long = 0
+            val price = when (event.price) {
+                zero -> "Gratis"
+                else -> "Rp. ${event.price}"
+            }
 
-                tvPrice.text = price
-                Glide.with(this@DetailActivity)
-                    .load(event.eventCover)
-                    .transform(CenterCrop(), RoundedCorners(8))
-                    .apply(RequestOptions())
-                    .into(ivPoster)
+            tvPrice.text = price
+            Glide.with(this@DetailActivity)
+                .load(event.eventCover)
+                .transform(CenterCrop(), RoundedCorners(8))
+                .apply(RequestOptions())
+                .into(ivPoster)
         }
     }
 
-    private fun buttonClickListener(data: Event){
+    private fun buttonClickListener(data: Event) {
         binding.apply {
 
             btnRegistration.setOnClickListener {
-                viewModel.increaseNumbersOfRegistrationClick(data.uid).observe(this@DetailActivity,{})
+                viewModel.increaseNumbersOfRegistrationClick(data.uid)
+                    .observe(this@DetailActivity, {})
                 startActivity(
                     Intent(this@DetailActivity, RegistrationActivity::class.java).putExtra(
                         EVENT_LINK_REGISTRATION, data.linkRegistration
@@ -145,15 +159,17 @@ class DetailActivity : AppCompatActivity() {
                 onBackPressed()
             }
 
-            viewModel.isFavorited.observe(this@DetailActivity,{ state ->
+            viewModel.isFavorited.observe(this@DetailActivity, { state ->
                 stateFavorite(state)
-                if(state){
+                if (state) {
                     btnFavorite.setOnClickListener {
-                        viewModel.deleteFavorite(data.uid).observe(this@DetailActivity, ::deleteFavoriteResponse)
+                        viewModel.deleteFavorite(data.uid)
+                            .observe(this@DetailActivity, ::deleteFavoriteResponse)
                     }
-                }else{
+                } else {
                     btnFavorite.setOnClickListener {
-                        viewModel.addFavorite(data.uid).observe(this@DetailActivity, ::addFavoriteResponse)
+                        viewModel.addFavorite(data.uid)
+                            .observe(this@DetailActivity, ::addFavoriteResponse)
                     }
                 }
             })
@@ -204,20 +220,23 @@ class DetailActivity : AppCompatActivity() {
         val reminderTitle: TextView = inflater.findViewById(R.id.tv_dialog_title)
         val reminderDescription: TextView = inflater.findViewById(R.id.tv_desc)
 
-        viewModel.isRemindered.observe(this@DetailActivity,{ state ->
-            if (state){
-                reminderDescription.text = getString(R.string.desc_reminder_dialog_delete, data.eventName)
+        viewModel.isRemindered.observe(this@DetailActivity, { state ->
+            if (state) {
+                reminderDescription.text =
+                    getString(R.string.desc_reminder_dialog_delete, data.eventName)
                 reminderTitle.text = "Hapus Pengingat Event"
                 btnAddSchedule.setOnClickListener {
                     materialBuilder.dismiss()
                     viewModel.deleteSchedule(data.uid).observe(this, ::deleteScheduleResponse)
                 }
-            }else{
+            } else {
                 reminderDescription.text = getString(R.string.desc_reminder_dialog, data.eventName)
                 reminderTitle.text = "Tambahkan Pengingat Event"
                 btnAddSchedule.setOnClickListener {
                     materialBuilder.dismiss()
-                    viewModel.addSchedule(data.uid).observe(this, ::addScheduleResponse)
+                    viewModel.addSchedule(data.uid).observe(this, {
+                        addScheduleResponse(it, data)
+                    })
                 }
             }
         })
@@ -230,10 +249,17 @@ class DetailActivity : AppCompatActivity() {
         materialBuilder.show()
     }
 
-    private fun addScheduleResponse(resource: Resource<Unit>?) {
+    private fun addScheduleResponse(resource: Resource<Unit>?, data: Event) {
         when (resource) {
             is Resource.Success -> {
                 loadingState(false)
+                alarmReceiver.setOneTimeAlarm(
+                    this@DetailActivity,
+                    DateConverter.convertMillisToStringForNotification(data.date),
+                    data.time,
+                    data.eventName,
+                    data.uid
+                )
                 Snackbar.make(
                     binding.root,
                     "Event berhasil di tambahkan pengingat",
@@ -301,6 +327,7 @@ class DetailActivity : AppCompatActivity() {
 
         }
     }
+
     private fun deleteFavoriteResponse(resource: Resource<Unit>?) {
         when (resource) {
             is Resource.Success -> {

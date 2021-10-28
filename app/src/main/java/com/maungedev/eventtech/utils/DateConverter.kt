@@ -19,12 +19,14 @@ object DateConverter {
         return sdf.format(calendar.time)
     }
 
-    @SuppressLint("SimpleDateFormat")
-    fun convertStringToMillis(stringDate: String): Long {
-        val formatter = SimpleDateFormat("d MMM yyyy")
-        val date = formatter.parse(stringDate) as Date
-        return date.time
+    fun convertMillisToStringForNotification(timeMillis: Long): String {
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = timeMillis
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return sdf.format(calendar.time)
     }
+
+
 
 
 

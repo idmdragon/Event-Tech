@@ -18,12 +18,14 @@ class CompetitionViewModel(private val useCase: CompetitionUseCase) : ViewModel(
         useCase.getAllEventCompetition().asLiveData()
 
     fun getEventsByCategories(categories: String):  LiveData<Resource<List<Event>>>  {
-        Log.d("CEKK","isi categories $categories")
         return if (categories == "Semua"){
             useCase.getAllEventCompetition().asLiveData()
         }else{
             useCase.getEventCompetitionByCategories(categories).asLiveData()
         }
     }
+
+    fun refreshAllEvent():  LiveData<Resource<Unit>> =
+        useCase.refreshAllEvent().asLiveData()
 
 }

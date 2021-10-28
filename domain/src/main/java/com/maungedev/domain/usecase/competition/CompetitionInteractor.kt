@@ -16,4 +16,8 @@ class CompetitionInteractor(private val eventRepository: EventRepository): Compe
 
     override fun getEventCompetitionByCategories(categories: String): Flow<Resource<List<Event>>> =
         eventRepository.getEventsCompetitionByCategories(categories)
+
+    override fun refreshAllEvent(): Flow<Resource<Unit>> =
+        eventRepository.refreshAllEvent()
+
 }

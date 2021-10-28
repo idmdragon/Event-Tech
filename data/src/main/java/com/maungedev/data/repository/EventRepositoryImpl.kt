@@ -147,7 +147,7 @@ class EventRepositoryImpl(
                 local.selectAllEventConference().toListFlowModel()
 
             override fun shouldFetch(data: List<Event>?): Boolean =
-                true
+                data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<FirebaseResponse<List<EventResponse>>> =
                 remote.getAllEvent()
@@ -179,7 +179,7 @@ class EventRepositoryImpl(
                 local.selectAllEventCompetition().toListFlowModel()
 
             override fun shouldFetch(data: List<Event>?): Boolean =
-                true
+                data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<FirebaseResponse<List<EventResponse>>> =
                 remote.getAllEvent()
@@ -293,5 +293,18 @@ class EventRepositoryImpl(
 
         }.asFlow()
 
+    override fun refreshAllEvent(): Flow<Resource<Unit>> =
+        object : NetworkBoundRequest<List<EventResponse>>() {
+
+            override suspend fun createCall(): Flow<FirebaseResponse<List<EventResponse>>> =
+                remote.getAllEvent()
+
+            override suspend fun saveCallResult(data: List<EventResponse>) {
+                local.clearEvent()
+                local.insertEvents(data.toListEntity())
+            }
+
+
+    }.asFlow()
 
 }

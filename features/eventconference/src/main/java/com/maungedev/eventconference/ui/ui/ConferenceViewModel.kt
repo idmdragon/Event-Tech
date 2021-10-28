@@ -19,6 +19,9 @@ class ConferenceViewModel(private val useCase: ConferenceUseCase) : ViewModel() 
     fun getAllPopularEvent():  LiveData<Resource<List<Event>>> =
         useCase.getAllPopularEvent().asLiveData()
 
+    fun refreshAllEvent():  LiveData<Resource<Unit>> =
+        useCase.refreshAllEvent().asLiveData()
+
     fun getEventByCategories(categories: String):  LiveData<Resource<List<Event>>> =
         useCase.getEventConferenceByCategories(categories).asLiveData()
 }

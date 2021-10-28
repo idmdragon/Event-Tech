@@ -6,7 +6,17 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     tools:context="com.maungedev.eventcompetition.ui.CompetitionFragment">
-    <androidx.appcompat.widget.Toolbar
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,4 +86,6 @@
                 tools:listitem="@layout/item_list_event" />
 
     </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

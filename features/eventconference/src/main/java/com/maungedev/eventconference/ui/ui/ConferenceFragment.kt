@@ -23,7 +23,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class ConferenceFragment : Fragment() {
 
-    private val conferenceViewModel: ConferenceViewModel by viewModel()
+    private val viewModel: ConferenceViewModel by viewModel()
     private var _binding: FragmentConferenceBinding? = null
     private lateinit var popularEventAdapter: MiniLayoutAdapter
     private lateinit var categoryEventAdapter: ConferenceCategoryAdapter
@@ -42,15 +42,39 @@ class ConferenceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        conferenceViewModel.getConferenceCategory()
+        viewModel.getConferenceCategory()
             .observe(viewLifecycleOwner, ::setConferenceCategory)
-        conferenceViewModel.getAllConferenceEvent().observe(viewLifecycleOwner, ::setAllConference)
-        conferenceViewModel.getAllPopularEvent().observe(viewLifecycleOwner, ::setPopularEvent)
+        viewModel.getAllConferenceEvent().observe(viewLifecycleOwner, ::setAllConference)
+        viewModel.getAllPopularEvent().observe(viewLifecycleOwner, ::setPopularEvent)
         binding.btnSearch.setOnClickListener {
             startActivity(Intent(requireContext(), Class.forName(SEARCH_PAGE)).putExtra(
                 ExtraNameConstant.EVENT_TYPE,"conference"
             ))
         }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.refreshAllEvent().observe(viewLifecycleOwner,::refreshResponse)
+        }
+    }
+
+    private fun refreshResponse(resource: Resource<Unit>?) {
+        when (resource) {
+            is Resource.Success -> {
+                loadingState(false)
+                binding.swipeRefresh.isRefreshing = false
+            }
+            is Resource.Loading -> {
+                loadingState(true)
+            }
+
+            is Resource.Error -> {
+                binding.swipeRefresh.isRefreshing = false
+                loadingState(false)
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                    .show()
+            }
+        }
+
     }
 
     private fun setPopularEvent(resource: Resource<List<Event>>) {

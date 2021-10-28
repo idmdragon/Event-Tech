@@ -11,4 +11,5 @@ interface ConferenceUseCase {
     fun getAllEventConference(): Flow<Resource<List<Event>>>
     fun getEventConferenceByCategories(categories: String): Flow<Resource<List<Event>>>
     fun getAllPopularEvent(): Flow<Resource<List<Event>>>
+    fun refreshAllEvent(): Flow<Resource<Unit>>
 }
