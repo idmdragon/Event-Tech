@@ -96,8 +96,8 @@ class ScheduleFragment : Fragment() {
 
     }
 
-    private fun loadingState(b: Boolean) {
-
+    private fun loadingState(state: Boolean) {
+        binding.progressBar.isVisible = state
     }
 
     private fun isEmpty(state: Boolean){
