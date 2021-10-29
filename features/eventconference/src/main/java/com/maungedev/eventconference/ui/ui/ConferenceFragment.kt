@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -44,8 +45,11 @@ class ConferenceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getConferenceCategory()
             .observe(viewLifecycleOwner, ::setConferenceCategory)
+
         viewModel.getAllConferenceEvent().observe(viewLifecycleOwner, ::setAllConference)
+
         viewModel.getAllPopularEvent().observe(viewLifecycleOwner, ::setPopularEvent)
+
         binding.btnSearch.setOnClickListener {
             startActivity(Intent(requireContext(), Class.forName(SEARCH_PAGE)).putExtra(
                 ExtraNameConstant.EVENT_TYPE,"conference"
@@ -129,15 +133,14 @@ class ConferenceFragment : Fragment() {
             }
 
             is Resource.Error -> {
-                loadingState(false)
                 Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
                     .show()
             }
         }
     }
 
-    private fun loadingState(b: Boolean) {
-
+    private fun loadingState(state: Boolean) {
+        binding.progressBar.isVisible = state
     }
 
     private fun setConferenceCategory(resource: Resource<List<ConferenceCategory>>?) {

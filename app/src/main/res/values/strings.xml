@@ -50,4 +50,8 @@
     <string name="desc_logout">Apakah kamu yakin akan keluar dari aplikasi?</string>
     <string name="cd_search_not_found">Pencarian Tidak di temukan</string>
     <string name="text_registration_page">Halaman Pendaftaran</string>
+    <string name="text_all">Semua</string>
+    <string name="text_sort_by_date">Urutkan Berdasarkan Tanggal</string>
+    <string name="text_sort_by_price">Urutkan Berdasarkan Biaya</string>
+    <string name="text_sort_by_popularity">Urutkan Berdasarkan Popularitas</string>
 </resources>

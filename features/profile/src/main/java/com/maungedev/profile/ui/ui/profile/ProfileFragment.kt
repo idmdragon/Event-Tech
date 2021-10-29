@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.maungedev.domain.model.User
@@ -118,7 +119,7 @@ class ProfileFragment : Fragment() {
         materialBuilder.show()
     }
 
-    private fun loadingState(b: Boolean) {
-
+    private fun loadingState(state: Boolean) {
+        binding.progressBar.isVisible = state
     }
 }

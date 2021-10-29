@@ -1,16 +1,21 @@
 package com.maungedev.eventcompetition.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.maungedev.domain.model.CompetitionCategory
 import com.maungedev.domain.model.Event
 import com.maungedev.domain.utils.Resource
+import com.maungedev.eventcompetition.R
 import com.maungedev.eventcompetition.databinding.FragmentCompetitionBinding
 import com.maungedev.eventcompetition.di.competitionModule
 import com.maungedev.eventtech.constant.ExtraNameConstant
@@ -27,10 +32,14 @@ class CompetitionFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var competitionAdapter: EventLayoutAdapter
-    private val categoryAdapter:CompetitionCategoryAdapter by lazy {
+    private val categoryAdapter: CompetitionCategoryAdapter by lazy {
         CompetitionCategoryAdapter().apply {
             setOnItemCallback {
-                viewModel.getEventsByCategories(it.categoryName).observe(viewLifecycleOwner,::setCompetitionEvent)
+                viewModel.sortType.observe(viewLifecycleOwner, { sortBy ->
+                    viewModel.getEventsByCategories(it.categoryName).observe(viewLifecycleOwner, {
+                        setCompetitionEvent(it, sortBy)
+                    })
+                })
             }
         }
     }
@@ -43,19 +52,33 @@ class CompetitionFragment : Fragment() {
         _binding = FragmentCompetitionBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getAllCompetitionEvent().observe(viewLifecycleOwner,::setCompetitionEvent)
-        viewModel.getCompetitionCategory().observe(viewLifecycleOwner,::setCompetitionCategory)
+        viewModel.setSortType("Semua")
+
+        viewModel.sortType.observe(viewLifecycleOwner, { sortBy ->
+            viewModel.getAllCompetitionEvent().observe(viewLifecycleOwner, {
+                setCompetitionEvent(it, sortBy)
+            })
+        })
+
+        viewModel.getCompetitionCategory().observe(viewLifecycleOwner, ::setCompetitionCategory)
+
         binding.btnSearch.setOnClickListener {
-            startActivity(Intent(requireContext(), Class.forName(PageNameConstant.SEARCH_PAGE)).putExtra(
-                ExtraNameConstant.EVENT_TYPE,"competition"
-            ))
+            startActivity(
+                Intent(requireContext(), Class.forName(PageNameConstant.SEARCH_PAGE)).putExtra(
+                    ExtraNameConstant.EVENT_TYPE, "competition"
+                )
+            )
         }
 
         binding.swipeRefresh.setOnRefreshListener {
-            viewModel.refreshAllEvent().observe(viewLifecycleOwner,::refreshResponse)
+            viewModel.refreshAllEvent().observe(viewLifecycleOwner, ::refreshResponse)
+        }
+        binding.btnMenu.setOnClickListener {
+            showFilterMenu(it, R.menu.filter_menu, requireContext())
         }
     }
 
@@ -79,12 +102,40 @@ class CompetitionFragment : Fragment() {
 
     }
 
-    private fun setCompetitionEvent(resource: Resource<List<Event>>) {
-        when(resource){
+    private fun setCompetitionEvent(resource: Resource<List<Event>>, sortType: String) {
+        when (resource) {
             is Resource.Success -> {
                 loadingState(false)
                 competitionAdapter = EventLayoutAdapter(requireContext())
-                resource.data?.let { competitionAdapter.setItems(it) }
+                resource.data?.let {
+                    val sortedList = ArrayList<Event>()
+                    sortedList.addAll(it)
+                    when (sortType) {
+                        "Urutkan Berdasarkan Biaya" -> {
+                            sortedList.sortBy { event: Event ->
+                                event.price
+                            }
+                            competitionAdapter.setItems(sortedList)
+                        }
+                        "Urutkan Berdasarkan Tanggal" -> {
+                            sortedList.sortBy { event: Event ->
+                                event.date
+                            }
+                            competitionAdapter.setItems(sortedList)
+                        }
+                        "Urutkan Berdasarkan Popularitas" -> {
+                            sortedList.sortByDescending { event: Event ->
+                                event.numbersOfView
+                            }
+                            competitionAdapter.setItems(sortedList)
+                        }
+
+                        else -> {
+                            competitionAdapter.setItems(sortedList)
+                        }
+                    }
+
+                }
                 binding.rvCompetition.adapter = competitionAdapter
                 binding.rvCompetition.layoutManager = LinearLayoutManager(
                     activity,
@@ -97,13 +148,14 @@ class CompetitionFragment : Fragment() {
 
             is Resource.Error -> {
                 loadingState(false)
-                Snackbar.make(binding.root,resource.message.toString(), Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
+                    .show()
             }
         }
     }
 
-    private fun loadingState(b: Boolean) {
-
+    private fun loadingState(state: Boolean) {
+        binding.progressBar.isVisible = state
     }
 
     private fun setCompetitionCategory(resource: Resource<List<CompetitionCategory>>?) {
@@ -120,5 +172,34 @@ class CompetitionFragment : Fragment() {
         }
     }
 
+    private fun showFilterMenu(
+        view: View,
+        optionMenu: Int,
+        context: Context
+    ) {
+        val popup = PopupMenu(context, view)
+        popup.menuInflater.inflate(optionMenu, popup.menu)
+        popup.setOnMenuItemClickListener { menuItem: MenuItem ->
+            when (menuItem.itemId) {
+                R.id.sort_by_price -> {
+                    viewModel.setSortType(getString(com.maungedev.eventtech.R.string.text_sort_by_price))
+                }
+                R.id.sort_by_date -> {
+                    viewModel.setSortType(getString(com.maungedev.eventtech.R.string.text_sort_by_date))
+                }
+                R.id.sort_by_popularity -> {
+                    viewModel.setSortType(getString(com.maungedev.eventtech.R.string.text_sort_by_popularity))
+                }
+                else -> {
+                    viewModel.setSortType(getString(com.maungedev.eventtech.R.string.text_all))
+                }
+            }
+            true
+
+        }
+        popup.setOnDismissListener {}
+        popup.show()
+
+    }
 
 }

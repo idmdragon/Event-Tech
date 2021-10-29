@@ -1,11 +1,18 @@
 package com.maungedev.eventconference.ui.ui
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
+import android.view.View
+import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.maungedev.domain.model.Event
 import com.maungedev.domain.utils.Resource
+import com.maungedev.eventconference.R
 import com.maungedev.eventconference.databinding.ActivityConferenceListBinding
 import com.maungedev.eventconference.ui.di.conferenceModule
 import com.maungedev.eventtech.constant.ExtraNameConstant.EVENT_CATEGORY
@@ -29,35 +36,79 @@ class ConferenceListActivity : AppCompatActivity() {
         with(binding) {
 
             val categories: String = intent.getStringExtra(EVENT_CATEGORY) ?: "Semua"
+            viewModel.setSortType("Semua")
+
             tvCategoryName.text = categories
 
-            when (categories) {
-                "Semua" -> {
-                    viewModel.getAllConferenceEvent()
-                        .observe(this@ConferenceListActivity, ::setListEvent)
+            viewModel.sortType.observe(this@ConferenceListActivity, { sortBy ->
+
+                when (categories) {
+                    "Semua" -> {
+                        viewModel.getAllConferenceEvent()
+                            .observe(this@ConferenceListActivity, {
+                                setListEvent(it, sortBy)
+                            })
+                    }
+                    "Popular" -> {
+                        viewModel.getAllPopularEvent()
+                            .observe(this@ConferenceListActivity, {
+                                setListEvent(it, sortBy)
+                            })
+                    }
+                    else -> {
+                        viewModel.getEventByCategories(categories)
+                            .observe(this@ConferenceListActivity, {
+                                setListEvent(it, sortBy)
+                            })
+                    }
                 }
-                "Popular" -> {
-                    viewModel.getAllPopularEvent()
-                        .observe(this@ConferenceListActivity, ::setListEvent)
-                }
-                else -> {
-                    viewModel.getEventByCategories(categories)
-                        .observe(this@ConferenceListActivity, ::setListEvent)
-                }
-            }
+            })
 
             btnBack.setOnClickListener {
                 onBackPressed()
             }
+
+            btnMenu.setOnClickListener {
+                Log.d("TESS", "btnMenu Clicked")
+                showFilterMenu(it, R.menu.filter_menu, this@ConferenceListActivity)
+            }
         }
     }
 
-    private fun setListEvent(resource: Resource<List<Event>>) {
+    private fun setListEvent(resource: Resource<List<Event>>, sortType: String) {
         when (resource) {
             is Resource.Success -> {
+                loadingState(false)
                 with(binding) {
                     listAdapter = EventLayoutAdapter(this@ConferenceListActivity)
-                    resource.data?.let { listAdapter.setItems(it) }
+                    resource.data?.let {
+                        val sortedList = ArrayList<Event>()
+                        sortedList.addAll(it)
+                        when (sortType) {
+                            "Urutkan Berdasarkan Biaya" -> {
+                                sortedList.sortBy { event: Event ->
+                                    event.price
+                                }
+                                listAdapter.setItems(sortedList)
+                            }
+                            "Urutkan Berdasarkan Tanggal" -> {
+                                sortedList.sortBy { event: Event ->
+                                    event.date
+                                }
+                                listAdapter.setItems(sortedList)
+                            }
+                            "Urutkan Berdasarkan Popularitas" -> {
+                                sortedList.sortByDescending { event: Event ->
+                                    event.numbersOfView
+                                }
+                                listAdapter.setItems(sortedList)
+                            }
+
+                            else -> {
+                                listAdapter.setItems(sortedList)
+                            }
+                        }
+                    }
                     rvListConference.adapter = listAdapter
                     rvListConference.layoutManager = LinearLayoutManager(
                         this@ConferenceListActivity,
@@ -79,8 +130,37 @@ class ConferenceListActivity : AppCompatActivity() {
 
     }
 
-    private fun loadingState(b: Boolean) {
-
+    private fun loadingState(state: Boolean) {
+        binding.progressBar.isVisible = state
     }
 
+    private fun showFilterMenu(
+        view: View,
+        optionMenu: Int,
+        context: Context
+    ) {
+        val popup = PopupMenu(context, view)
+        popup.menuInflater.inflate(optionMenu, popup.menu)
+        popup.setOnMenuItemClickListener { menuItem: MenuItem ->
+            when (menuItem.itemId) {
+                R.id.sort_by_price -> {
+                    viewModel.setSortType(getString(com.maungedev.eventtech.R.string.text_sort_by_price))
+                }
+                R.id.sort_by_date -> {
+                    viewModel.setSortType(getString(com.maungedev.eventtech.R.string.text_sort_by_date))
+                }
+                R.id.sort_by_popularity ->{
+                    viewModel.setSortType(getString(com.maungedev.eventtech.R.string.text_sort_by_popularity))
+                }
+                else -> {
+                    viewModel.setSortType(getString(com.maungedev.eventtech.R.string.text_all))
+                }
+            }
+            true
+
+        }
+        popup.setOnDismissListener {}
+        popup.show()
+
+    }
 }
