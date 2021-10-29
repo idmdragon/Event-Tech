@@ -13,7 +13,7 @@ import kotlinx.coroutines.tasks.await
 
 abstract class FirebaseService {
 
-    val auth = FirebaseAuth.getInstance()
+    private val auth = FirebaseAuth.getInstance()
     val firestore = Firebase.firestore
 
     fun getCurrentUserId() = auth.currentUser?.uid
@@ -105,27 +105,6 @@ abstract class FirebaseService {
             emit(FirebaseResponse.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 
-
-    inline fun <FieldType, reified ResponseType> getDocumentsWhereField(
-        collection: String,
-        fieldName: String,
-        value: FieldType
-    ): Flow<FirebaseResponse<List<ResponseType>>> =
-        flow {
-            val result = firestore
-                .collection(collection)
-                .whereEqualTo(fieldName, value)
-                .get()
-                .await()
-
-            if (result.isEmpty) {
-                emit(FirebaseResponse.Empty)
-            } else {
-                emit(FirebaseResponse.Success(result.toObjects(ResponseType::class.java)))
-            }
-        }.catch {
-            emit(FirebaseResponse.Error(it.message.toString()))
-        }.flowOn(Dispatchers.IO)
 
     fun addArrayStringValueAtDocField(
         collection: String,

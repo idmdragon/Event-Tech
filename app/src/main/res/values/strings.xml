@@ -49,4 +49,5 @@
     <string name="desc_reminder_dialog_delete">Apakah anda akan menghapus pengingat event pada event %s</string>
     <string name="desc_logout">Apakah kamu yakin akan keluar dari aplikasi?</string>
     <string name="cd_search_not_found">Pencarian Tidak di temukan</string>
+    <string name="text_registration_page">Halaman Pendaftaran</string>
 </resources>

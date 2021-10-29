@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.map
 class DataStore(private val context: Context) {
 
      companion object {
-        val UID_PREF_KEY = stringPreferencesKey("uid")
         val ONBOARD_PREF_KEY = booleanPreferencesKey("onboard")
         const val DATASTORE_NAME = "EventTech"
 

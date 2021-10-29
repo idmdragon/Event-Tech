@@ -6,5 +6,4 @@ data class UserResponse(
     val email: String = "",
     val schedule: List<String> = listOf(),
     val favorite: List<String> = listOf(),
-) {
-}
+)

@@ -1,6 +1,5 @@
 package com.maungedev.authentication.ui.ui.login
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.maungedev.domain.usecase.auth.AuthUseCase

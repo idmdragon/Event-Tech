@@ -5,7 +5,6 @@ import com.maungedev.domain.model.Event
 import com.maungedev.domain.model.User
 import com.maungedev.domain.usecase.detail.DetailUseCase
 import com.maungedev.domain.utils.Resource
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val useCase: DetailUseCase) : ViewModel() {

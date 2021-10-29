@@ -10,7 +10,7 @@ import com.maungedev.eventtech.utils.DataStore
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(private val authUseCase: AuthUseCase,
-                        private val application: Application) : ViewModel() {
+                        application: Application) : ViewModel() {
 
     private val datastore = DataStore.getInstance(application)
 

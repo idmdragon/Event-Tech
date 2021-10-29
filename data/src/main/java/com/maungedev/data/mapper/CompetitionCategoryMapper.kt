@@ -1,11 +1,8 @@
 package com.maungedev.data.mapper
 
 import com.maungedev.data.source.local.entity.CompetitionCategoryEntity
-import com.maungedev.data.source.local.entity.ConferenceCategoryEntity
 import com.maungedev.data.source.remote.response.CompetitionCategoryResponse
-import com.maungedev.data.source.remote.response.ConferenceCategoryResponse
 import com.maungedev.domain.model.CompetitionCategory
-import com.maungedev.domain.model.ConferenceCategory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

@@ -3,8 +3,6 @@ package com.maungedev.search.ui
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +11,6 @@ import com.maungedev.domain.model.Event
 import com.maungedev.domain.utils.Resource
 import com.maungedev.eventtech.constant.ExtraNameConstant
 import com.maungedev.eventtech.ui.adapter.EventLayoutAdapter
-import com.maungedev.eventtech.ui.adapter.ScheduleAdapter
 import com.maungedev.search.databinding.ActivitySearchBinding
 import com.maungedev.search.di.searchModule
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -63,6 +60,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setSearchList(resource: Resource<List<Event>>?) {
         binding.apply {
             when (resource) {

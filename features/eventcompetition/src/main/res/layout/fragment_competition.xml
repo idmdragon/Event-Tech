@@ -16,76 +16,77 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/range_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:text="@string/title_eventcompetition"
-            android:textSize="@dimen/size_18"
-            style="@style/PoppinsSemiBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="@dimen/range_16"
-            android:layout_marginStart="@dimen/range_24"
-            android:contentDescription="@string/app_logo"
-            android:src="@drawable/ic_logo_bar" />
-
-        <ImageButton
-            android:id="@+id/btnMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/cdNotification"
-            android:padding="@dimen/range_12"
-            android:src="@drawable/ic_menu" />
-
-        <ImageButton
-            android:id="@+id/btnSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/cdNotification"
-            android:padding="@dimen/range_12"
-            android:src="@drawable/ic_search" />
-    </androidx.appcompat.widget.Toolbar>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_event_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/range_24"
-        android:layout_marginTop="@dimen/range_16"
-        />
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/range_8"
-        android:paddingBottom="@dimen/range_64"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_event_category">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_competition"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/range_12"
-                android:orientation="horizontal"
+                android:layout_marginEnd="@dimen/range_24"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tvPageTitle"
-                app:layout_constraintTop_toBottomOf="@+id/tvPageTitle"
-                tools:listitem="@layout/item_list_event" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    </ScrollView>
+                <TextView
+                    style="@style/PoppinsSemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/range_24"
+                    android:layout_marginTop="@dimen/range_16"
+                    android:contentDescription="@string/app_logo"
+                    android:src="@drawable/ic_logo_bar"
+                    android:text="@string/title_eventcompetition"
+                    android:textSize="@dimen/size_18" />
+
+                <ImageButton
+                    android:id="@+id/btnMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/cdNotification"
+                    android:padding="@dimen/range_12"
+                    android:src="@drawable/ic_menu" />
+
+                <ImageButton
+                    android:id="@+id/btnSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/cdNotification"
+                    android:padding="@dimen/range_12"
+                    android:src="@drawable/ic_search" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_event_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/range_24"
+                android:layout_marginTop="@dimen/range_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/range_8"
+                android:paddingBottom="@dimen/range_64"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_event_category">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_competition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/range_12"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tvPageTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPageTitle"
+                    tools:listitem="@layout/item_list_event" />
+
+            </ScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

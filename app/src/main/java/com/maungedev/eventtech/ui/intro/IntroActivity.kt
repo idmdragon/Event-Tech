@@ -11,10 +11,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
 import com.maungedev.eventtech.R
-import com.maungedev.eventtech.constant.PageNameConstant
 import com.maungedev.eventtech.constant.PageNameConstant.AUTHENTICATION_PAGE
 import com.maungedev.eventtech.databinding.ActivityIntroBinding
-import com.maungedev.eventtech.ui.main.MainActivity
 
 class IntroActivity : AppCompatActivity() {
 

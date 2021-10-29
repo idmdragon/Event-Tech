@@ -1,24 +1,20 @@
 package com.maungedev.favorite.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.maungedev.domain.model.Event
 import com.maungedev.domain.utils.Resource
 import com.maungedev.eventtech.ui.adapter.MiniLayoutAdapter
-import com.maungedev.eventtech.ui.adapter.ScheduleAdapter
 import com.maungedev.favorite.databinding.FragmentFavoriteBinding
 import com.maungedev.favorite.di.favoriteModule
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
-import org.koin.android.viewmodel.ext.android.viewModel
 class FavoriteFragment : Fragment() {
 
     private val viewModel: FavoriteViewModel by viewModel()

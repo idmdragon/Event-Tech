@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.maungedev.eventtech.R
@@ -14,7 +13,6 @@ import com.maungedev.eventtech.constant.PageNameConstant.AUTHENTICATION_PAGE
 import com.maungedev.eventtech.di.splashModule
 import com.maungedev.eventtech.ui.intro.IntroActivity
 import com.maungedev.eventtech.ui.main.MainActivity
-import com.maungedev.eventtech.utils.DataStore
 import org.koin.core.context.loadKoinModules
 import org.koin.android.viewmodel.ext.android.viewModel
 

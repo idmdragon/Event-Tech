@@ -8,7 +8,7 @@ import com.maungedev.domain.model.CompetitionCategory
 import com.maungedev.eventtech.R
 import com.maungedev.eventtech.databinding.ItemCompetitionCategoryBinding
 
-class CompetitionCategoryAdapter() :
+class CompetitionCategoryAdapter :
     RecyclerView.Adapter<CompetitionCategoryAdapter.ViewHolder>() {
 
     private val categories = arrayListOf<CompetitionCategory>()

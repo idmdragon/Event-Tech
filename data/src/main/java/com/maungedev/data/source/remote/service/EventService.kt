@@ -1,6 +1,5 @@
 package com.maungedev.data.source.remote.service
 
-import android.icu.text.CaseMap
 import com.maungedev.data.constant.FirebaseConstant
 import com.maungedev.data.source.remote.FirebaseResponse
 import com.maungedev.data.source.remote.response.CompetitionCategoryResponse
