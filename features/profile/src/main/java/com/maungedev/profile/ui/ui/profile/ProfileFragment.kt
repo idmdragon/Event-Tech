@@ -16,7 +16,9 @@ import com.maungedev.domain.model.User
 import com.maungedev.domain.utils.Resource
 import com.maungedev.eventtech.R
 import com.maungedev.eventtech.constant.ExtraNameConstant.USERNAME
+import com.maungedev.eventtech.constant.PageNameConstant.ABOUT_PAGE
 import com.maungedev.eventtech.constant.PageNameConstant.AUTHENTICATION_PAGE
+import com.maungedev.eventtech.constant.PageNameConstant.RESET_PASSWORD_PAGE
 import com.maungedev.profile.databinding.FragmentProfileBinding
 import com.maungedev.profile.ui.di.profileModule
 import com.maungedev.profile.ui.ui.edit_username.EditUsernameActivity
@@ -68,6 +70,23 @@ class ProfileFragment : Fragment() {
                                 )
                             }
                         }
+                        tvEditPassword.setOnClickListener {
+                            startActivity(
+                                Intent(
+                                    requireContext(),
+                                    Class.forName(RESET_PASSWORD_PAGE)
+                                )
+                            )
+                        }
+
+                        tvAbout.setOnClickListener {
+                            startActivity(
+                                Intent(
+                                    requireContext(),
+                                    Class.forName(ABOUT_PAGE)
+                                )
+                            )
+                        }
                     }
                 }
 
@@ -106,7 +125,12 @@ class ProfileFragment : Fragment() {
             materialBuilder.dismiss()
             viewModel.logout()
 
-            requireContext().startActivity(Intent(requireContext(), Class.forName(AUTHENTICATION_PAGE))).also {
+            requireContext().startActivity(
+                Intent(
+                    requireContext(),
+                    Class.forName(AUTHENTICATION_PAGE)
+                )
+            ).also {
                 activity?.finishAffinity()
             }
         }

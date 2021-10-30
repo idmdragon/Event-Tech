@@ -149,11 +149,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/white"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/btnRegister"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/range_24"
         app:layout_constraintEnd_toEndOf="@+id/btnRegister"
         app:layout_constraintStart_toStartOf="@+id/btnRegister"
-        app:layout_constraintTop_toTopOf="@+id/btnRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -18,9 +18,6 @@
             android:name=".ui.ui.edit_username.EditUsernameActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.ui.edit_password.EditPasswordActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.ui.about.AboutActivity"
             android:exported="true" />
     </application>
