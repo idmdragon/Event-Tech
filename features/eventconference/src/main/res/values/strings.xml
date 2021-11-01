@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="desc_empty_notification">Kamu belum memiliki notifikasi event</string>
-    <string name="title_notification_event">Notifikasi Event</string>
-</resources>

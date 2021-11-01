@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="text_search_event_not_found">Temukan event di bidang IT dengan nama event yang sesuai yaa..</string>
+    <string name="text_search_event_not_found" translatable="false">Temukan event di bidang IT dengan nama event yang sesuai yaa..</string>
 </resources>

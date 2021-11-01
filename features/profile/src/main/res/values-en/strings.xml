@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subtitle_username">Username</string>
+    <string name="subtitle_email">Email</string>
+    <string name="subtitle_edit_account">Edit Account</string>
+    <string name="text_edit_username">Edit Username</string>
+    <string name="text_password">Reset Password</string>
+    <string name="subtitle_other">Other</string>
+    <string name="text_setting">Setting</string>
+    <string name="text_about">About Application</string>
+    <string name="text_save_changes">Save Changes</string>
+    <string name="text_logout">Logout</string>
+    <string name="desc_about">Event Tech is platform for find an event in Information Technology.</string>
+</resources>

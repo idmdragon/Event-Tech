@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_about_event">Tentang Event</string>
+    <string name="text_prerequisite">Prasyarat</string>
+    <string name="text_price_title">Biaya Masuk</string>
+    <string name="text_registration">Daftar</string>
+    <string name="text_reminder">Pengingat</string>
+</resources>

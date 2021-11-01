@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_about_event">About Event</string>
+    <string name="text_prerequisite">Prerequisite</string>
+    <string name="text_price_title">Event Price</string>
+    <string name="text_registration">Register</string>
+    <string name="text_reminder">Reminder</string>
+</resources>

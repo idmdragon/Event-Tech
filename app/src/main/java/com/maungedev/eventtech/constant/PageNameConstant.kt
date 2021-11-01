@@ -7,5 +7,6 @@ object PageNameConstant {
     const val SEARCH_PAGE = "com.maungedev.search.ui.SearchActivity"
     const val RESET_PASSWORD_PAGE= "com.maungedev.authentication.ui.ui.login.ResetPasswordActivity"
     const val ABOUT_PAGE= "com.maungedev.profile.ui.ui.about.AboutActivity"
+    const val SETTING_PAGE= "com.maungedev.profile.ui.ui.setting.SettingActivity"
 
 }

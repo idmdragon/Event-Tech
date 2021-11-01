@@ -67,26 +67,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-            <ScrollView
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_competition"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="@dimen/range_8"
-                android:paddingBottom="@dimen/range_64"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_event_category">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/range_16"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/range_164"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/rv_event_category"
+                app:layout_constraintTop_toBottomOf="@+id/rv_event_category"
+                tools:listitem="@layout/item_list_event" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_competition"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/range_12"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/tvPageTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPageTitle"
-                    tools:listitem="@layout/item_list_event" />
-
-            </ScrollView>
             <ProgressBar
                 android:id="@+id/progress_bar"
                 style="@style/ProgressBarStyle"

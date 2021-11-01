@@ -48,19 +48,19 @@ class DetailActivity : AppCompatActivity() {
     private fun setUpObserver() {
         val eventUID = intent.getStringExtra(EVENT_UID)
 
-            if (eventUID != null) {
-                viewModel.getEventById(eventUID).observe(this@DetailActivity, ::setDetailObserver)
-                viewModel.getCurrentUser()
-                    .observe(this@DetailActivity, { setCurrentUser(it, eventUID) })
+        if (eventUID != null) {
+            viewModel.getEventById(eventUID).observe(this@DetailActivity, ::setDetailObserver)
+            viewModel.getCurrentUser()
+                .observe(this@DetailActivity, { setCurrentUser(it, eventUID) })
 
-                viewModel.increaseNumbersOfView(eventUID).observe(this@DetailActivity, {})
-            }else{
-                Snackbar.make(
-                    binding.root,
-                    "Event yang anda cari tidak ditemukan",
-                    Snackbar.LENGTH_LONG
-                ).show()
-            }
+            viewModel.increaseNumbersOfView(eventUID).observe(this@DetailActivity, {})
+        } else {
+            Snackbar.make(
+                binding.root,
+                "Event yang anda cari tidak ditemukan",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
 
 
         viewModel.isRemindered.observe(this@DetailActivity, ::stateReminder)
@@ -227,7 +227,9 @@ class DetailActivity : AppCompatActivity() {
                 reminderTitle.text = "Hapus Pengingat Event"
                 btnAddSchedule.setOnClickListener {
                     materialBuilder.dismiss()
-                    viewModel.deleteSchedule(data.uid).observe(this, ::deleteScheduleResponse)
+                    viewModel.deleteSchedule(data.uid).observe(this, {
+                        deleteScheduleResponse(it, data)
+                    })
                 }
             } else {
                 reminderDescription.text = getString(R.string.desc_reminder_dialog, data.eventName)
@@ -280,7 +282,7 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
-    private fun deleteScheduleResponse(resource: Resource<Unit>?) {
+    private fun deleteScheduleResponse(resource: Resource<Unit>?, data: Event) {
         when (resource) {
             is Resource.Success -> {
                 loadingState(false)
@@ -289,6 +291,11 @@ class DetailActivity : AppCompatActivity() {
                     "Event berhasil dihapus dari pengingat",
                     Snackbar.LENGTH_LONG
                 ).show()
+                alarmReceiver.cancelAlarm(
+                    this@DetailActivity,
+                    DateConverter.convertMillisToStringForNotification(data.date),
+                    data.time
+                )
             }
             is Resource.Loading -> {
                 loadingState(true)

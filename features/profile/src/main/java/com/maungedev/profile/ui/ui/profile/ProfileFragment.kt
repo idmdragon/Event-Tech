@@ -20,6 +20,7 @@ import com.maungedev.eventtech.constant.ExtraNameConstant.USERNAME
 import com.maungedev.eventtech.constant.PageNameConstant.ABOUT_PAGE
 import com.maungedev.eventtech.constant.PageNameConstant.AUTHENTICATION_PAGE
 import com.maungedev.eventtech.constant.PageNameConstant.RESET_PASSWORD_PAGE
+import com.maungedev.eventtech.constant.PageNameConstant.SETTING_PAGE
 import com.maungedev.profile.databinding.FragmentProfileBinding
 import com.maungedev.profile.ui.di.profileModule
 import com.maungedev.profile.ui.ui.edit_username.EditUsernameActivity
@@ -78,6 +79,15 @@ class ProfileFragment : Fragment() {
                                 )
                             }
                         }
+                        tvSetting.setOnClickListener {
+                            startActivity(
+                                Intent(
+                                    requireContext(),
+                                    Class.forName(SETTING_PAGE)
+                                )
+                            )
+                        }
+
                         tvAbout.setOnClickListener {
                             startActivity(
                                 Intent(

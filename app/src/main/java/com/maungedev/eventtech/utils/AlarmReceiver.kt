@@ -9,6 +9,8 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
+import android.util.Log
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.maungedev.eventtech.R
@@ -32,8 +34,12 @@ class AlarmReceiver : BroadcastReceiver() {
 
 
     override fun onReceive(context: Context, intent: Intent) {
-        val message = intent.getStringExtra(EVENT_TIME) as String
-        val title = intent.getStringExtra(EVENT_NAME) as String
+        val message = String.format(
+            "1 Jam kedepan %s akan di mulai", intent.getStringExtra(
+                EVENT_NAME
+            ) as String
+        )
+        val title = "Event Tech Reminder"
         val eventUid = intent.getStringExtra(EVENT_UID) as String
         val notifId = ID_ONETIME
 
@@ -54,20 +60,28 @@ class AlarmReceiver : BroadcastReceiver() {
         intent.putExtra(EVENT_TIME, time)
         intent.putExtra(EVENT_UID, eventUid)
 
-        val dateArray = date.split("-").toTypedArray()
-        val timeArray = time.split(":").toTypedArray()
-        val calendar = Calendar.getInstance()
-        val hours = Integer.parseInt(timeArray[0])
-        val remindersHours = hours - 1
+        val reminderMillis = DateConverter.convertDateAndTimesToMillis(date, time)
+        val pendingIntent =
+            PendingIntent.getBroadcast(context, convertLongToInt(reminderMillis), intent, 0)
+        alarmManager.set(AlarmManager.RTC_WAKEUP, reminderMillis, pendingIntent)
+    }
 
-        calendar.set(Calendar.YEAR, Integer.parseInt(dateArray[0]))
-        calendar.set(Calendar.MONTH, Integer.parseInt(dateArray[1]) - 1)
-        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateArray[2]))
-        calendar.set(Calendar.HOUR_OF_DAY, remindersHours)
-        calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]))
-        calendar.set(Calendar.SECOND, 0)
-        val pendingIntent = PendingIntent.getBroadcast(context, ID_ONETIME, intent, 0)
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+    fun cancelAlarm(
+        context: Context,
+        date: String,
+        time: String,
+    ) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val reminderMillis = DateConverter.convertDateAndTimesToMillis(date, time)
+        val pendingIntent =
+            PendingIntent.getBroadcast(context, convertLongToInt(reminderMillis), intent, 0)
+        pendingIntent.cancel()
+        alarmManager.cancel(pendingIntent)
+    }
+
+    private fun convertLongToInt(value: Long): Int {
+        return ((value / 1000 / 60).toInt())
     }
 
     private fun isDateInvalid(date: String, format: String): Boolean {
