@@ -54,7 +54,6 @@ class FavoriteFragment : Fragment() {
                 resource.data?.let { listItem ->
                     favoriteEventAdapter = MiniLayoutAdapter(requireContext())
                     favoriteEventAdapter.setItems(listItem.sortedBy {event -> event.numbersOfView })
-                    favoriteEventAdapter.itemCount = listItem.size
                     binding.rvFavorite.adapter = favoriteEventAdapter
                     binding.rvFavorite.layoutManager = LinearLayoutManager(
                         activity,

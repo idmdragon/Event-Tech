@@ -2,6 +2,7 @@ package com.maungedev.eventconference.ui.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,32 +47,36 @@ class ConferenceFragment : Fragment() {
         viewModel.getConferenceCategory()
             .observe(viewLifecycleOwner, ::setConferenceCategory)
 
-        viewModel.getAllConferenceEvent().observe(viewLifecycleOwner, ::setAllConference)
-
         viewModel.getAllPopularEvent().observe(viewLifecycleOwner, ::setPopularEvent)
 
         binding.btnSearch.setOnClickListener {
-            startActivity(Intent(requireContext(), Class.forName(SEARCH_PAGE)).putExtra(
-                ExtraNameConstant.EVENT_TYPE,"conference"
-            ))
+            startActivity(
+                Intent(requireContext(), Class.forName(SEARCH_PAGE)).putExtra(
+                    ExtraNameConstant.EVENT_TYPE, "conference"
+                )
+            )
         }
 
         binding.swipeRefresh.setOnRefreshListener {
-            viewModel.refreshAllEvent().observe(viewLifecycleOwner,::refreshResponse)
+            viewModel.refreshAllEvent().observe(viewLifecycleOwner, ::refreshResponse)
         }
+
     }
 
     private fun refreshResponse(resource: Resource<Unit>?) {
         when (resource) {
             is Resource.Success -> {
                 loadingState(false)
+                binding.swipeRefresh.isEnabled = true
                 binding.swipeRefresh.isRefreshing = false
             }
             is Resource.Loading -> {
                 loadingState(true)
+                binding.swipeRefresh.isEnabled = false
             }
 
             is Resource.Error -> {
+                binding.swipeRefresh.isEnabled = true
                 binding.swipeRefresh.isRefreshing = false
                 loadingState(false)
                 Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
@@ -86,38 +91,12 @@ class ConferenceFragment : Fragment() {
             is Resource.Success -> {
                 loadingState(false)
                 popularEventAdapter = MiniLayoutAdapter(requireContext())
-                resource.data?.let { popularEventAdapter.setItems(it) }
-                binding.rvPopular.adapter = popularEventAdapter
-                binding.rvPopular.layoutManager = LinearLayoutManager(
-                    activity,
-                    LinearLayoutManager.VERTICAL, false
-                )
-            }
-            is Resource.Loading -> {
-                loadingState(true)
-            }
+                resource.data?.let {
+                    val listTopFourPopularEvent = ArrayList<Event>()
+                    listTopFourPopularEvent.addAll(it)
+                    popularEventAdapter.setItems(listTopFourPopularEvent.take(4))
+                }
 
-            is Resource.Error -> {
-                loadingState(false)
-                Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
-                    .show()
-            }
-        }
-
-    }
-
-    private fun setAllConference(resource: Resource<List<Event>>) {
-        when (resource) {
-            is Resource.Success -> {
-                loadingState(false)
-                popularEventAdapter = MiniLayoutAdapter(requireContext())
-                resource.data?.let { popularEventAdapter.setItems(it) }
-                popularEventAdapter.itemCount = 5
-                binding.rvPopular.adapter = popularEventAdapter
-                binding.rvPopular.layoutManager = LinearLayoutManager(
-                    activity,
-                    LinearLayoutManager.VERTICAL, false
-                )
                 binding.btnAll.setOnClickListener {
                     startActivity(
                         Intent(
@@ -127,17 +106,26 @@ class ConferenceFragment : Fragment() {
                             it.putExtra(ExtraNameConstant.EVENT_CATEGORY, "Popular")
                         })
                 }
+
+                binding.rvPopular.adapter = popularEventAdapter
+                binding.rvPopular.layoutManager = LinearLayoutManager(
+                    activity,
+                    LinearLayoutManager.VERTICAL, false
+                )
             }
             is Resource.Loading -> {
                 loadingState(true)
             }
 
             is Resource.Error -> {
+                loadingState(false)
                 Snackbar.make(binding.root, resource.message.toString(), Snackbar.LENGTH_LONG)
                     .show()
             }
         }
+
     }
+
 
     private fun loadingState(state: Boolean) {
         binding.progressBar.isVisible = state

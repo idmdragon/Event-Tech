@@ -43,5 +43,14 @@ class AuthRepositoryImpl(
 
         }.asFlow()
 
+    override fun resetPassword(email: String): Flow<Resource<Unit>> =
+        object : NetworkBoundRequest<Unit>() {
+
+            override suspend fun createCall(): Flow<FirebaseResponse<Unit>> =
+                remote.resetPassword(email)
+
+            override suspend fun saveCallResult(data: Unit) {}
+
+        }.asFlow()
 
 }

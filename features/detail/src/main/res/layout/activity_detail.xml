@@ -78,6 +78,7 @@
                 android:layout_marginStart="@dimen/range_24"
                 android:layout_marginEnd="@dimen/range_24"
                 android:contentDescription="@string/cd_event_poster"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

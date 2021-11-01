@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/drawable/ic_ilus_intro_1.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.32760416666666664" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.28055555555555556" />
+        <entry key="app/src/main/res/drawable/ilu_empty_notification.xml" value="0.15885416666666666" />
         <entry key="app/src/main/res/drawable/image_placeholder.xml" value="0.159375" />
         <entry key="app/src/main/res/drawable/indicator_active.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/drawable/indicator_incative.xml" value="0.16510416666666666" />
@@ -61,7 +62,7 @@
         <entry key="features/authentication/src/main/res/layout/auth_activity.xml" value="0.2791666666666667" />
         <entry key="features/authentication/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="features/authentication/src/main/res/layout/fragment_register.xml" value="0.3165618448637317" />
-        <entry key="features/detail/src/main/res/layout/activity_detail.xml" value="0.22" />
+        <entry key="features/detail/src/main/res/layout/activity_detail.xml" value="0.33" />
         <entry key="features/detail/src/main/res/layout/activity_registration.xml" value="0.18" />
         <entry key="features/eventcompetition/src/main/res/layout/activity_conference_list.xml" value="0.23229166666666667" />
         <entry key="features/eventcompetition/src/main/res/layout/fragment_competition.xml" value="0.3152317880794702" />
@@ -69,6 +70,7 @@
         <entry key="features/eventcompetition/src/main/res/menu/filter_menu.xml" value="0.33" />
         <entry key="features/eventcompetition/src/main/res/menu/menu.xml" value="0.18958333333333333" />
         <entry key="features/eventconference/src/main/res/layout/activity_conference_list.xml" value="0.33" />
+        <entry key="features/eventconference/src/main/res/layout/activity_notification.xml" value="0.2" />
         <entry key="features/eventconference/src/main/res/layout/fragment_conference.xml" value="0.2644444444444444" />
         <entry key="features/eventconference/src/main/res/layout/s.xml" value="0.3026041666666667" />
         <entry key="features/eventconference/src/main/res/menu/filter_menu.xml" value="0.18958333333333333" />

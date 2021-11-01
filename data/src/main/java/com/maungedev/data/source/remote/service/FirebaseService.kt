@@ -13,7 +13,7 @@ import kotlinx.coroutines.tasks.await
 
 abstract class FirebaseService {
 
-    private val auth = FirebaseAuth.getInstance()
+    val auth = FirebaseAuth.getInstance()
     val firestore = Firebase.firestore
 
     fun getCurrentUserId() = auth.currentUser?.uid

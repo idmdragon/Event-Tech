@@ -74,4 +74,7 @@ class RemoteDataSource(
 
     fun logout(): Unit =
         userService.logout()
+
+    fun resetPassword(email: String): Flow<FirebaseResponse<Unit>> =
+        authService.resetPassword(email)
 }

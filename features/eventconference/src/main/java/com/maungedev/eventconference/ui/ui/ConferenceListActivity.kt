@@ -3,7 +3,6 @@ package com.maungedev.eventconference.ui.ui
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
@@ -69,9 +68,10 @@ class ConferenceListActivity : AppCompatActivity() {
             }
 
             btnMenu.setOnClickListener {
-                Log.d("TESS", "btnMenu Clicked")
-                showFilterMenu(it, R.menu.filter_menu, this@ConferenceListActivity)
+                showFilterMenu(it, R.menu.filter_menu_conference, this@ConferenceListActivity)
             }
+
+
         }
     }
 

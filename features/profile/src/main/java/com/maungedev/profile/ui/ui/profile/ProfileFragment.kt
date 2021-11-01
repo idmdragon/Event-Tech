@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.maungedev.domain.model.User
 import com.maungedev.domain.utils.Resource
 import com.maungedev.eventtech.R
+import com.maungedev.eventtech.constant.ExtraNameConstant.EMAIL
 import com.maungedev.eventtech.constant.ExtraNameConstant.USERNAME
 import com.maungedev.eventtech.constant.PageNameConstant.ABOUT_PAGE
 import com.maungedev.eventtech.constant.PageNameConstant.AUTHENTICATION_PAGE
@@ -57,9 +58,8 @@ class ProfileFragment : Fragment() {
                         if (user != null) {
                             tvEmail.text = user.email
                             tvUsername.text = user.username
-                        }
-                        tvEditUsername.setOnClickListener {
-                            if (user != null) {
+
+                            tvEditUsername.setOnClickListener {
                                 startActivity(
                                     Intent(
                                         requireContext(),
@@ -69,16 +69,15 @@ class ProfileFragment : Fragment() {
                                     )
                                 )
                             }
-                        }
-                        tvEditPassword.setOnClickListener {
-                            startActivity(
-                                Intent(
-                                    requireContext(),
-                                    Class.forName(RESET_PASSWORD_PAGE)
+                            tvEditPassword.setOnClickListener {
+                                startActivity(
+                                    Intent(
+                                        requireContext(),
+                                        Class.forName(RESET_PASSWORD_PAGE)
+                                    ).putExtra(EMAIL, user.email)
                                 )
-                            )
+                            }
                         }
-
                         tvAbout.setOnClickListener {
                             startActivity(
                                 Intent(

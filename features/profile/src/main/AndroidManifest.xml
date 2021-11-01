@@ -15,6 +15,9 @@
 
     <application>
         <activity
+            android:name=".ui.ui.setting.SettingActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.ui.edit_username.EditUsernameActivity"
             android:exported="true" />
         <activity
